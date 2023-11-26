@@ -1,0 +1,95 @@
+<mat-drawer-container class="example-container" >
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <div class="row mb-3">
+            <span class="side-menu-title">Menu</span>
+        </div>
+        <mat-divider></mat-divider>
+        
+        <div class="row">
+            <div class="col-12 container-btn-side-menu">
+                <button mat-button class="btn-side-menu">
+                    Dimensionamento de Bateria
+                </button>
+            </div>                       
+            <mat-divider></mat-divider>
+
+            <div class="col-12">
+                <button mat-button class="btn-side-menu">
+                    Simulação Grupo A
+                </button>
+            </div>
+
+            <mat-divider></mat-divider>
+            <div class="col-12">
+                <button mat-button class="btn-side-menu" (click)="abrirSimulacaoB()">
+                    Simulação Grupo B
+                </button>
+            </div>
+            
+        </div>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row >
+                <button 
+                    mat-icon-button class="example-icon" 
+                    aria-label="Example icon-button with menu icon"
+                    (click)="drawer.toggle()">
+
+                    <mat-icon>menu</mat-icon>
+                </button>
+        
+                <span>Aton</span>
+        
+                <span class="example-spacer"></span>
+                <!-- <div class="user-name">Jaques Oliveira</div> -->
+                
+                <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                    <mat-icon>person</mat-icon>
+                </button>
+                
+                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                    <mat-icon>settings</mat-icon>
+                </button>
+        
+                <button mat-icon-button 
+                    class="example-icon" 
+                    aria-label="Example icon-button with share icon"
+                    (click)="sair()">
+                    <mat-icon>logout</mat-icon>
+                </button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+
+        <!-- <button type="button" mat-button (click)="drawer.toggle()">
+            Toggle sidenav
+        </button> -->
+    </div>
+  
+  </mat-drawer-container>
+
+
+<!-- <mat-drawer-container class="example-container" [hasBackdrop]="hasBackdrop.value">
+    <mat-drawer #drawer [mode]="mode.value">I'm a drawer</mat-drawer>
+    <mat-drawer-content>
+      <mat-form-field>
+        <mat-label>Sidenav mode</mat-label>
+        <mat-select #mode value="side">
+          <mat-option value="side">Side</mat-option>
+          <mat-option value="over">Over</mat-option>
+          <mat-option value="push">Push</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Has backdrop</mat-label>
+        <mat-select #hasBackdrop>
+          <mat-option>Unset</mat-option>
+          <mat-option [value]="true">True</mat-option>
+          <mat-option [value]="false">False</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
+    </mat-drawer-content>
+  </mat-drawer-container> -->

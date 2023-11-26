@@ -1,0 +1,39 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.user-name{
+    margin-right: 10px;
+    font-size: smaller !important;
+}
+
+.example-container {
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid rgba(0, 0, 0, 0.5); */
+  }
+  
+/* .example-sidenav-content {
+    display: flex;
+    height: 100%;
+} */
+  
+.example-sidenav {
+    padding: 20px;
+    width: 20%;
+}
+
+.container-btn-side-menu{
+    align-items: start !important;
+    justify-content: start !important;
+}
+
+.btn-side-menu{
+    font-size: small !important;
+    width: 100%;
+    justify-content: start !important;
+}
+
+.side-menu-title{
+    font-weight: bold;
+}

@@ -1,0 +1,6 @@
+.imagem{
+    background: url("src/assets/images/bg_login.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* Resize the background image to cover the entire container */
+}

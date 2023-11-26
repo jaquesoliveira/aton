@@ -1,0 +1,191 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row >
+        <button 
+            mat-icon-button class="example-icon" 
+            aria-label="Example icon-button with menu icon"
+            (click)="menu()">
+
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+
+        <span>Aton</span>
+
+        <span class="example-spacer"></span>
+        <!-- <div class="user-name">Jaques Oliveira</div> -->
+        
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+            <mat-icon>person</mat-icon>
+        </button>
+        
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+            <mat-icon>settings</mat-icon>
+        </button>
+
+        <button mat-icon-button 
+            class="example-icon" 
+            aria-label="Example icon-button with share icon"
+            (click)="sair()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container-fluid">
+    <div class="p-3 mt-3">
+        <h2>Cálculo da conta de energia com base na lei 14.300</h2>
+    </div>
+    <mat-divider></mat-divider>
+   
+    <div class="card-header mb-2" 
+        style="background-color: #3f51b5; color: #fff; padding: 15px;">
+        INFORMAÇÕES DE CONSUMO
+    </div>
+
+    <div>
+        <mat-form-field class="col-lg-3 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Consumo Médio Mensal(Kwh/mês)</mat-label>
+            <input matInput >
+        </mat-form-field>
+    
+    
+        <mat-form-field class="col-lg-3 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Geração média mensal GD I (antes da lei)(Kwh/mês)</mat-label>
+            <input matInput>
+        </mat-form-field>
+    
+        <mat-form-field class="col-lg-4 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Geração média prevista mensal GD II (DEPOIS DA LEI)(Kwh/mês)</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+
+    <div class="mb-4">
+        <mat-form-field class="col-lg-3 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Taxa de Iluminação Pública sem solar (CIP)</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field  class="col-lg-3 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Taxa de Iluminação Pública com solar (CIP)</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Aumento anual da conta de energia</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Valor do investimento</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="mt-5">
+        <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Variação de injeção</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Tipo de Fornecimento</mat-label>
+            <!-- <input matInput> -->
+            <mat-label>Cars</mat-label>
+            <select matNativeControl required>
+                <option value="1">Monofásico</option>
+                <option value="2">Bifásico</option>
+                <option value="3">Trifásico</option>                
+            </select>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Classificação de Consumo</mat-label>
+            <select matNativeControl required>
+                <option value="1">B1</option>
+                <option value="2">B2</option>
+                <option value="3">B3</option>                
+            </select>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Considerar TUSD G</mat-label>
+            <select matNativeControl required>
+                <option value="SIM">SIM</option>
+                <option value="NAO">NÃO</option>             
+            </select>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Potência da Geração</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Potência da Consumo</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+            <mat-label>Houve obra no Transformador</mat-label>
+            <select matNativeControl required>
+                <option value="SIM">SIM</option>
+                <option value="NAO">NÃO</option>             
+            </select>
+        </mat-form-field>
+    </div>
+    
+
+    <div class="card-header mb-2" 
+        style="background-color: #3f51b5; color: #fff; padding: 15px;">
+        REGIÃO
+    </div>
+
+    <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+        <mat-label>Estado</mat-label>
+        <select matNativeControl required>
+            <option value="SIM">CEARÁ</option>            
+        </select>
+    </mat-form-field>
+
+    <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+        <mat-label>Concessionária</mat-label>
+        <select matNativeControl required>
+            <option value="SIM">ENEL - CE</option>            
+        </select>
+    </mat-form-field>
+
+    <div class="card-header mb-2" 
+        style="background-color: #3f51b5; color: #fff; padding: 15px;">
+        PERFIL DE CONSUMO
+    </div>
+
+    <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+        <mat-label>Perfil de Consumo</mat-label>
+        <select matNativeControl required>
+            <option value="SIM">Residencial 1</option>
+            <option value="SIM">Residencial 2</option>
+            <option value="SIM">Consumo Remoto</option>
+            <option value="SIM">Noturno</option>
+            <option value="SIM">Comercial</option>
+            <option value="SIM">Padarias / Mercados</option>
+            <option value="SIM">24H</option>
+            <option value="SIM">Personalizado</option>
+        </select>
+    </mat-form-field>
+
+    <mat-form-field class="col-lg-2 col-sm-12 col-12" style="margin-right:15px;">
+        <mat-label>Simultaneidade</mat-label>
+        <input matInput readonly [(ngModel)]="simultaneidade">
+    </mat-form-field>
+
+    <div class="card-header mb-2" 
+        style="background-color: #3f51b5; color: #fff; padding: 15px;">
+        IMPOSTOS
+    </div>
+
+    <div class="card-header mb-2" 
+        style="background-color: #3f51b5; color: #fff; padding: 15px;">
+        RESUMO DE TARIFAS
+    </div>
+</div>
