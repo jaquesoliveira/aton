@@ -17,10 +17,24 @@
     display: flex;
     height: 100%;
 } */
-  
+
 .example-sidenav {
     padding: 20px;
     width: 20%;
+}
+
+@media(max-width: 480px) {
+    .example-sidenav {
+        padding: 20px;
+        width: 75%;
+    }
+}
+
+@media(max-width: 720px) {
+    .example-sidenav {
+        padding: 20px;
+        width: 60%;
+    }
 }
 
 .container-btn-side-menu{

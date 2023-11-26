@@ -179,7 +179,135 @@
         <input matInput readonly [(ngModel)]="simultaneidade">
     </mat-form-field>
 
-    <div class="card-header mb-2" 
+
+    <div class="col-lg-6 col-sm-12 col-12 mt-3" >
+        <div style="padding: 5px; background-color: #ccc;">
+            <span>Informações de Geração e Consumo</span>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+              <tr>                
+                <th scope="col">Descrição</th>
+                <th scope="col">Diário</th>
+                <th scope="col">Mensal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Geração</td>
+                <td>10,00</td>
+                <td>300,00</td>
+              </tr>
+              <tr>
+                <td>Energia Injetada</td>
+                <td>6,63</td>
+                <td>199,00</td>
+              </tr>
+              <tr>
+                <td>Consumo Instantâneo</td>
+                <td>3,37</td>
+                <td>101,00</td>
+              </tr>
+              <tr>
+                <td>Consumo Retornado</td>
+                <td>29,97</td>
+                <td>899,00</td>
+              </tr>
+              <tr>
+                <td><strong>Consumo Total</strong></td>
+                <td><strong>33,33</strong></td>
+                <td><strong>1.000,00</strong></td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--GRÁFICO-->
+    <div class="mt-3 mb-3">
+        <p-chart type="line" [data]="data" [options]="options"></p-chart>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            PERFIL DE CONSUMO PERSONALIZADO 
+        </div>
+        <div class="card-body">
+            <div style="padding: 5px; background-color: #ccc;">
+                <span>Consumo em kWh</span>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td>1,67</td>
+                    <td>1,67</td>
+                    <td>1,67</td>
+                    <td>1,67</td>
+                    <td>1,67</td>
+                    <td>1,67</td>
+                    <td>1,67</td>
+                    <td>1,67</td>
+                    <td>1,67</td>
+                    <td>1,67</td>
+                </tr>
+            </table>
+
+            <div class="col-lg-4 col-sm-12 col-12 mt-3">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Consumo Diário(solar)</td>
+                            <td>33,33</td>
+                        </tr>
+                        <tr>
+                            <td>Consumo Mensal(solar)</td>
+                            <td>1.000,00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4 col-sm-12 col-12 mt-3">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Geração Diária</td>
+                            <td>33,33</td>
+                        </tr>
+                        <tr>
+                            <td>Geração Mensal</td>
+                            <td>1.000,00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">
+        <div class="card-header">
+           CONSUMO REMOTO
+        </div>
+        <div class="card-body">
+            <div class="col-lg-4 col-sm-12 col-12 mt-3">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Quantidade de imóveis que vão receber energia MONOFÁSICO</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Quantidade de imóveis que vão receber energia BIFÁSICO</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Quantidade de imóveis que vão receber energia TRIFÁSICO</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>            
+        </div>
+    </div>
+
+    <div class="card-header mb-2 mt-3" 
         style="background-color: #3f51b5; color: #fff; padding: 15px;">
         IMPOSTOS
     </div>

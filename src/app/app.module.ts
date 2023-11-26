@@ -21,7 +21,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { DimensionamentoBateriaComponent } from './pages/dimensionamento-bateria/dimensionamento-bateria.component';
 import { SimulacaoGrupoAComponent } from './pages/simulacao-grupo-a/simulacao-grupo-a.component';
 import { SimulacaoGrupoBComponent } from './pages/simulacao-grupo-b/simulacao-grupo-b.component';
-
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
@@ -48,7 +48,8 @@ import { SimulacaoGrupoBComponent } from './pages/simulacao-grupo-b/simulacao-gr
     MatIconModule,
     MatInputModule,
     FormsModule,
-    MatDividerModule
+    MatDividerModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
