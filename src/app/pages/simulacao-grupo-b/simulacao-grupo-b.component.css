@@ -5,3 +5,13 @@
 .field{
     width: 100% !important;
 }
+
+.coluna-verde {
+    background-color: #99ce93;
+}
+
+.consumo-producao{
+    background-color: #99ce93;
+    color: #333;
+    padding: 10px;
+}

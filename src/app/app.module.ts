@@ -22,7 +22,8 @@ import { DimensionamentoBateriaComponent } from './pages/dimensionamento-bateria
 import { SimulacaoGrupoAComponent } from './pages/simulacao-grupo-a/simulacao-grupo-a.component';
 import { SimulacaoGrupoBComponent } from './pages/simulacao-grupo-b/simulacao-grupo-b.component';
 import { ChartModule } from 'primeng/chart';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,9 @@ import { ChartModule } from 'primeng/chart';
     MatInputModule,
     FormsModule,
     MatDividerModule,
-    ChartModule
+    ChartModule,
+    MatCheckboxModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
