@@ -3,31 +3,32 @@
         <div class="row mb-3">
             <span class="side-menu-title">Menu</span>
         </div>
-        <mat-divider></mat-divider>
+        
         
         <div class="row col-12 ">
-            <div class="col-12 container-btn-side-menu">
-                <button mat-button class="btn-side-menu">
-                    Dimensionamento de Bateria
-                </button>
-            </div>                       
-            <mat-divider></mat-divider>
 
-            <div class="col-12">
-                <button mat-button class="btn-side-menu">
-                    Simulação Grupo A
-                </button>
-            </div>
+            <ul>               
+                <li style="margin-top: 10px; margin-bottom: 10px;">
+                    <a routerLink="/simulacao-a" class="btn">
+                        Simulação Grupo A
+                    </a> 
+                </li>
+                <mat-divider></mat-divider>
 
-            <mat-divider></mat-divider>
-            <div class="col-12">
-                <button mat-button class="btn-side-menu" (click)="abrirSimulacaoB()">
-                    Simulação Grupo B
-                </button>
-            </div>
+                <li style="margin-top: 10px; margin-bottom: 10px;">
+                    <a routerLink="/simulacao-b" class="btn">
+                        Simulação Grupo B
+                    </a>                     
+                </li>
+                <mat-divider></mat-divider>
 
-            
-            
+                <li style="margin-top: 10px; margin-bottom: 10px;">
+                    <a routerLink="/dimensionamento-bateria" class="btn">
+                        Dimensionamento Bateria
+                    </a>
+                </li>
+                <mat-divider></mat-divider>
+            </ul>
         </div>
     </mat-drawer>
   

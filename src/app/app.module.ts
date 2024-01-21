@@ -24,6 +24,7 @@ import { SimulacaoGrupoBComponent } from './pages/simulacao-grupo-b/simulacao-gr
 import { ChartModule } from 'primeng/chart';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
+import { TopBarComponent } from './commons/top-bar/top-bar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     PaginaInexistenteComponent,
     DimensionamentoBateriaComponent,
     SimulacaoGrupoAComponent,
-    SimulacaoGrupoBComponent
+    SimulacaoGrupoBComponent,
+    TopBarComponent
   ],
   imports: [
     BrowserModule,

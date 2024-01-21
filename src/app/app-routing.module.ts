@@ -4,6 +4,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { PaginaInexistenteComponent } from './pages/pagina-inexistente/pagina-inexistente.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SimulacaoGrupoBComponent } from './pages/simulacao-grupo-b/simulacao-grupo-b.component';
+import { SimulacaoGrupoAComponent } from './pages/simulacao-grupo-a/simulacao-grupo-a.component';
+import { DimensionamentoBateriaComponent } from './pages/dimensionamento-bateria/dimensionamento-bateria.component';
 
 const routes: Routes = [
   {
@@ -17,10 +19,20 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path:'simulacao-a',
+    component: SimulacaoGrupoAComponent,
+    pathMatch: 'full'
+  },
+  {
     path:'simulacao-b',
     component: SimulacaoGrupoBComponent,
     pathMatch: 'full'
-  },  
+  },
+  {
+    path:'dimensionamento-bateria',
+    component: DimensionamentoBateriaComponent,
+    pathMatch: 'full'
+  },
   {
     path:'**',
     component: PaginaInexistenteComponent    

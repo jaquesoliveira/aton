@@ -15,3 +15,17 @@
     color: #333;
     padding: 10px;
 }
+
+.myFieldSet {
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 0px;
+    background-color: #FFF;
+    border-radius: 5px;
+    border: #333;
+}
+
+legend {    
+    color: #555;
+    font-size: medium;
+}

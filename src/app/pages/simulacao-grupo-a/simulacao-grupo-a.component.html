@@ -1,1 +1,423 @@
-<p>simulacao-grupo-a works!</p>
+<app-top-bar></app-top-bar>
+
+<div class="container-fluid mt-2">    
+    <div class="p-3 mt-3">
+        <h2>Cálculo da conta de energia com a lei 14.300 -  GRUPO A</h2>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col-12 mt-3 mb-3">
+            <div class="card">                
+                <div class="card-body">
+                    <h2>Cálculo da conta de energia com a lei 14.300 -  GRUPO A</h2>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <mat-divider></mat-divider>
+        
+    
+    <!-- CONTATO-->
+    <div class="card-header barra-de-titulo">
+        CONTATO
+    </div>
+
+    <div class="row">
+        <div class="col-el-6 col-lg-8 col-sm-12 col-12 mt-3 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    CLIENTE
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <mat-form-field  class="col-lg-6 col-sm-12 col-12">
+                            <mat-label>Nome</mat-label>
+                            <input matInput [(ngModel)] = "nomeCliente"> 
+                        </mat-form-field>
+    
+                        <mat-form-field  class="col-lg-6 col-sm-12 col-12">
+                            <mat-label>E-mail</mat-label>
+                            <input matInput [(ngModel)] = "emailCliente">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                        <mat-form-field  class="col-lg-6 col-sm-12 col-12">
+                            <mat-label>Celular #1</mat-label>
+                            <input matInput [(ngModel)] = "foneCliente1">
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-6 col-sm-12 col-12">
+                            <mat-label>Celular #2</mat-label>
+                            <input matInput [(ngModel)] = "foneCliente2">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 col-sm-12 col-12 mt-3 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    VENDEDOR
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <mat-form-field  class="col-lg-6 col-sm-12 col-12">
+                            <mat-label>Nome</mat-label>
+                            <input matInput [(ngModel)] = "nomeVendedor">
+                        </mat-form-field>
+    
+                        <mat-form-field  class="col-lg-6 col-sm-12 col-12">
+                            <mat-label>E-mail</mat-label>
+                            <input matInput [(ngModel)] = "emailVendedor">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                        <mat-form-field  class="col-lg-6 col-sm-12 col-12">
+                            <mat-label>Celular #1</mat-label>
+                            <input matInput [(ngModel)] = "foneVendedor1">
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-6 col-sm-12 col-12">
+                            <mat-label>Celular #2</mat-label>
+                            <input matInput [(ngModel)] = "foneVendedor2">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- INFORMAÇÕES INICIAIS-->
+    <div class="card-header mt-4 barra-de-titulo ">
+        INFORMAÇÕES INICIAIS
+    </div>
+
+    <div class="row">
+        <div class="col-12 mt-3 mb-3">
+            <div class="card">
+                
+                <div class="card-body">
+                    <div class="row">
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Consumo Fora Ponta</mat-label>
+                            <input matInput [(ngModel)] = "consumoForaPonta">
+                        </mat-form-field>
+    
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Demanda Fora Ponta / Única</mat-label>
+                            <input matInput [(ngModel)] = "demandaForaPontaUnica">
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Consumo Ponta</mat-label>
+                            <input matInput [(ngModel)] = "consumoPonta">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Demanda Ponta</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Geração do Sistema Solar</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Demanda Geração</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Classificação de Consumo</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Acréscimo de Demanda Fora Ponta</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Tarifa Horo Sazonal</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Demanda Especial (Sem ICMS)</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Valor Investimento</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Simultaneidade do Consumo de Energia</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Taxa de Iluminação Pública (CIP)</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    
+                        <mat-form-field  class="col-lg-4 col-sm-12 col-12">
+                            <mat-label>Aumento Anual da Conta de Energia(%)</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--INFORMAÇÕES DA CONCESSIONÁRIA-->
+    <div class="card-header mt-4 barra-de-titulo ">
+        INFORMAÇÕES DA CONCESSIONÁRIA
+    </div>
+
+    <div class="row">
+        <div class="col-el-4 col-lg-4 col-sm-12 col-12 mt-3 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    CONCESSIONÁRIA
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <mat-form-field  class="col-lg-12 col-sm-12 col-12">
+                            <mat-label>Nome</mat-label>
+                            <select matNativeControl required>
+                                <option value="1">Monofásico</option>
+                                <option value="2">Bifásico</option>
+                                <option value="3">Trifásico</option>                
+                            </select>
+                        </mat-form-field>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-12 mb-3">
+            <div class="card mb-3">               
+                <div class="card-body">
+                    <div class="row">
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>TUSD Fora Ponta (kWh)</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>TUSD Ponta  (kWh)</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>TE Fora Ponta (kWh)</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>TE Ponta (kWh)</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card ">               
+                <div class="card-body">
+                    <div class="row">
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Valor da Demanda Fora Ponta / Única</mat-label>
+                            <input matInput readonly>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Valor da Demanda Ponta</mat-label>
+                            <input matInput readonly>
+                        </mat-form-field>
+                    
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Valor da Demanda de Geração</mat-label>
+                            <input matInput readonly>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Valor do FioB Fora Ponta (kWh)</mat-label>
+                            <input matInput readonly>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Valor do FioB Ponta  (kWh)</mat-label>
+                            <input matInput readonly>
+                        </mat-form-field>
+                  
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Valor do FioA Fora Ponta (kWh)</mat-label>
+                            <input matInput readonly>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Valor do FioA Ponta (kWh)</mat-label>
+                            <input matInput readonly>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Valor da Componente TFSEE e P&D</mat-label>
+                            <input matInput readonly>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--AJUSTES-->
+    <div class="card-header mt-4 barra-de-titulo ">
+        AJUSTES
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-12 mt-3 mb-3">
+            <div class="card">                
+                <div class="card-body">
+                    <div class="row">
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Fator de Reajuste (FP x P)</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Necessidade de geração para compensação total</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Compensação Fora Ponta</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Compensação Ponta</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-12 mb-3">
+            <div class="card">                
+                <div class="card-body">
+                    <div class="row">
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Energia não compensada Fora Ponta</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Energia não compensada Fora Ponta</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Crédito de Energia Fora Ponta</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--IMPOSTOS-->
+    <div class="card-header mb-2 mt-4 barra-de-titulo">
+        IMPOSTOS
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-12 mb-3">
+            <div class="card">                
+                <div class="card-body">
+                    <div class="row">
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>ICMS</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>PIS</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>COFINS</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-12 col-sm-12 col-12 mb-3">
+            <div class="card">                
+                <div class="card-body">
+                    <div class="row">
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Tarifar ICMS na TUSD</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Tarifar ICMS na TE</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Tarifar ICMS Na Demanda</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+
+                        <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                            <mat-label>Tarifar ICMS na Simultaneidade</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
