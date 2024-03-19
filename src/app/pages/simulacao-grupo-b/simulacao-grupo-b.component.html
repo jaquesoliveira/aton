@@ -30,7 +30,7 @@
                     
                         <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
                             <mat-label>Geração média prev. mensal GD II</mat-label>
-                            <input matInput>
+                            <input matInput [(ngModel)] = "geracaoMediaPreviaMensal" (blur)="preencherInformacoesDeGeracaoEconsumo()">
                             <mat-hint>(pós/Lei)(Kwh/mês)</mat-hint>
                         </mat-form-field>
                     </div>
@@ -176,7 +176,7 @@
                             
                                 <mat-form-field class="col-lg-6 col-sm-12 col-12">
                                     <mat-label>Simultaneidade</mat-label>
-                                    <input matInput readonly [(ngModel)]="simultaneidade">
+                                    <input matInput readonly [ngModel]="getValSimultaneidade()">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -199,13 +199,13 @@
                     <tbody>
                       <tr>
                         <td>Geração</td>
-                        <td>10,00</td>
-                        <td>300,00</td>
+                        <td>{{valGeracaoDiaria}}</td>
+                        <td>{{geracaoMensal}}</td>
                       </tr>
                       <tr>
                         <td>Energia Injetada</td>
-                        <td>6,63</td>
-                        <td>199,00</td>
+                        <td>{{energiaInjetadaDiaria}}</td>
+                        <td>{{energiaInjetadaMensal}}</td>
                       </tr>
                       <tr>
                         <td>Consumo Instantâneo</td>
@@ -225,6 +225,8 @@
                     </tbody>
                 </table>
             </div>
+
+            <button class="btn btn-primary" (click)="calcular()">teste</button>
 
             <div class="row">
                 <div class="col-lg-6 col-sm-12 col-12 mt-3 mb-3">

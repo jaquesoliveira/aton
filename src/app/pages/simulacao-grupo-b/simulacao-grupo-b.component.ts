@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { GrupoB } from 'src/app/libs/grupo-b';
 
 @Component({
   selector: 'app-simulacao-grupo-b',
@@ -25,6 +26,44 @@ export class SimulacaoGrupoBComponent {
   data2Content2:any = [];
   options2: any;
 
+  valGeracaoDiaria: number = 0
+  geracaoMensal = 0
+
+  energiaInjetadaDiaria = 6.63
+  energiaInjetadaMensal = 199.00
+
+  geracaoMediaPreviaMensal = 0.0
+
+  geracao = [
+    0.00, 
+    0.00,
+    0.00, 
+    0.00, 
+    0.00, 
+    0.00, 
+    0.01, 
+    0.02, 
+    0.03, 
+    0.07, 
+    0.11, 
+    0.15,
+    0.15, 
+    0.15,
+    0.15,
+    0.10, 
+    0.05, 
+    0.01, 
+    0.00, 
+    0.00, 
+    0.00, 
+    0.00, 
+    0.00, 
+    0.00
+    ]
+
+  geracaoDiariaTeste: number[] = []
+
+
   constructor( private route: Router){}
 
   ngOnInit() {
@@ -45,7 +84,7 @@ export class SimulacaoGrupoBComponent {
             this.data1Content2[i] = this.data1Content2[i-1] + 500
         }       
 
-        console.log(this.data1Content[i])
+        //console.log(this.data1Content[i])
     }
 
     const documentStyle = getComputedStyle(document.documentElement);
@@ -273,13 +312,22 @@ export class SimulacaoGrupoBComponent {
                     drawOnChartArea: false,
                     color: surfaceBorder
                 }
-            }
-            
+            }            
         }
-    };
-
-    
+    };    
 }
+
+  preencherInformacoesDeGeracaoEconsumo(){
+    this.valGeracaoDiaria = 0
+    let tempValGeracaoDiaria: number = 0
+    for(let i of this.geracao){
+        //let temp = i*this.geracaoMediaPreviaMensal/30
+        this.geracaoDiariaTeste.push(i*this.geracaoMediaPreviaMensal/30);
+        tempValGeracaoDiaria+=i*this.geracaoMediaPreviaMensal/30
+    }
+    this.valGeracaoDiaria = parseFloat(tempValGeracaoDiaria.toFixed(2));
+    this.geracaoMensal = parseFloat((this.valGeracaoDiaria * 30).toFixed(2))
+  }
 
   sair(){
     this.route.navigate(['/'])
@@ -287,5 +335,68 @@ export class SimulacaoGrupoBComponent {
 
   menu(){
     this.route.navigate(['home'])
+  }
+
+  getValSimultaneidade(){    
+    let s = Math.abs(((this.energiaInjetadaDiaria/this.valGeracaoDiaria) - 1) * 100);
+    if(s === Infinity){
+        return 0
+    }
+    return s.toFixed(2)//Math.round(s);
+  }
+
+  private getSomaGeracaoDiaria(){
+    let total = 0;   
+
+    for(var n of this.getGeracaoDiaria()){
+        total += n;
+    }
+    return total
+  }
+
+  private getGeracaoMensal(){  this.geracaoMensal = this.getSomaGeracaoDiaria() * 30
+  }
+
+  private getGeracaoDiaria(){
+    let geracaoDiaria = [
+        (this.geracao[0]*this.getGeracaoDiariaValorHora(0)) /30, 
+        (this.geracao[1]*this.getGeracaoDiariaValorHora(1)) /30, 
+        (this.geracao[2]*this.getGeracaoDiariaValorHora(2)) /30, 
+        (this.geracao[3]*this.getGeracaoDiariaValorHora(3)) /30, 
+        (this.geracao[4]*this.getGeracaoDiariaValorHora(4)) /30, 
+        (this.geracao[5]*this.getGeracaoDiariaValorHora(5)) /30, 
+        (this.geracao[6]*this.getGeracaoDiariaValorHora(6)) /30, 
+        (this.geracao[7]*this.getGeracaoDiariaValorHora(7)) /30,
+        (this.geracao[8]*this.getGeracaoDiariaValorHora(8)) /30,
+        (this.geracao[9]*this.getGeracaoDiariaValorHora(9)) /30,
+        (this.geracao[10]*this.getGeracaoDiariaValorHora(10)) /30,
+        (this.geracao[11]*this.getGeracaoDiariaValorHora(11)) /30,
+        (this.geracao[12]*this.getGeracaoDiariaValorHora(12))/30,
+        (this.geracao[13]*this.getGeracaoDiariaValorHora(13)) /30,
+        (this.geracao[14]*this.getGeracaoDiariaValorHora(14)) /30,
+        (this.geracao[15]*this.getGeracaoDiariaValorHora(15)) /30,
+        (this.geracao[16]*this.getGeracaoDiariaValorHora(16)) /30,
+        (this.geracao[17]*this.getGeracaoDiariaValorHora(17)) /30,
+        (this.geracao[18]*this.getGeracaoDiariaValorHora(18)) /30,
+        (this.geracao[19]*this.getGeracaoDiariaValorHora(19)) /30,
+        (this.geracao[20]*this.getGeracaoDiariaValorHora(20)) /30,
+        (this.geracao[21]*this.getGeracaoDiariaValorHora(21)) /30,
+        (this.geracao[22]*this.getGeracaoDiariaValorHora(22)) /30,
+        (this.geracao[23]*this.getGeracaoDiariaValorHora(23)) /30,
+    ]
+
+    return geracaoDiaria
+  }
+  getGeracaoDiariaValorHora(posicao: number){
+    if(this.geracao[posicao] === 0.00){
+        return 0.00
+    }
+    let r = (this.geracao[posicao]*this.geracaoMediaPreviaMensal)/30 
+    return r
+  }
+
+  calcular(){
+    let t = this.valGeracaoDiaria = this.getSomaGeracaoDiaria();
+    console.log(this.getSomaGeracaoDiaria())
   }
 }
