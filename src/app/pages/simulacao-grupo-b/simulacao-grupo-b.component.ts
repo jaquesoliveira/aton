@@ -29,8 +29,8 @@ export class SimulacaoGrupoBComponent {
   valGeracaoDiaria: number = 0
   geracaoMensal = 0
 
-  energiaInjetadaDiaria = 6.63
-  energiaInjetadaMensal = 199.00
+  energiaInjetadaDiaria = 0.0
+  energiaInjetadaMensal = 0.0
 
   geracaoMediaPreviaMensal = 0.0
 
@@ -61,12 +61,20 @@ export class SimulacaoGrupoBComponent {
     0.00
     ]
 
-  geracaoDiariaTeste: number[] = []
+  geracaoDiariaList: number[] = []
+  energiaInjetadaList: number[] = []
+  consumo: number[] = []
+  consumoMedioMensal: number[] = []
 
+
+  valConsumoMedioMensal = 0
+  perfilConsumoSelecionado = ''
+  valSimultaneidade = 0
 
   constructor( private route: Router){}
 
   ngOnInit() {
+    console.log(1.5-0.33)
 
     for(let i=0; i<24; i++){
         if(i===0 ){
@@ -321,12 +329,75 @@ export class SimulacaoGrupoBComponent {
     this.valGeracaoDiaria = 0
     let tempValGeracaoDiaria: number = 0
     for(let i of this.geracao){
-        //let temp = i*this.geracaoMediaPreviaMensal/30
-        this.geracaoDiariaTeste.push(i*this.geracaoMediaPreviaMensal/30);
+        this.geracaoDiariaList.push(i*this.geracaoMediaPreviaMensal/30);
         tempValGeracaoDiaria+=i*this.geracaoMediaPreviaMensal/30
     }
     this.valGeracaoDiaria = parseFloat(tempValGeracaoDiaria.toFixed(2));
     this.geracaoMensal = parseFloat((this.valGeracaoDiaria * 30).toFixed(2))
+
+    this.preencherConsumo()
+    this.preencherConsumoMedioMensal()
+    this.preencherenergiaInjetadaList()
+    this.preencherenergiaInjetadaDiario()
+    this.preencherEnergiaInjetadaMensal()
+    this.preencherValSimultaneidade()
+  }
+
+  preencherConsumo(){
+    if(this.perfilConsumoSelecionado === 'residencial_1' ){
+        this.consumo = []
+        const consumo = new GrupoB;       
+        
+        for(let cons of consumo.residencial_1){
+            this.consumo.push(cons);
+        }
+    }
+  }
+
+  preencherConsumoMedioMensal(){    
+    this.consumoMedioMensal = []
+    for(let cons of this.consumo){        
+        this.consumoMedioMensal.push(parseFloat(((this.valConsumoMedioMensal/30)*cons).toFixed(2)));
+    }
+  }
+
+  preencherenergiaInjetadaList(){
+    console.log('>>>>> consumoMedioMensal')
+    console.log(this.consumoMedioMensal)
+    
+    this.energiaInjetadaList = []
+    for(let i=0; i<24;i++){
+        let geracaoDiariaList = this.geracaoDiariaList[i]
+        let consumoMedioMensal = this.consumoMedioMensal[i]
+
+        let temp = geracaoDiariaList - consumoMedioMensal
+        // console.log('>>>>> temp')
+        // console.log(temp)
+
+         //console.log('>>>>> geracaoDiariaList')
+         //console.log(geracaoDiariaList + '-' + consumoMedioMensal)
+        if(temp <= 0){
+            temp = 0
+        }else{
+            temp = this.geracaoDiariaList[i]-this.consumoMedioMensal[i]
+        }
+
+        this.energiaInjetadaList.push(temp)
+        temp = 0
+    }    
+  }
+
+  preencherenergiaInjetadaDiario(){
+    this.energiaInjetadaDiaria = 0
+    for(let item of this.energiaInjetadaList){
+        this.energiaInjetadaDiaria+=item        
+    }
+   
+    console.log(this.energiaInjetadaDiaria)
+  }
+
+  preencherEnergiaInjetadaMensal(){
+    this.energiaInjetadaMensal = this.energiaInjetadaDiaria*30
   }
 
   sair(){
@@ -337,25 +408,25 @@ export class SimulacaoGrupoBComponent {
     this.route.navigate(['home'])
   }
 
-  getValSimultaneidade(){    
-    let s = Math.abs(((this.energiaInjetadaDiaria/this.valGeracaoDiaria) - 1) * 100);
-    if(s === Infinity){
-        return 0
-    }
-    return s.toFixed(2)//Math.round(s);
+  preencherValSimultaneidade(){   
+    this.valSimultaneidade = Math.abs(((this.energiaInjetadaDiaria/this.valGeracaoDiaria) - 1) * 100);
+    // if(s === Infinity){
+    //     return 0
+    // }
+    // return s.toFixed(2)//Math.round(s);
   }
 
-  private getSomaGeracaoDiaria(){
-    let total = 0;   
+//   private getSomaGeracaoDiaria(){
+//     let total = 0;   
 
-    for(var n of this.getGeracaoDiaria()){
-        total += n;
-    }
-    return total
-  }
+//     for(var n of this.getGeracaoDiaria()){
+//         total += n;
+//     }
+//     return total
+//   }
 
-  private getGeracaoMensal(){  this.geracaoMensal = this.getSomaGeracaoDiaria() * 30
-  }
+//   private getGeracaoMensal(){  this.geracaoMensal = this.getSomaGeracaoDiaria() * 30
+//   }
 
   private getGeracaoDiaria(){
     let geracaoDiaria = [
@@ -395,8 +466,8 @@ export class SimulacaoGrupoBComponent {
     return r
   }
 
-  calcular(){
-    let t = this.valGeracaoDiaria = this.getSomaGeracaoDiaria();
-    console.log(this.getSomaGeracaoDiaria())
-  }
+//   calcular(){
+//     let t = this.valGeracaoDiaria = this.getSomaGeracaoDiaria();
+//     console.log(this.getSomaGeracaoDiaria())
+//   }
 }

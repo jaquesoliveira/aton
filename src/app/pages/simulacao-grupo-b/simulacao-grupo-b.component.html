@@ -18,7 +18,7 @@
                     <div class="row">
                         <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
                             <mat-label>Consumo Médio Mensal</mat-label>
-                            <input matInput >
+                            <input matInput [(ngModel)] = "valConsumoMedioMensal">
                             <mat-hint>(KWh/mês)</mat-hint>
                         </mat-form-field>            
                         
@@ -30,7 +30,7 @@
                     
                         <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
                             <mat-label>Geração média prev. mensal GD II</mat-label>
-                            <input matInput [(ngModel)] = "geracaoMediaPreviaMensal" (blur)="preencherInformacoesDeGeracaoEconsumo()">
+                            <input matInput [(ngModel)] = "geracaoMediaPreviaMensal" >
                             <mat-hint>(pós/Lei)(Kwh/mês)</mat-hint>
                         </mat-form-field>
                     </div>
@@ -162,8 +162,8 @@
                             <div class="row">  
                                 <mat-form-field class="col-lg-6 col-sm-12 col-12">
                                     <mat-label>Perfil de Consumo</mat-label>
-                                    <select matNativeControl required>
-                                        <option value="SIM">Residencial 1</option>
+                                    <select matNativeControl [(ngModel)]="perfilConsumoSelecionado" (change)="preencherInformacoesDeGeracaoEconsumo()" required>
+                                        <option value="residencial_1">Residencial 1</option>
                                         <option value="SIM">Residencial 2</option>
                                         <option value="SIM">Consumo Remoto</option>
                                         <option value="SIM">Noturno</option>
@@ -173,10 +173,9 @@
                                         <option value="SIM">Personalizado</option>
                                     </select>
                                 </mat-form-field>
-                            
                                 <mat-form-field class="col-lg-6 col-sm-12 col-12">
                                     <mat-label>Simultaneidade</mat-label>
-                                    <input matInput readonly [ngModel]="getValSimultaneidade()">
+                                    <input matInput readonly [ngModel]="valSimultaneidade">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -226,7 +225,7 @@
                 </table>
             </div>
 
-            <button class="btn btn-primary" (click)="calcular()">teste</button>
+            <button class="btn btn-primary" >teste</button>
 
             <div class="row">
                 <div class="col-lg-6 col-sm-12 col-12 mt-3 mb-3">
