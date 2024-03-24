@@ -64,17 +64,19 @@ export class SimulacaoGrupoBComponent {
   geracaoDiariaList: number[] = []
   energiaInjetadaList: number[] = []
   consumo: number[] = []
+  consumoInstataneoDiarioList: number[] = []
   consumoMedioMensal: number[] = []
 
 
   valConsumoMedioMensal = 0
   perfilConsumoSelecionado = ''
   valSimultaneidade = 0
+  consumoInstataneoDiario = 0
+  consumoInstataneoMenasal = 0
 
   constructor( private route: Router){}
 
   ngOnInit() {
-    console.log(1.5-0.33)
 
     for(let i=0; i<24; i++){
         if(i===0 ){
@@ -90,9 +92,7 @@ export class SimulacaoGrupoBComponent {
         if(i>1 ){
             this.data1Content[i] = this.data1Content[i-1] + this.data1Content[i-1]*0.1
             this.data1Content2[i] = this.data1Content2[i-1] + 500
-        }       
-
-        //console.log(this.data1Content[i])
+        }
     }
 
     const documentStyle = getComputedStyle(document.documentElement);
@@ -341,6 +341,7 @@ export class SimulacaoGrupoBComponent {
     this.preencherenergiaInjetadaDiario()
     this.preencherEnergiaInjetadaMensal()
     this.preencherValSimultaneidade()
+    this.preencherConsumoInstataneoDiario()
   }
 
   preencherConsumo(){
@@ -362,8 +363,6 @@ export class SimulacaoGrupoBComponent {
   }
 
   preencherenergiaInjetadaList(){
-    console.log('>>>>> consumoMedioMensal')
-    console.log(this.consumoMedioMensal)
     
     this.energiaInjetadaList = []
     for(let i=0; i<24;i++){
@@ -371,11 +370,7 @@ export class SimulacaoGrupoBComponent {
         let consumoMedioMensal = this.consumoMedioMensal[i]
 
         let temp = geracaoDiariaList - consumoMedioMensal
-        // console.log('>>>>> temp')
-        // console.log(temp)
-
-         //console.log('>>>>> geracaoDiariaList')
-         //console.log(geracaoDiariaList + '-' + consumoMedioMensal)
+        
         if(temp <= 0){
             temp = 0
         }else{
@@ -390,10 +385,8 @@ export class SimulacaoGrupoBComponent {
   preencherenergiaInjetadaDiario(){
     this.energiaInjetadaDiaria = 0
     for(let item of this.energiaInjetadaList){
-        this.energiaInjetadaDiaria+=item        
+        this.energiaInjetadaDiaria+=parseFloat(item.toFixed(2))
     }
-   
-    console.log(this.energiaInjetadaDiaria)
   }
 
   preencherEnergiaInjetadaMensal(){
@@ -409,24 +402,21 @@ export class SimulacaoGrupoBComponent {
   }
 
   preencherValSimultaneidade(){   
-    this.valSimultaneidade = Math.abs(((this.energiaInjetadaDiaria/this.valGeracaoDiaria) - 1) * 100);
-    // if(s === Infinity){
-    //     return 0
-    // }
-    // return s.toFixed(2)//Math.round(s);
+    this.valSimultaneidade = Math.abs(((this.energiaInjetadaDiaria/this.valGeracaoDiaria) - 1) * 100);    
   }
 
-//   private getSomaGeracaoDiaria(){
-//     let total = 0;   
+  preencherConsumoInstataneoDiario(){
+    let tempResult = 0;
 
-//     for(var n of this.getGeracaoDiaria()){
-//         total += n;
-//     }
-//     return total
-//   }
+    for(let i=0;i<24;i++){
+        tempResult = this.geracaoDiariaList[i] - this.energiaInjetadaList[i];
+        this.consumoInstataneoDiarioList[i] =this.geracaoDiariaList[i] - this.energiaInjetadaList[i]; 
+        this.consumoInstataneoDiario += parseFloat(tempResult.toFixed(2))
 
-//   private getGeracaoMensal(){  this.geracaoMensal = this.getSomaGeracaoDiaria() * 30
-//   }
+        tempResult = 0
+    }
+    this.consumoInstataneoMenasal = parseFloat((this.consumoInstataneoDiario * 30).toFixed(2))
+  }
 
   private getGeracaoDiaria(){
     let geracaoDiaria = [
@@ -466,8 +456,4 @@ export class SimulacaoGrupoBComponent {
     return r
   }
 
-//   calcular(){
-//     let t = this.valGeracaoDiaria = this.getSomaGeracaoDiaria();
-//     console.log(this.getSomaGeracaoDiaria())
-//   }
 }
