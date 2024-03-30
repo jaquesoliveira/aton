@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import Chart from 'chart.js/auto';
 import { GrupoB } from 'src/app/libs/grupo-b';
 
 @Component({
@@ -78,9 +79,15 @@ export class SimulacaoGrupoBComponent {
   consumoRetornado = 0
   consumoRetornadoMensal = 0
 
+  canvasName: any
+  grafico: any = []
+
   constructor( private route: Router){}
 
   ngOnInit() {
+
+    this.canvasName = Math.random().toString();
+    this.gerarGrafico();
 
     for(let i=0; i<24; i++){
         if(i===0 ){
@@ -368,6 +375,22 @@ export class SimulacaoGrupoBComponent {
             this.consumo.push(cons);
         }
     }
+
+    if(this.perfilConsumoSelecionado === 'consumoRemoto' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.consumoRemoto){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'consumoNoturno' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.consumoNoturno){
+            this.consumo.push(cons);
+        }
+    }
   }
 
   calcularConsumoMedioMensal(){    
@@ -465,5 +488,18 @@ export class SimulacaoGrupoBComponent {
     }
     let r = (this.geracao[posicao]*this.geracaoMediaPreviaMensal)/30 
     return r
+  }
+
+  gerarGrafico(){
+    if(this.grafico instanceof Chart){
+        this.grafico.destroy();
+        this.grafico = []
+    }
+
+    this.grafico = new Chart(this.canvasName, {
+        type: 'line',
+        data: this.data2,
+        options: this.options2
+    })
   }
 }

@@ -2,7 +2,7 @@
 
 <mat-tab-group>
     <mat-tab label="Informações">
-        <div class="container-fluid mb-5">
+        <div class="container mb-5">
             <div class="p-3 mt-3">
                 <h2>Cálculo da conta de energia com base na lei 14.300</h2>
             </div>
@@ -54,7 +54,7 @@
                             <input matInput>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Valor do investimento</mat-label>
                             <input matInput>
                         </mat-form-field>
@@ -65,12 +65,12 @@
             <div class="card mt-3 mb-5">
                 <div class="card-body">
                     <div class="row">
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Variação de injeção</mat-label>
                             <input matInput>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Tipo de Fornecimento</mat-label>
                             <!-- <input matInput> -->
                             <mat-label>Cars</mat-label>
@@ -81,7 +81,7 @@
                             </select>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Classificação de Consumo</mat-label>
                             <select matNativeControl required>
                                 <option value="1">B1</option>
@@ -90,7 +90,7 @@
                             </select>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Considerar TUSD G</mat-label>
                             <select matNativeControl required>
                                 <option value="SIM">SIM</option>
@@ -98,17 +98,17 @@
                             </select>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Potência da Geração</mat-label>
                             <input matInput>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Potência da Consumo</mat-label>
                             <input matInput>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Houve obra no Transformador</mat-label>
                             <select matNativeControl required>
                                 <option value="SIM">SIM</option>
@@ -126,7 +126,7 @@
             </div>
 
             <div class="row">
-                <div class="col-el-4 col-lg-6 col-sm-12 col-12 mt-3 mb-3">
+                <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-3 mb-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">        
@@ -156,7 +156,7 @@
             </div>
         
             <div class="row">
-                <div class="col-el-4 col-lg-6 col-sm-12 col-12 mt-3 mb-3">
+                <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-3 mb-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">  
@@ -165,8 +165,8 @@
                                     <select matNativeControl [(ngModel)]="perfilConsumoSelecionado" (change)="preencherInformacoesDeGeracaoEconsumo()" required>
                                         <option value="residencial_1">Residencial 1</option>
                                         <option value="residencial_2">Residencial 2</option>
-                                        <option value="SIM">Consumo Remoto</option>
-                                        <option value="SIM">Noturno</option>
+                                        <option value="consumoRemoto">Consumo Remoto</option>
+                                        <option value="consumoNoturno">Noturno</option>
                                         <option value="SIM">Comercial</option>
                                         <option value="SIM">Padarias / Mercados</option>
                                         <option value="SIM">24H</option>
@@ -182,57 +182,58 @@
                     </div>
                 </div>
             </div>        
-        
-            <div class="col-lg-6 col-sm-12 col-12 mt-3" >
-                <div style="padding: 5px; background-color: #ccc;">
-                    <span>Informações de Geração e Consumo</span>
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                      <tr>                
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Diário</th>
-                        <th scope="col">Mensal</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Geração</td>
-                        <td>{{valGeracaoDiaria | number}}</td>
-                        <td>{{geracaoMensal | number}}</td>
-                      </tr>
-                      <tr>
-                        <td>Energia Injetada</td>
-                        <td>{{energiaInjetadaDiaria | number}}</td>
-                        <td>{{energiaInjetadaMensal | number}}</td>
-                      </tr>
-                      <tr>
-                        <td>Consumo Instantâneo</td>
-                        <td>{{consumoInstataneoDiario | number}}</td>
-                        <td>{{consumoInstataneoMenasal | number}}</td>
-                      </tr>
-                      <tr>
-                        <td>Consumo Retornado</td>
-                        <td>{{consumoRetornado | number}}</td>
-                        <td>{{consumoRetornadoMensal | number}}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Consumo Total</strong></td>
-                        <td><strong>{{consumoTotalDiario | number}}</strong></td>
-                        <td><strong>{{consumoTotalMensal | number}}</strong></td>
-                      </tr>
-                    </tbody>
-                </table>
-            </div>
-
             <div class="row">
+                <div class="col-lg-6 col-sm-12 col-12 mt-3" >
+                    <div style="padding: 5px; background-color: #ccc;">
+                        <span>Informações de Geração e Consumo</span>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>                
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Diário</th>
+                            <th scope="col">Mensal</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Geração</td>
+                            <td>{{valGeracaoDiaria | number}}</td>
+                            <td>{{geracaoMensal | number}}</td>
+                        </tr>
+                        <tr>
+                            <td>Energia Injetada</td>
+                            <td>{{energiaInjetadaDiaria | number}}</td>
+                            <td>{{energiaInjetadaMensal | number}}</td>
+                        </tr>
+                        <tr>
+                            <td>Consumo Instantâneo</td>
+                            <td>{{consumoInstataneoDiario | number}}</td>
+                            <td>{{consumoInstataneoMenasal | number}}</td>
+                        </tr>
+                        <tr>
+                            <td>Consumo Retornado</td>
+                            <td>{{consumoRetornado | number}}</td>
+                            <td>{{consumoRetornadoMensal | number}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Consumo Total</strong></td>
+                            <td><strong>{{consumoTotalDiario | number}}</strong></td>
+                            <td><strong>{{consumoTotalMensal | number}}</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            
                 <div class="col-lg-6 col-sm-12 col-12 mt-3 mb-3">
                     <div class="card">
                         <div class="card-header ">
                             PERFIL DE CONSUMO
                         </div>
                         <div class="card-body">
-                            <p-chart type="line" [data]="data2" [options]="options2" style="max-width: 800px !important; max-height: 600px !important;"></p-chart>                            
+                            <!-- <p-chart type="line" [data]="data2" [options]="options2" ></p-chart> -->
+                            <canvas [id]="canvasName">{{grafico}}</canvas>
                         </div>
                     </div>
                 </div>
@@ -347,7 +348,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-10 col-sm-12 col-12 mt-3 mb-3">
+                <div class="col-lg-12 col-sm-12 col-12 mt-3 mb-3">
                     <div class="card">
                         <div class="card-body">        
                             <div class="row">
@@ -418,7 +419,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-10 col-sm-12 col-12 mt-3 mb-3">
+                <div class="col-lg-12 col-sm-12 col-12 mt-3 mb-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -694,7 +695,7 @@
                         </div>
                         <div class="card-body">
                             <div class="mt-2 mb-2">
-                                <p-chart type="line" [data]="data1" [options]="options1"></p-chart>
+                                <!-- <p-chart type="line" [data]="data1" [options]="options1"></p-chart> -->
                             </div>            
                         </div>
                     </div>
@@ -707,7 +708,7 @@
                         </div>
                         <div class="card-body">
                             <div class="mt-2 mb-2">
-                                <p-chart type="line" [data]="data2" [options]="options2"></p-chart>
+                                <!-- <p-chart type="line" [data]="data2" [options]="options2"></p-chart> -->
                             </div>
                         </div>
                     </div>

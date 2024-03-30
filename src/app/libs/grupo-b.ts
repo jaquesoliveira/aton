@@ -8,12 +8,28 @@ export class GrupoB {
       0.04,	0.04,	0.04,	0.04,	0.04,	0.05,	0.05,	0.04,	0.03,	0.03,	0.03,	0.03,	0.03,	0.03,	0.03,	0.03,	0.03,	0.03,	0.08,	0.08,	0.08,	0.04,	0.04,	0.04
    ]
 
+   consumoRemoto = [
+      0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00
+   ]
+
+   consumoNoturno = [
+      0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.00,	0.10,	0.15,	0.15,	0.15,	0.15,	0.15,	0.15
+   ]
+
    getResidencial1(){
     return this.residencial_1
    }
 
    getResidencial2(){
       return this.residencial_2
+   }
+
+   getConsumoRemoto(){
+      return this.consumoRemoto
+   }
+
+   getConsumoNoturno(){
+      return this.consumoNoturno
    }
 
 }
