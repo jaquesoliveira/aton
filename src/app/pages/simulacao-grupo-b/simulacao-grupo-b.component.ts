@@ -82,12 +82,15 @@ export class SimulacaoGrupoBComponent {
   canvasName: any
   grafico: any = []
 
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  //dataSource = ELEMENT_DATA;
+
   constructor( private route: Router){}
 
   ngOnInit() {
 
     this.canvasName = Math.random().toString();
-    this.gerarGrafico();
+    
 
     for(let i=0; i<24; i++){
         if(i===0 ){
@@ -355,6 +358,7 @@ export class SimulacaoGrupoBComponent {
     this.calcularConsumoInstataneoDiario()
     this.calcularConsumoRetornado()
     this.calcularConsumoTotal()
+    this.gerarGrafico();
   }
 
   calcularConsumo(){
@@ -388,6 +392,38 @@ export class SimulacaoGrupoBComponent {
         const consumo = new GrupoB;
         
         for(let cons of consumo.consumoNoturno){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'comercial_1' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.comercial_1){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'padarias_mercados' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.padarias_mercados){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'vinteEQuatroHoras' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.vinteEQuatroHoras){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'personalizado' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.personalizado){
             this.consumo.push(cons);
         }
     }
@@ -490,7 +526,7 @@ export class SimulacaoGrupoBComponent {
     return r
   }
 
-  gerarGrafico(){
+  gerarGrafico(){    
     if(this.grafico instanceof Chart){
         this.grafico.destroy();
         this.grafico = []
