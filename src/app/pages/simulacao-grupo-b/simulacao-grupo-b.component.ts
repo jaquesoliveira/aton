@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import Chart from 'chart.js/auto';
+import { Estado } from 'src/app/libs/estado';
+import { Estados } from 'src/app/libs/estados';
 import { GrupoB } from 'src/app/libs/grupo-b';
 
 @Component({
@@ -71,7 +73,7 @@ export class SimulacaoGrupoBComponent {
   consumoMedioMensal: number[] = []
   consumoRetornadoList: number[] = []
 
-  valConsumoMedioMensal = 0
+  valConsumoMedioMensal: number = 0
   perfilConsumoSelecionado = ''
   valSimultaneidade = 0
   consumoInstataneoDiario = 0
@@ -83,14 +85,15 @@ export class SimulacaoGrupoBComponent {
   grafico: any = []
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  //dataSource = ELEMENT_DATA;
+  estadosList: Estado[] = []
+  estadosSelecionado = ''  
 
   constructor( private route: Router){}
 
   ngOnInit() {
 
     this.canvasName = Math.random().toString();
-    
+    this.getEstados();
 
     for(let i=0; i<24; i++){
         if(i===0 ){
@@ -339,7 +342,12 @@ export class SimulacaoGrupoBComponent {
     };    
 }
 
-  preencherInformacoesDeGeracaoEconsumo(){
+getEstados(){
+    let est = new Estados();
+    this.estadosList = est.getEstados();
+}
+
+preencherInformacoesDeGeracaoEconsumo(){
     this.valGeracaoDiaria = 0
     let tempValGeracaoDiaria: number = 0
     for(let i of this.geracao){
@@ -526,7 +534,7 @@ export class SimulacaoGrupoBComponent {
     return r
   }
 
-  gerarGrafico(){    
+  gerarGrafico(){
     if(this.grafico instanceof Chart){
         this.grafico.destroy();
         this.grafico = []
@@ -537,5 +545,13 @@ export class SimulacaoGrupoBComponent {
         data: this.data2,
         options: this.options2
     })
+  }
+
+  getEstadoPerfilConsumo(){
+    if(this.valConsumoMedioMensal === 0 
+        && this.geracaoMediaPreviaMensal === 0){
+            return true;
+    }
+    return false;
   }
 }

@@ -10,7 +10,9 @@ export class HomeComponent {
 
   showFiller = false;
 
-  constructor( private route: Router){}
+  constructor( private route: Router){
+    
+  }
 
   sair(){
     this.route.navigate(['/'])
