@@ -1,10 +1,11 @@
-<app-top-bar></app-top-bar>
-
-<mat-tab-group>
+<!-- <app-top-bar></app-top-bar> -->
+<mat-spinner *ngIf="showSpinner" class="spinner"></mat-spinner>
+<mat-tab-group *ngIf="!showSpinner">
     <mat-tab label="Informações">
-        <div class="container">
+        <div class="container-fluid">
             <div class="p-3 mt-3">
-                <h2>Cálculo da conta de energia com base na lei 14.300</h2>
+                <h2>Simulação Grupo B</h2>
+                <h4>Cálculo da conta de energia com base na lei 14.300</h4>
             </div>
             <mat-divider></mat-divider>
            
@@ -132,9 +133,13 @@
                             <div class="row">        
                                 <mat-form-field class="col-lg-6 col-sm-12 col-12">
                                     <mat-label>Estado</mat-label>
-                                    <select matNativeControl [(ngModel)]="estadosSelecionado" name="estado" required>
+                                    <select matNativeControl 
+                                        [(ngModel)]="estadosSelecionado" 
+                                        name="estado"
+                                        (change)="buscarConcessionaria()"
+                                        required>
                                         <ng-container *ngFor="let estado of estadosList">                                            
-                                            <option value="estado.UF">{{estado.nome}}</option>                                            
+                                            <option [value]="estado.nome">{{estado.nome}}</option>                                            
                                         </ng-container>
                                     </select>
                                 </mat-form-field>
@@ -412,7 +417,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>Estado</td>
-                                                <td style="width: 40%;">CEARÁ</td>
+                                                <td style="width: 40%;">{{estadosSelecionado}}</td>
                                             </tr>
                                             <tr>
                                                 <td>Concessionária escolhida</td>
@@ -459,9 +464,7 @@
                     </div>
                 </div>        
             </div>
-        </div>
 
-        <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-12 mt-1 mb-3">
                     <div class="card">
@@ -491,6 +494,9 @@
                 </div>
             </div>
         </div>
+
+        
+        
 
     </mat-tab>
     
@@ -732,13 +738,5 @@
         </div>    
     </mat-tab>
 </mat-tab-group>
-
-
-<footer class="mt-5" style="background-color: #fff; ">
-    <div class="container" 
-    style="background-color: #fff; min-height: 50px !important;">
-        <p class="p-3">Todos os direitos reservados</p>
-    </div>    
-</footer>
 
 

@@ -11,7 +11,8 @@ import { GrupoB } from 'src/app/libs/grupo-b';
   styleUrls: ['./simulacao-grupo-b.component.css']
 })
 export class SimulacaoGrupoBComponent {
-    
+  
+  showSpinner = true;  
   showFiller = false;
   simultaneidade = '100%';
 
@@ -86,7 +87,8 @@ export class SimulacaoGrupoBComponent {
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   estadosList: Estado[] = []
-  estadosSelecionado = ''  
+  //estadosSelecionado = {} as Estado;
+  estadosSelecionado = '';
 
   constructor( private route: Router){}
 
@@ -339,7 +341,9 @@ export class SimulacaoGrupoBComponent {
                 }
             }            
         }
-    };    
+    };
+
+    this.showSpinner = false;
 }
 
 getEstados(){
@@ -553,5 +557,9 @@ preencherInformacoesDeGeracaoEconsumo(){
             return true;
     }
     return false;
+  }
+  
+  buscarConcessionaria(){
+    console.log(this.estadosSelecionado)
   }
 }
