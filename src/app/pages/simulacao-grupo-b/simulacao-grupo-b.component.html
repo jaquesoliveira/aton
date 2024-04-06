@@ -138,7 +138,7 @@
                                         name="estado"
                                         (change)="buscarConcessionaria()"
                                         required>
-                                        <ng-container *ngFor="let estado of estadosList">                                            
+                                        <ng-container *ngFor="let estado of estadosList;">
                                             <option [value]="estado.nome">{{estado.nome}}</option>                                            
                                         </ng-container>
                                     </select>
@@ -146,8 +146,11 @@
                             
                                 <mat-form-field class="col-lg-6 col-sm-12 col-12">
                                     <mat-label>Concessionária</mat-label>
-                                    <select matNativeControl required>
-                                        <option value="SIM">ENEL - CE</option>            
+                                    <select matNativeControl [(ngModel)]="concessionariaSelecionada" required>
+                                        <option label="-- SELECIONE --"></option>
+                                        <ng-container *ngFor="let con of concessionariaList;">                                            
+                                            <option [value]="con.nome">{{con.nome}}</option>                                            
+                                        </ng-container>
                                     </select>
                                 </mat-form-field>
                             </div>
@@ -421,7 +424,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Concessionária escolhida</td>
-                                                <td style="width: 40%;">ENEL CE</td>
+                                                <td style="width: 40%;">{{concessionariaSelecionada}}</td>
                                             </tr>
                                             <tr>
                                                 <td>Valor da TUSD (sem imposto)</td>

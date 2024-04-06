@@ -4,6 +4,7 @@ import Chart from 'chart.js/auto';
 import { Estado } from 'src/app/libs/estado';
 import { Estados } from 'src/app/libs/estados';
 import { GrupoB } from 'src/app/libs/grupo-b';
+import { GurpoBServiceService } from 'src/app/services/gurpo-b-service.service';
 
 @Component({
   selector: 'app-simulacao-grupo-b',
@@ -87,10 +88,15 @@ export class SimulacaoGrupoBComponent {
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   estadosList: Estado[] = []
+
+  concessionariaList: Estado[] = []
   //estadosSelecionado = {} as Estado;
   estadosSelecionado = '';
+  concessionariaSelecionada = ''
 
-  constructor( private route: Router){}
+  constructor( 
+    private route: Router,
+    private service: GurpoBServiceService){}
 
   ngOnInit() {
 
@@ -560,6 +566,11 @@ preencherInformacoesDeGeracaoEconsumo(){
   }
   
   buscarConcessionaria(){
-    console.log(this.estadosSelecionado)
+    this.concessionariaSelecionada = ''
+    this.service.consultar(this.estadosSelecionado).subscribe({
+        next: (data) => {
+            this.concessionariaList = data
+        }
+    })
   }
 }
