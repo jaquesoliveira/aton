@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { enviroment } from '../enviroment/enviroment';
 import { catchError, throwError } from 'rxjs';
 import { Estado } from '../libs/estado';
+import { ParametrosAneelResumidaDto } from '../dto/parametrosAneelResumidaDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GurpoBServiceService {
 
-  private url = enviroment.baseUrl + "/concessionaria";
+  private url = enviroment.baseUrl;
 
   httpOptions =  {
     headers: new HttpHeaders({'Content-Type': 'application/json;charset=UTF-8'})
@@ -19,7 +20,13 @@ export class GurpoBServiceService {
 
   consultar(nomeEstado: string){
     console.log(nomeEstado)
-    return this.httpClient.get<Estado[]>(this.url.concat(`/${nomeEstado}`))
+    return this.httpClient.get<Estado[]>(this.url.concat(`/concessionaria/${nomeEstado}`))
+    .pipe(catchError(this.handlerError))
+  }
+
+  getValTusdSemImposto(parametros: ParametrosAneelResumidaDto){
+    console.log(parametros)
+    return this.httpClient.post<any>(this.url.concat('/aneel'), JSON.stringify(parametros), this.httpOptions)
     .pipe(catchError(this.handlerError))
   }
 

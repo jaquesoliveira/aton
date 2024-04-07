@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import Chart from 'chart.js/auto';
+import { ParametrosAneelResumidaDto } from 'src/app/dto/parametrosAneelResumidaDto';
 import { Estado } from 'src/app/libs/estado';
 import { Estados } from 'src/app/libs/estados';
 import { GrupoB } from 'src/app/libs/grupo-b';
@@ -93,6 +94,8 @@ export class SimulacaoGrupoBComponent {
   //estadosSelecionado = {} as Estado;
   estadosSelecionado = '';
   concessionariaSelecionada = ''
+  valTusdSemImposto = 0.0
+  valClassificacaoConsumo = ''
 
   constructor( 
     private route: Router,
@@ -570,6 +573,22 @@ preencherInformacoesDeGeracaoEconsumo(){
     this.service.consultar(this.estadosSelecionado).subscribe({
         next: (data) => {
             this.concessionariaList = data
+        }
+    })
+  }
+
+  getValTusdSemImposto(){
+    let parametros = {} as ParametrosAneelResumidaDto 
+    parametros.uf = this.estadosSelecionado
+    parametros.concessionaria = this.concessionariaSelecionada
+    parametros.classificacao = this.valClassificacaoConsumo
+    console.log('sdjfkaljdsçkajdlçkj')
+
+    this.service.getValTusdSemImposto(parametros).subscribe({
+        next: (data) => {
+            let temp = data
+            
+            this.valTusdSemImposto = parseFloat((temp/1000).toFixed(2))
         }
     })
   }

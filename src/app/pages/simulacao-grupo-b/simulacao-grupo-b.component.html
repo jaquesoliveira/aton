@@ -84,10 +84,10 @@
                 
                         <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Classificação de Consumo</mat-label>
-                            <select matNativeControl required>
-                                <option value="1">B1</option>
-                                <option value="2">B2</option>
-                                <option value="3">B3</option>                
+                            <select matNativeControl [(ngModel)] = "valClassificacaoConsumo" required>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B3">B3</option>                
                             </select>
                         </mat-form-field>
                 
@@ -139,14 +139,16 @@
                                         (change)="buscarConcessionaria()"
                                         required>
                                         <ng-container *ngFor="let estado of estadosList;">
-                                            <option [value]="estado.nome">{{estado.nome}}</option>                                            
+                                            <option [value]="estado.UF">{{estado.nome}}</option>                                            
                                         </ng-container>
                                     </select>
                                 </mat-form-field>
                             
                                 <mat-form-field class="col-lg-6 col-sm-12 col-12">
                                     <mat-label>Concessionária</mat-label>
-                                    <select matNativeControl [(ngModel)]="concessionariaSelecionada" required>
+                                    <select matNativeControl 
+                                        [(ngModel)]="concessionariaSelecionada" 
+                                        (change)="getValTusdSemImposto()" required>
                                         <option label="-- SELECIONE --"></option>
                                         <ng-container *ngFor="let con of concessionariaList;">                                            
                                             <option [value]="con.nome">{{con.nome}}</option>                                            
@@ -342,57 +344,60 @@
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-12 mt-1">
                     <div class="card">
-                        <div class="card-body">        
+                        <div class="card-body">
+
                             <div class="row">
-                                <div class="col-lg-4 col-sm-12 col-12 mt-1">
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <td>ICMS</td>
-                                                <td class="coluna-verde">20,00%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>PIS</td>
-                                                <td class="coluna-verde">0,710%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>COFINS</td>
-                                                <td class="coluna-verde">2,280%</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="col-sm-12 col-12 mt-1">
+
+                                    <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3">
+                                        <mat-label>ICMS</mat-label>
+                                        <input matInput [(ngModel)] = "valConsumoMedioMensal">
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3 ms-1">    
+                                        <mat-label>PIS</mat-label>
+                                        <input matInput [(ngModel)] = "valConsumoMedioMensal">
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3 ms-1">
+                                        <mat-label>COFINS</mat-label>
+                                        <input matInput [(ngModel)] = "valConsumoMedioMensal">
+                                    </mat-form-field>
                                 </div>
+                            </div>
+
+                            <div class="row">
                         
                                 <div class="col-lg-7 col-sm-12 col-12 mt-1">
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
                                                 <td>ICMS na TUSD da Taxa de disponibilidade</td>
-                                                <td class="coluna-verde" style="width: 40%;">
+                                                <td style="width: 40%;">
                                                     <mat-checkbox class="example-margin">Sim</mat-checkbox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>ICMS na TE da Taxa de disponibilidade</td>
-                                                <td class="coluna-verde">
+                                                <td>
                                                     <mat-checkbox class="example-margin">Sim</mat-checkbox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>ICMS na TUSD da Energia Injetada/Retornada</td>
-                                                <td class="coluna-verde">
+                                                <td>
                                                     <mat-checkbox class="example-margin">Sim</mat-checkbox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>ICMS no Fio B</td>
-                                                <td class="coluna-verde">
+                                                <td>
                                                     <mat-checkbox class="example-margin">Sim</mat-checkbox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>ICMS na TUSD G</td>
-                                                <td class="coluna-verde">
+                                                <td>
                                                     <mat-checkbox class="example-margin">Sim</mat-checkbox>
                                                 </td>
                                             </tr>
@@ -428,7 +433,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Valor da TUSD (sem imposto)</td>
-                                                <td style="width: 40%;">RS 0,44</td>
+                                                <td style="width: 40%;">{{valTusdSemImposto | currency:'BRL':true}}</td>
                                             </tr>
                                             <tr>
                                                 <td>Valor da TE (sem imposto)</td>
