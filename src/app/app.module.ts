@@ -31,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { InversorListComponent } from './pages/cadastros/produtos/inversor-list/inversor-list.component';
 
 registerLocaleData(ptBr);
 
@@ -45,7 +46,8 @@ registerLocaleData(ptBr);
     DimensionamentoBateriaComponent,
     SimulacaoGrupoAComponent,
     SimulacaoGrupoBComponent,
-    TopBarComponent
+    TopBarComponent,
+    InversorListComponent,
   ],
   imports: [
     BrowserModule,

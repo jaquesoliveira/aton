@@ -6,6 +6,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { SimulacaoGrupoBComponent } from './pages/simulacao-grupo-b/simulacao-grupo-b.component';
 import { SimulacaoGrupoAComponent } from './pages/simulacao-grupo-a/simulacao-grupo-a.component';
 import { DimensionamentoBateriaComponent } from './pages/dimensionamento-bateria/dimensionamento-bateria.component';
+import { InversorListComponent } from './pages/cadastros/produtos/inversor-list/inversor-list.component';
+import { InversorFormComponent } from './pages/cadastros/produtos/inversor-form/inversor-form.component';
+import { ProdutosComponent } from './pages/cadastros/produtos/produtos/produtos.component';
+import { ClientesComponent } from './pages/cadastros/clientes/clientes/clientes.component';
+import { PropostasComponent } from './pages/propostas/propostas/propostas.component';
+import { ModuloFotovoltaicoListComponent } from './pages/cadastros/produtos/modulo-fotovoltaico-list/modulo-fotovoltaico-list.component';
+import { ModuloFotovoltaicoFormComponent } from './pages/cadastros/produtos/modulo-fotovoltaico-form/modulo-fotovoltaico-form.component';
 
 const routes: Routes = [
   {
@@ -31,6 +38,41 @@ const routes: Routes = [
   {
     path:'dimensionamento-bateria',
     component: DimensionamentoBateriaComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'cadastro/produtos',
+    component: ProdutosComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'cadastro/produtos/inversor-list',
+    component: InversorListComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'cadastro/produtos/inversor-form',
+    component: InversorFormComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'cadastro/produtos/modulo-list',
+    component: ModuloFotovoltaicoListComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'cadastro/produtos/modulo-form',
+    component: ModuloFotovoltaicoFormComponent,
+    pathMatch: 'full'
+  }, 
+  {
+    path:'cadastro/clientes',
+    component: ClientesComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'propostas',
+    component: PropostasComponent,
     pathMatch: 'full'
   },
   {

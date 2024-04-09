@@ -315,23 +315,23 @@
                    CONSUMO REMOTO
                 </div>
                 <div class="card-body">
-                    <div class="col-lg-5 col-sm-12 col-12 mt-1">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 80%;">Quantidade de imóveis que vão receber energia MONOFÁSICO</td>
-                                    <td  class="coluna-verde" style="width: 20%;">0</td>
-                                </tr>
-                                <tr>
-                                    <td>Quantidade de imóveis que vão receber energia BIFÁSICO</td>
-                                    <td class="coluna-verde">0</td>
-                                </tr>
-                                <tr>
-                                    <td>Quantidade de imóveis que vão receber energia TRIFÁSICO</td>
-                                    <td class="coluna-verde">0</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="row mt-1">
+                        <p>Quantidade de imóveis que vão receber energia</p>
+                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                            <mat-label>Monofásico</mat-label>
+                            <input matInput [ngModel]="valSimultaneidade" placeholder="Monofásico">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                            <mat-label>Bifásico</mat-label>
+                            <input matInput [ngModel]="valSimultaneidade" placeholder="Bifásico">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">
+                            <mat-label>Trifásico</mat-label>
+                            <input matInput [ngModel]="valSimultaneidade" placeholder="Trifásico">
+                        </mat-form-field>                  
+                        
                     </div>            
                 </div>
             </div>
@@ -347,23 +347,20 @@
                         <div class="card-body">
 
                             <div class="row">
-                                <div class="col-sm-12 col-12 mt-1">
+                                <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3">
+                                    <mat-label>ICMS</mat-label>
+                                    <input matInput [(ngModel)] = "valConsumoMedioMensal">
+                                </mat-form-field>
 
-                                    <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3">
-                                        <mat-label>ICMS</mat-label>
-                                        <input matInput [(ngModel)] = "valConsumoMedioMensal">
-                                    </mat-form-field>
+                                <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3 ms-1">    
+                                    <mat-label>PIS</mat-label>
+                                    <input matInput [(ngModel)] = "valConsumoMedioMensal">
+                                </mat-form-field>
 
-                                    <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3 ms-1">    
-                                        <mat-label>PIS</mat-label>
-                                        <input matInput [(ngModel)] = "valConsumoMedioMensal">
-                                    </mat-form-field>
-
-                                    <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3 ms-1">
-                                        <mat-label>COFINS</mat-label>
-                                        <input matInput [(ngModel)] = "valConsumoMedioMensal">
-                                    </mat-form-field>
-                                </div>
+                                <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3 ms-1">
+                                    <mat-label>COFINS</mat-label>
+                                    <input matInput [(ngModel)] = "valConsumoMedioMensal">
+                                </mat-form-field>
                             </div>
 
                             <div class="row">
