@@ -1,128 +1,106 @@
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h3 class="offcanvas-title" id="offcanvasScrollingLabel">Filtros</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <div class="row">
             <mat-form-field class="col-lg-12 col-sm-12 col-12">
                 <mat-label>Fabricante</mat-label>
-                <input matInput>
-                
+                <input matInput>                
             </mat-form-field>
     
             <mat-form-field  class="col-lg-12 col-sm-12 col-12">
                 <mat-label>Potencia</mat-label>
-                <input matInput>
-                
+                <input matInput>                
             </mat-form-field>
+
             <div class="row mt-2">
                 <div class="d-flex flex-row-reverse">
-                    <button class="btn btn-primary" data-bs-dismiss="offcanvas"> Pesquisar</button>
+                    <button 
+                        class="btn btn-primary" 
+                        data-bs-dismiss="offcanvas">
+                        Pesquisar
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-  </div>
+</div>
 
 <div class="row mt-4">
     <div  class="d-flex justify-content-between">
-        <div>
+        <div style="display: flex; align-items: center;">
+            <a mat-icon-button
+                (click)="navegarParaMenuDeProdutos()">
+                <mat-icon>arrow_back_ios_new</mat-icon>
+            </a>
             <img width="30px" src="assets/images/inversor.png" alt="">
-            <span class="ms-2" style="font-size: large;">Cadastro de Inversor</span>
+            <span class="ms-2" style="font-size: large;">Inversores</span>
         </div>        
         <div>
-            <!-- <a class="btn" 
-                data-bs-toggle="offcanvas" 
-                data-bs-target="#offcanvasScrolling" 
-                aria-controls="offcanvasScrolling">
-                <img src="assets/images/filtro.png" width="32px" alt="">
-            </a>
-            <a class="btn" 
-                data-bs-toggle="offcanvas" 
-                data-bs-target="#offcanvasScrolling" 
-                aria-controls="offcanvasScrolling">
-                <img src="assets/images/add2.png" width="32px" alt="">
-            </a> -->
-
-            <a mat-icon-button>
+            <button mat-mini-fab 
+                class="pc-only"
+                color="primary"
+                (click)="navegarParaFormularioDeInversor()">
                 <mat-icon>add</mat-icon>
-            </a>
+            </button>
             
-            <a mat-icon-button 
+            <button mat-mini-fab 
+                color="primary" 
                 data-bs-toggle="offcanvas" 
                 data-bs-target="#offcanvasScrolling" 
-                aria-controls="offcanvasScrolling">
+                aria-controls="offcanvasScrolling"
+                class="ms-1">
                 <mat-icon>tune</mat-icon>
-            </a>
+            </button>
         </div>
     </div>
 </div>    
 <hr>
 
-
-<!-- 
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Fabricante</mat-label>
-                <input matInput>
-                
-            </mat-form-field>
-    
-            <mat-form-field  class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Potencia</mat-label>
-                <input matInput>
-                
-            </mat-form-field>    
-        </div>
-
-        <mat-divider></mat-divider>
-        <div class="row mt-2">
-            <div class="d-flex flex-row-reverse">
-                <button class="btn btn-primary"> Pesquisar</button>
+<div class="list-group list-group-flush mt-3" style="max-width: 700px; margin-bottom: 120px;">
+    <ng-container *ngFor="let inv of inversorList" class="mb-2">
+        <a [routerLink]="['/cadastro/produtos/inversor-form']" 
+            (click)="selacionarInversor(inv)"
+            class="list-group-item list-group-item-action" 
+            aria-current="true">
+            
+            <div class="d-flex w-100 justify-content-between">
+                <h3 class="mb-1 fabricante" style="font-weight: 500;">{{inv.fabricante}}</h3>
+                <small>                    
+                    <!-- <button mat-mini-fab 
+                        color="primary">
+                        <mat-icon>delete</mat-icon>
+                    </button> -->
+                </small>
             </div>
-        </div>
+            <small class="mb-1 detalhes">Potencia: {{inv.potencia}} | Garantia(defeitos): {{inv.garantiaDefeito}} | Monitoramento: {{inv.monitoramento}}</small>
+
+            <!-- style="display: flex; align-items: center;" -->            
+        </a>    
+    </ng-container>
+</div>
+
+
+<div>
+    
+</div>
+
+<nav class="navbar fixed-bottom bg-body-tertiary mb-4 me-3 mobile-only">
+    <div class="container d-flex flex-row-reverse p5">
+        <button mat-fab 
+            color="primary"
+            (click)="navegarParaFormularioDeInversor()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</nav>
+
+
+<!-- <div class="item-list mt-2 " > 
+    <div class="row">
+        <span class="ms-2 mt-2 fabricante" style="font-size: larger;">Livoltek</span>
+        Potencia: <small class="ms-2">10KWh</small>
     </div>
 </div> -->
-
-
-<!-- <div class="row mt-5">
-    <div>        
-        <span class="ms-2" style="font-size: large;">Lista de Inversores</span>
-    </div>
-</div> -->
-
-<div class="list-group list-group-flush mt-3">
-    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small>3 days ago</small>
-      </div>
-      <p class="mb-1">Some placeholder content in a paragraph.</p>
-      <small>And some small print.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small class="text-body-secondary">3 days ago</small>
-      </div>
-      <p class="mb-1">Some placeholder content in a paragraph.</p>
-      <small class="text-body-secondary">And some muted small print.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small class="text-body-secondary">3 days ago</small>
-      </div>
-      <p class="mb-1">Some placeholder content in a paragraph.</p>
-      <small class="text-body-secondary">And some muted small print.</small>
-    </a>
-  </div>
-<!-- <div class="card mt-3 mb-5">
-    <div class="card-body">
-        
-    </div>
-</div> -->
-
