@@ -1,106 +1,180 @@
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-    <div class="offcanvas-header">
-        <h3 class="offcanvas-title" id="offcanvasScrollingLabel">Filtros</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="row">
-            <mat-form-field class="col-lg-12 col-sm-12 col-12">
-                <mat-label>Fabricante</mat-label>
-                <input matInput>                
-            </mat-form-field>
-    
-            <mat-form-field  class="col-lg-12 col-sm-12 col-12">
-                <mat-label>Potencia</mat-label>
-                <input matInput>                
-            </mat-form-field>
-
-            <div class="row mt-2">
-                <div class="d-flex flex-row-reverse">
-                    <button 
-                        class="btn btn-primary" 
-                        data-bs-dismiss="offcanvas">
-                        Pesquisar
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="full-container" *ngIf="showSpinner">
+    <mat-spinner class="load-centered"></mat-spinner>
 </div>
-
-<div class="row mt-4">
-    <div  class="d-flex justify-content-between">
+<div class="row mt-1 mb-1">
+    <div class="d-flex justify-content-between" 
+        style="display: flex; align-items: center;">
         <div style="display: flex; align-items: center;">
-            <a mat-icon-button
-                (click)="navegarParaMenuDeProdutos()">
-                <mat-icon>arrow_back_ios_new</mat-icon>
-            </a>
-            <img width="30px" src="assets/images/inversor.png" alt="">
-            <span class="ms-2" style="font-size: large;">Inversores</span>
-        </div>        
-        <div>
-            <button mat-mini-fab 
-                class="pc-only"
+            <button mat-mini-fab
                 color="primary"
-                (click)="navegarParaFormularioDeInversor()">
-                <mat-icon>add</mat-icon>
+                (click)="navegarParaMenuDeProdutos()">
+                <mat-icon>menu</mat-icon>
             </button>
-            
-            <button mat-mini-fab 
-                color="primary" 
-                data-bs-toggle="offcanvas" 
-                data-bs-target="#offcanvasScrolling" 
-                aria-controls="offcanvasScrolling"
-                class="ms-1">
-                <mat-icon>tune</mat-icon>
-            </button>
+            <img class="ms-2" width="30px" src="assets/images/inversor.png" alt="">
+            <span class="ms-1" style="font-size: large;">Inversores</span>
         </div>
     </div>
-</div>    
-<hr>
+</div>
 
-<div class="list-group list-group-flush mt-3" style="max-width: 700px; margin-bottom: 120px;">
-    <ng-container *ngFor="let inv of inversorList" class="mb-2">
-        <a [routerLink]="['/cadastro/produtos/inversor-form']" 
-            (click)="selacionarInversor(inv)"
-            class="list-group-item list-group-item-action" 
-            aria-current="true">
-            
-            <div class="d-flex w-100 justify-content-between">
-                <h3 class="mb-1 fabricante" style="font-weight: 500;">{{inv.fabricante}}</h3>
-                <small>                    
-                    <!-- <button mat-mini-fab 
-                        color="primary">
-                        <mat-icon>delete</mat-icon>
-                    </button> -->
-                </small>
+<div class="card-header barra-de-titulo mb-1" 
+    style="background-color: #3f51b5; color: #fff; padding: 5px;">
+    <span class="ms-2">Filtros</span>
+</div>
+
+<div class="card mb-1">
+    <div class="card-body"> 
+
+        <div class="row mt-3">
+            <div class="mb-3 col-2">
+                <label for="fabricante" class="form-label">Fabricante</label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="filtros.fabricante"
+                    (keyup.enter)="onEnter()"
+                    id="fabricante">
             </div>
-            <small class="mb-1 detalhes">Potencia: {{inv.potencia}} | Garantia(defeitos): {{inv.garantiaDefeito}} | Monitoramento: {{inv.monitoramento}}</small>
 
-            <!-- style="display: flex; align-items: center;" -->            
-        </a>    
-    </ng-container>
+            <div class="mb-3 col-2">
+                <label for="potencia" class="form-label">Potência</label>
+                <input class="form-control form-control-sm" 
+                    [(ngModel)]="filtros.potencia"
+                    (keyup.enter)="onEnter()"
+                    id="potencia">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="garantia" class="form-label">Garantia</label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="filtros.garantiaDefeito"
+                    (keyup.enter)="onEnter()"
+                    id="garantia">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="monitoramento" class="form-label">Monitoramento</label>
+               
+                <select class="form-select form-select-sm" 
+                    aria-label="Default select example"
+                    [(ngModel)]="filtros.monitoramento">                    
+                    <ng-container *ngFor="let monitor of monitoramentos">
+                        <option [value]="monitor">{{monitor}}</option>
+                    </ng-container>
+                </select>    
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="modelo" class="form-label">Modelo</label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="filtros.modelo"
+                    (keyup.enter)="onEnter()"
+                    id="modelo">
+            </div>
+        </div>
+        
+        <mat-divider></mat-divider>
+        <div class="row mt-2">
+            <div class="d-flex justify-content-end">        
+                <button mat-raised-button color="primary" 
+                    (click)="limpar()"
+                    class="ms-5">Limpar</button>
+                <button mat-raised-button color="primary" 
+                    (click)="pesquisar()"
+                    class="ms-1">Pesquisar</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-
-<div>
-    
+<div class="card-header barra-de-titulo mb-1 mt-3" 
+    style="background-color: #3f51b5; color: #fff; padding: 5px;">
+    <span class="ms-2">Lista de Inversores</span>
 </div>
+<div class="card mb-5">
+    <div class="card-body"> 
 
-<nav class="navbar fixed-bottom bg-body-tertiary mb-4 me-3 mobile-only">
-    <div class="container d-flex flex-row-reverse p5">
-        <button mat-fab 
-            color="primary"
+    <div class="d-flex justify-content-between" 
+        style="display: flex; align-items: center;">
+        <button mat-raised-button 
+            color="primary" 
             (click)="navegarParaFormularioDeInversor()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
-</nav>
+            Adicionar
+        </button>        
 
+        <mat-paginator 
+            [length]="totalPages"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageOptions"
+            aria-label="Select page">
+        </mat-paginator>
+    </div>    
+    
+    <mat-divider class="mt-3"></mat-divider>
 
-<!-- <div class="item-list mt-2 " > 
-    <div class="row">
-        <span class="ms-2 mt-2 fabricante" style="font-size: larger;">Livoltek</span>
-        Potencia: <small class="ms-2">10KWh</small>
-    </div>
-</div> -->
+    <table mat-table [dataSource]="dataSource">
+        <!-- Position Column -->
+        <ng-container mat-column-codigo  matColumnDef="codigo" style="width: 20px !important;">
+            <th mat-header-cell mat-column-codigo  *matHeaderCellDef> Código </th>
+            <td mat-cell mat-column-codigo *matCellDef="let element"
+            style="width: 5%;"><span style="text-transform: uppercase;">{{element.id}}</span></td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="fabricante" >
+            <th mat-header-cell *matHeaderCellDef> Fabricante </th>
+            <td mat-cell mat-column-fabricante *matCellDef="let element"
+                style="width: 21%; text-transform: uppercas;"> {{element.fabricante}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="modelo" >
+            <th mat-header-cell *matHeaderCellDef> Modelo </th>
+            <td mat-cell mat-column-modelo *matCellDef="let element"
+                style="width: 15%; text-transform: uppercas;"> {{element.modelo}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="potencia" >
+            <th mat-header-cell *matHeaderCellDef> Petência </th>
+            <td mat-cell mat-column-potencia *matCellDef="let element"
+                style="width: 15%; text-transform: uppercas;"> {{element.potencia }} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="garantia" >
+            <th mat-header-cell *matHeaderCellDef> Garantia </th>
+            <td mat-cell mat-column-garantia *matCellDef="let element"
+                style="width: 15%; text-transform: uppercase;"> {{element.garantiaDefeito}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container mat-column-monitoramento matColumnDef="monitoramento" >
+            <th mat-header-cell *matHeaderCellDef> Monitoramento </th>
+            <td mat-cell mat-column-monitoramento *matCellDef="let element"
+                style="width: 15%; text-transform: uppercase;"> {{element.monitoramento}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef mat-column-acoes > Ações </th>
+        <td mat-cell mat-column-acoes *matCellDef="let element"
+            style="width: 11%;">
+            
+            <button mat-mini-fab
+                color="primary"
+                (click)="editar(element)"
+                [routerLink]="['/cadastro/produtos/inversor-form']" >
+                <mat-icon>edit</mat-icon>
+            </button>
+
+            <button mat-mini-fab
+                color="primary"
+                class="ms-2"
+                (click)="excluir(element.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+        </ng-container>  
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

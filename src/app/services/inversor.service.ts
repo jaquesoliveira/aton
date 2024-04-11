@@ -13,7 +13,7 @@ export class InversorService {
   private url = enviroment.baseUrl;
 
   httpOptions =  {
-    headers: new HttpHeaders({'Content-Type': 'application/json;charset=UTF-8'})
+    headers: new HttpHeaders({'Content-Type': 'application/json;charset=UTF-8' })
   }
 
   constructor(private httpClient: HttpClient) { }
@@ -23,13 +23,18 @@ export class InversorService {
     .pipe(catchError(this.handlerError))
   }
 
-  consultar(parametros: ParametrosInversorDto){
+  pesquisar(parametros: InversorDto){
     return this.httpClient.post<InversorDto[]>(this.url.concat(`/inversor/consultar`), JSON.stringify(parametros), this.httpOptions)
     .pipe(catchError(this.handlerError))
   }
 
   salvar(inversorDto: InversorDto){
     return this.httpClient.post<any>(this.url.concat(`/inversor/salvar`), JSON.stringify(inversorDto), this.httpOptions)
+    .pipe(catchError(this.handlerError))
+  }
+
+  excluir(id: number){
+    return this.httpClient.delete<any>(this.url.concat(`/inversor/${id}`))
     .pipe(catchError(this.handlerError))
   }
 

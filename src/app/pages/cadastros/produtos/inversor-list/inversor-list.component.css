@@ -27,3 +27,13 @@
         display: none;
     }
 }
+
+.spinner{
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    margin: 50%;
+}
+
+
+
