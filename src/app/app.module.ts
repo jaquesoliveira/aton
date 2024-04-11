@@ -25,14 +25,18 @@ import { SimulacaoGrupoBComponent } from './pages/simulacao-grupo-b/simulacao-gr
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatDialogModule} from '@angular/material/dialog';
 import { TopBarComponent } from './commons/top-bar/top-bar.component';
 import { HttpClientModule } from '@angular/common/http';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { InversorListComponent } from './pages/cadastros/produtos/inversor-list/inversor-list.component';
 import { InversorFormComponent } from './pages/cadastros/produtos/inversor-form/inversor-form.component';
+import { InfoDialogComponent } from './commons/info-dialog/info-dialog.component';
+import { ConfirmDialogComponent } from './commons/confirm-dialog/confirm-dialog.component';
 
 registerLocaleData(ptBr);
 
@@ -49,7 +53,9 @@ registerLocaleData(ptBr);
     SimulacaoGrupoBComponent,
     TopBarComponent,
     InversorListComponent,
-    InversorFormComponent
+    InversorFormComponent,
+    InfoDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +75,8 @@ registerLocaleData(ptBr);
     MatTableModule,
     MatProgressSpinnerModule,
     HttpClientModule,
+    MatDialogModule,
+    MatPaginatorModule
   ],
   providers: [
     {

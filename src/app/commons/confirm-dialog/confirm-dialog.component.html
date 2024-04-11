@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-start p5" 
+    style="display: flex; align-items: center;">
+    <img class="ms-2" 
+        style="width: 50px; height: 50px;" 
+        src="assets/images/exclamation.png" alt="">
+    <h1 mat-dialog-title>{{data.tituloDialog}}</h1>
+</div>
+
+<mat-divider></mat-divider>
+
+<div mat-dialog-actions
+    class="d-flex justify-content-end p5">
+    <button mat-raised-button 
+        color="primary" 
+        (click)="onCancel()">
+        Não
+    </button>
+    <button mat-raised-button 
+    color="primary" 
+        (click)="onConfirm()"
+        cdkFocusInitial>
+        Sim
+    </button>
+</div>

@@ -1,15 +1,24 @@
-<div class="row mt-4">
-    <div  class="d-flex justify-content-between">
+<div class="full-container" *ngIf="showSpinner">
+    <mat-spinner class="load-centered"></mat-spinner>
+</div>
+<div class="row mt-1 mb-1">
+    <div class="d-flex justify-content-between" 
+        style="display: flex; align-items: center;">
         <div style="display: flex; align-items: center;">
-            <a mat-icon-button
+            <!-- <a mat-icon-button
                 (click)="navegarParaListaDeInversores()">
                 <mat-icon>arrow_back_ios_new</mat-icon>
-            </a>
-            <img width="30px" src="assets/images/inversor.png" alt="">
-            <span class="ms-2" style="font-size: large;">Cadastro de Inversor</span>
+            </a> -->
+            <button mat-mini-fab
+                color="primary"
+                (click)="navegarParaListaDeInversores()">
+                <mat-icon>reply</mat-icon>
+            </button>
+            <img class="ms-2" width="30px" src="assets/images/inversor.png" alt="">
+            <span class="ms-1" style="font-size: large;">Cadastro de Inversor</span>
         </div>
 
-        <div class="pc-only">
+        <!-- <div class="pc-only">
             <button mat-mini-fab 
                 color="primary"
                 class="me-1"
@@ -20,75 +29,73 @@
             <button mat-mini-fab color="primary" (click)="salvar()">
                 <mat-icon>save</mat-icon>
             </button>
-        </div>
+        </div> -->
     </div>
-</div>    
-<hr>
+</div> 
 
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Fabricante</mat-label>
-                <input matInput
+<div class="card-header barra-de-titulo mb-1" 
+    style="background-color: #3f51b5; color: #fff; padding: 5px;">
+    <span class="ms-2">Formulário</span>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body"> 
+
+        <div class="row mt-3">
+            <div class="mb-3 col-2">
+                <label for="fabricante" class="form-label">Fabricante</label>
+                <input class="form-control form-control-sm"
                     [(ngModel)]="inversor.fabricante"
-                    maxlength="40"
-                    required>
-            </mat-form-field>
-    
-            <mat-form-field  class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Potência</mat-label>
-                <input matInput 
+                    id="fabricante">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="potencia" class="form-label">Potência</label>
+                <input class="form-control form-control-sm" 
                     [(ngModel)]="inversor.potencia"
-                    maxlength="20"
-                    required>
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Garantia Defeito</mat-label>
-                <input matInput 
+                    id="potencia">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="garantia" class="form-label">Garantia</label>
+                <input class="form-control form-control-sm"
                     [(ngModel)]="inversor.garantiaDefeito"
-                    maxlength="40" 
-                    required>
-            </mat-form-field>
+                    id="garantia">
+            </div>
 
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Monitoramento</mat-label>
-                <select matNativeControl name="inversor"
-                    [(ngModel)]="inversor.monitoramento" required>
-
+            <div class="mb-3 col-2">
+                <label for="monitoramento" class="form-label">Monitoramento</label>
+               
+                <select class="form-select form-select-sm" 
+                    aria-label="Default select example"
+                    [(ngModel)]="inversor.monitoramento">                    
                     <ng-container *ngFor="let monitor of monitoramentos">
                         <option [value]="monitor">{{monitor}}</option>
                     </ng-container>
-                </select>
-            </mat-form-field>
+                </select>    
+            </div>
 
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Modelo</mat-label>
-                <input matInput 
+            <div class="mb-3 col-2">
+                <label for="modelo" class="form-label">Modelo</label>
+                <input class="form-control form-control-sm"
                     [(ngModel)]="inversor.modelo"
-                    maxlength="40" 
-                    required>
-            </mat-form-field>
+                    id="modelo">
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="mt-2 d-flex justify-content-end">
+            <button mat-raised-button
+                color="primary" class="me-1"
+                (click)="navegarParaListaDeInversores()">
+                Cancelar
+            </button>
+            <button mat-raised-button color="primary" 
+                (click)="limpar()">Limpar</button>
+            <button mat-raised-button color="primary" 
+                (click)="salvar()"                
+                class="ms-1">Salvar</button>
         </div>
     </div>
 </div>
-
-<nav class="navbar fixed-bottom bg-body-tertiary mb-4 me-3 mobile-only">
-    <div class="container d-flex justify-content-end p5">
-
-        <div>
-            <button mat-fab 
-                color="primary" class="me-1">
-                <mat-icon>reply</mat-icon>
-            </button>
-        </div>
-
-        <div>
-            <button mat-fab 
-                color="primary">
-                <mat-icon>save</mat-icon>
-            </button>
-        </div>       
-    </div>    
-</nav>

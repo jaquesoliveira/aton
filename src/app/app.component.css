@@ -81,3 +81,37 @@
     font-weight: bold;
 }
 
+
+
+/*------------ DRAWER -------------*/
+@media (min-width: 1200px){
+.example-sidenav{
+    padding: 0px;    
+    width: 20%;
+    overflow-x: hidden !important;
+}}
+
+@media (min-width: 1080px){
+.example-sidenav {
+    padding: 0px;
+    width: 25%;
+}}
+
+/* @media (min-width: 720px){
+.example-sidenav {
+    padding: 20px;
+    width: 40%;
+}} */
+
+/* @media (min-width: 480px){
+.example-sidenav {
+    padding: 20px;
+    width: 60%;
+}} */
+
+
+/*não funciona*/
+.teste-scroll {
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+}

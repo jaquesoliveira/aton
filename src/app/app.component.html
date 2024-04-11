@@ -1,10 +1,10 @@
 <mat-drawer-container class="example-container" >
-    <mat-drawer #drawer class="example-sidenav" mode="side">
+    <mat-drawer #drawer class="example-sidenav teste-scroll" mode="side">
         <div class="row mb-3">
             <span class="side-menu-title ms-4 mt-3 mb-2">Menu</span>
         </div>        
         
-        <div class="row col-12 ">
+        <div class="row teste-scroll" >
             <ul>  
                 <mat-divider></mat-divider> 
                 <li style="margin-top: 10px; margin-bottom: 10px;">
@@ -129,8 +129,8 @@
         </div>
     </mat-drawer>
   
-    <div class="example-sidenav-content">
-        <mat-toolbar color="primary">
+    <div>
+        <mat-toolbar color="primary" style="min-width: 1200px; overflow-y: hidden !important; overflow-x: hidden;">
             <mat-toolbar-row >
                 <button 
                     mat-icon-button 
@@ -141,7 +141,8 @@
                     <mat-icon>menu</mat-icon>
                 </button>
         
-                <span>Energy System</span>
+                <img src="assets/images/logo.png" style="width: 50px;" alt="">
+                <span class="ms-2">Energy System</span>
         
                 <span class="example-spacer"></span>
                 <!-- <div class="user-name">Jaques Oliveira</div> -->
@@ -163,16 +164,9 @@
             </mat-toolbar-row>
         </mat-toolbar>
 
-        <div class="container" style="min-width: 370px;">            
+        <div class="container" style="min-width: 1200px; overflow-y: hidden !important; overflow-x: hidden;">            
             <router-outlet></router-outlet>            
         </div>
-
-        <!-- <footer  style="background-color: #fff; ">
-            <div style="background-color: #fff; min-height: 50px !important; text-align: center; color: #777;">
-                <p class="p-3">Todos os direitos reservados</p>
-            </div>    
-        </footer> -->
-
     </div>
   
 </mat-drawer-container>

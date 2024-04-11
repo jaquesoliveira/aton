@@ -27,7 +27,9 @@
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/fonts/roboto.css",
+              "src/assets/fonts/material-icons.css"
             ],
             "scripts": [
 	            "node_modules/bootstrap/dist/js/bootstrap.js",
@@ -69,6 +71,7 @@
             },
             "development": {
               "buildTarget": "solar-softwares-app:build:development"
+              
             }
           },
           "defaultConfiguration": "development"
