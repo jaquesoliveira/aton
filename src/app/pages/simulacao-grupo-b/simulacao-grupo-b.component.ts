@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import Chart from 'chart.js/auto';
+import { ParametrosAneelResumidaDto } from 'src/app/dto/parametrosAneelResumidaDto';
+import { Estado } from 'src/app/libs/estado';
+import { Estados } from 'src/app/libs/estados';
 import { GrupoB } from 'src/app/libs/grupo-b';
+import { GurpoBServiceService } from 'src/app/services/gurpo-b-service.service';
 
 @Component({
   selector: 'app-simulacao-grupo-b',
@@ -8,7 +13,8 @@ import { GrupoB } from 'src/app/libs/grupo-b';
   styleUrls: ['./simulacao-grupo-b.component.css']
 })
 export class SimulacaoGrupoBComponent {
-    
+  
+  showSpinner = true;  
   showFiller = false;
   simultaneidade = '100%';
 
@@ -33,6 +39,8 @@ export class SimulacaoGrupoBComponent {
   energiaInjetadaMensal = 0.0
 
   geracaoMediaPreviaMensal = 0.0
+  consumoTotalDiario = 0
+  consumoTotalMensal = 0
 
   geracao = [
     0.00, 
@@ -66,17 +74,37 @@ export class SimulacaoGrupoBComponent {
   consumo: number[] = []
   consumoInstataneoDiarioList: number[] = []
   consumoMedioMensal: number[] = []
+  consumoRetornadoList: number[] = []
 
-
-  valConsumoMedioMensal = 0
+  valConsumoMedioMensal: number = 0
   perfilConsumoSelecionado = ''
   valSimultaneidade = 0
   consumoInstataneoDiario = 0
   consumoInstataneoMenasal = 0
+  consumoRetornado = 0
+  consumoRetornadoMensal = 0
 
-  constructor( private route: Router){}
+  canvasName: any
+  grafico: any = []
+
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  estadosList: Estado[] = []
+
+  concessionariaList: Estado[] = []
+  //estadosSelecionado = {} as Estado;
+  estadosSelecionado = '';
+  concessionariaSelecionada = ''
+  valTusdSemImposto = 0.0
+  valClassificacaoConsumo = ''
+
+  constructor( 
+    private route: Router,
+    private service: GurpoBServiceService){}
 
   ngOnInit() {
+
+    this.canvasName = Math.random().toString();
+    this.getEstados();
 
     for(let i=0; i<24; i++){
         if(i===0 ){
@@ -322,10 +350,17 @@ export class SimulacaoGrupoBComponent {
                 }
             }            
         }
-    };    
+    };
+
+    this.showSpinner = false;
 }
 
-  preencherInformacoesDeGeracaoEconsumo(){
+getEstados(){
+    let est = new Estados();
+    this.estadosList = est.getEstados();
+}
+
+preencherInformacoesDeGeracaoEconsumo(){
     this.valGeracaoDiaria = 0
     let tempValGeracaoDiaria: number = 0
     for(let i of this.geracao){
@@ -335,34 +370,94 @@ export class SimulacaoGrupoBComponent {
     this.valGeracaoDiaria = parseFloat(tempValGeracaoDiaria.toFixed(2));
     this.geracaoMensal = parseFloat((this.valGeracaoDiaria * 30).toFixed(2))
 
-    this.preencherConsumo()
-    this.preencherConsumoMedioMensal()
-    this.preencherenergiaInjetadaList()
-    this.preencherenergiaInjetadaDiario()
-    this.preencherEnergiaInjetadaMensal()
-    this.preencherValSimultaneidade()
-    this.preencherConsumoInstataneoDiario()
+    this.calcularConsumo()
+    this.calcularConsumoMedioMensal()
+    this.calcularEnergiaInjetadaList()
+    this.calcularEnergiaInjetadaDiario()
+    this.calcularEnergiaInjetadaMensal()
+    this.calcularValSimultaneidade()
+    this.calcularConsumoInstataneoDiario()
+    this.calcularConsumoRetornado()
+    this.calcularConsumoTotal()
+    this.gerarGrafico();
   }
 
-  preencherConsumo(){
+  calcularConsumo(){
+    this.consumo = []
     if(this.perfilConsumoSelecionado === 'residencial_1' ){
-        this.consumo = []
+        
         const consumo = new GrupoB;       
         
         for(let cons of consumo.residencial_1){
             this.consumo.push(cons);
         }
     }
+
+    if(this.perfilConsumoSelecionado === 'residencial_2' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.residencial_2){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'consumoRemoto' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.consumoRemoto){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'consumoNoturno' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.consumoNoturno){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'comercial_1' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.comercial_1){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'padarias_mercados' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.padarias_mercados){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'vinteEQuatroHoras' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.vinteEQuatroHoras){
+            this.consumo.push(cons);
+        }
+    }
+
+    if(this.perfilConsumoSelecionado === 'personalizado' ){
+        const consumo = new GrupoB;
+        
+        for(let cons of consumo.personalizado){
+            this.consumo.push(cons);
+        }
+    }
   }
 
-  preencherConsumoMedioMensal(){    
+  calcularConsumoMedioMensal(){    
     this.consumoMedioMensal = []
     for(let cons of this.consumo){        
         this.consumoMedioMensal.push(parseFloat(((this.valConsumoMedioMensal/30)*cons).toFixed(2)));
     }
   }
 
-  preencherenergiaInjetadaList(){
+  calcularEnergiaInjetadaList(){
     
     this.energiaInjetadaList = []
     for(let i=0; i<24;i++){
@@ -382,14 +477,14 @@ export class SimulacaoGrupoBComponent {
     }    
   }
 
-  preencherenergiaInjetadaDiario(){
+  calcularEnergiaInjetadaDiario(){
     this.energiaInjetadaDiaria = 0
     for(let item of this.energiaInjetadaList){
         this.energiaInjetadaDiaria+=parseFloat(item.toFixed(2))
     }
   }
 
-  preencherEnergiaInjetadaMensal(){
+  calcularEnergiaInjetadaMensal(){
     this.energiaInjetadaMensal = this.energiaInjetadaDiaria*30
   }
 
@@ -401,16 +496,19 @@ export class SimulacaoGrupoBComponent {
     this.route.navigate(['home'])
   }
 
-  preencherValSimultaneidade(){   
-    this.valSimultaneidade = Math.abs(((this.energiaInjetadaDiaria/this.valGeracaoDiaria) - 1) * 100);    
+  calcularValSimultaneidade(){   
+    this.valSimultaneidade = parseFloat(Math.abs(((this.energiaInjetadaDiaria/this.valGeracaoDiaria) - 1) * 100).toFixed(2));    
   }
 
-  preencherConsumoInstataneoDiario(){
+  calcularConsumoInstataneoDiario(){
     let tempResult = 0;
+    this.consumoInstataneoDiario = 0
+    this.consumoInstataneoMenasal = 0
+    this.consumoInstataneoDiarioList = []
 
     for(let i=0;i<24;i++){
         tempResult = this.geracaoDiariaList[i] - this.energiaInjetadaList[i];
-        this.consumoInstataneoDiarioList[i] =this.geracaoDiariaList[i] - this.energiaInjetadaList[i]; 
+        this.consumoInstataneoDiarioList[i] = this.geracaoDiariaList[i] - this.energiaInjetadaList[i]; 
         this.consumoInstataneoDiario += parseFloat(tempResult.toFixed(2))
 
         tempResult = 0
@@ -418,36 +516,29 @@ export class SimulacaoGrupoBComponent {
     this.consumoInstataneoMenasal = parseFloat((this.consumoInstataneoDiario * 30).toFixed(2))
   }
 
-  private getGeracaoDiaria(){
-    let geracaoDiaria = [
-        (this.geracao[0]*this.getGeracaoDiariaValorHora(0)) /30, 
-        (this.geracao[1]*this.getGeracaoDiariaValorHora(1)) /30, 
-        (this.geracao[2]*this.getGeracaoDiariaValorHora(2)) /30, 
-        (this.geracao[3]*this.getGeracaoDiariaValorHora(3)) /30, 
-        (this.geracao[4]*this.getGeracaoDiariaValorHora(4)) /30, 
-        (this.geracao[5]*this.getGeracaoDiariaValorHora(5)) /30, 
-        (this.geracao[6]*this.getGeracaoDiariaValorHora(6)) /30, 
-        (this.geracao[7]*this.getGeracaoDiariaValorHora(7)) /30,
-        (this.geracao[8]*this.getGeracaoDiariaValorHora(8)) /30,
-        (this.geracao[9]*this.getGeracaoDiariaValorHora(9)) /30,
-        (this.geracao[10]*this.getGeracaoDiariaValorHora(10)) /30,
-        (this.geracao[11]*this.getGeracaoDiariaValorHora(11)) /30,
-        (this.geracao[12]*this.getGeracaoDiariaValorHora(12))/30,
-        (this.geracao[13]*this.getGeracaoDiariaValorHora(13)) /30,
-        (this.geracao[14]*this.getGeracaoDiariaValorHora(14)) /30,
-        (this.geracao[15]*this.getGeracaoDiariaValorHora(15)) /30,
-        (this.geracao[16]*this.getGeracaoDiariaValorHora(16)) /30,
-        (this.geracao[17]*this.getGeracaoDiariaValorHora(17)) /30,
-        (this.geracao[18]*this.getGeracaoDiariaValorHora(18)) /30,
-        (this.geracao[19]*this.getGeracaoDiariaValorHora(19)) /30,
-        (this.geracao[20]*this.getGeracaoDiariaValorHora(20)) /30,
-        (this.geracao[21]*this.getGeracaoDiariaValorHora(21)) /30,
-        (this.geracao[22]*this.getGeracaoDiariaValorHora(22)) /30,
-        (this.geracao[23]*this.getGeracaoDiariaValorHora(23)) /30,
-    ]
-
-    return geracaoDiaria
+  calcularConsumoRetornado(){
+    let valTemp = 0;
+    this.consumoRetornado = 0;
+    this.consumoRetornadoMensal = 0
+    for(let i=0;i<24;i++){
+        if(this.consumoMedioMensal[i] > this.geracaoDiariaList[i]){
+            valTemp = this.consumoMedioMensal[i] - this.geracaoDiariaList[i];
+        }else{
+            valTemp = 0;
+        }
+        this.consumoRetornado+=valTemp;
+    }
+    this.consumoRetornadoMensal = parseFloat((this.consumoRetornado * 30).toFixed(2))
   }
+
+  calcularConsumoTotal(){
+    this.consumoTotalDiario = 0
+    this.consumoTotalMensal = 0
+
+    this.consumoTotalDiario = this.consumoInstataneoDiario + this.consumoRetornado
+    this.consumoTotalMensal = parseFloat((this.consumoTotalDiario * 30).toFixed(2))
+  }
+
   getGeracaoDiariaValorHora(posicao: number){
     if(this.geracao[posicao] === 0.00){
         return 0.00
@@ -456,4 +547,49 @@ export class SimulacaoGrupoBComponent {
     return r
   }
 
+  gerarGrafico(){
+    if(this.grafico instanceof Chart){
+        this.grafico.destroy();
+        this.grafico = []
+    }
+
+    this.grafico = new Chart(this.canvasName, {
+        type: 'line',
+        data: this.data2,
+        options: this.options2
+    })
+  }
+
+  getEstadoPerfilConsumo(){
+    if(this.valConsumoMedioMensal === 0 
+        && this.geracaoMediaPreviaMensal === 0){
+            return true;
+    }
+    return false;
+  }
+  
+  buscarConcessionaria(){
+    this.concessionariaSelecionada = ''
+    this.service.consultar(this.estadosSelecionado).subscribe({
+        next: (data) => {
+            this.concessionariaList = data
+        }
+    })
+  }
+
+  getValTusdSemImposto(){
+    let parametros = {} as ParametrosAneelResumidaDto 
+    parametros.uf = this.estadosSelecionado
+    parametros.concessionaria = this.concessionariaSelecionada
+    parametros.classificacao = this.valClassificacaoConsumo
+    console.log('sdjfkaljdsçkajdlçkj')
+
+    this.service.getValTusdSemImposto(parametros).subscribe({
+        next: (data) => {
+            let temp = data
+            
+            this.valTusdSemImposto = parseFloat((temp/1000).toFixed(2))
+        }
+    })
+  }
 }

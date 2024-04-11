@@ -18,13 +18,23 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatTableModule} from '@angular/material/table';
 import { DimensionamentoBateriaComponent } from './pages/dimensionamento-bateria/dimensionamento-bateria.component';
 import { SimulacaoGrupoAComponent } from './pages/simulacao-grupo-a/simulacao-grupo-a.component';
 import { SimulacaoGrupoBComponent } from './pages/simulacao-grupo-b/simulacao-grupo-b.component';
-import { ChartModule } from 'primeng/chart';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import { TopBarComponent } from './commons/top-bar/top-bar.component';
+import { HttpClientModule } from '@angular/common/http';
+
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+import { InversorListComponent } from './pages/cadastros/produtos/inversor-list/inversor-list.component';
+import { InversorFormComponent } from './pages/cadastros/produtos/inversor-form/inversor-form.component';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -37,7 +47,9 @@ import { TopBarComponent } from './commons/top-bar/top-bar.component';
     DimensionamentoBateriaComponent,
     SimulacaoGrupoAComponent,
     SimulacaoGrupoBComponent,
-    TopBarComponent
+    TopBarComponent,
+    InversorListComponent,
+    InversorFormComponent
   ],
   imports: [
     BrowserModule,
@@ -52,11 +64,22 @@ import { TopBarComponent } from './commons/top-bar/top-bar.component';
     MatInputModule,
     FormsModule,
     MatDividerModule,
-    ChartModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt',
+    },
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'BRL',
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

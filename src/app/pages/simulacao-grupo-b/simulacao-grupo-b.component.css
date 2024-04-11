@@ -29,3 +29,9 @@ legend {
     color: #555;
     font-size: medium;
 }
+
+.spinner{
+    margin: auto;
+    margin-top: 350px !important;
+    z-index: 5;
+}

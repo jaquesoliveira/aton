@@ -1,14 +1,15 @@
-<app-top-bar></app-top-bar>
-
-<mat-tab-group>
+<!-- <app-top-bar></app-top-bar> -->
+<mat-spinner *ngIf="showSpinner" class="spinner"></mat-spinner>
+<mat-tab-group *ngIf="!showSpinner">
     <mat-tab label="Informações">
-        <div class="container-fluid mb-5">
+        <div class="container-fluid">
             <div class="p-3 mt-3">
-                <h2>Cálculo da conta de energia com base na lei 14.300</h2>
+                <h2>Simulação Grupo B</h2>
+                <h4>Cálculo da conta de energia com base na lei 14.300</h4>
             </div>
             <mat-divider></mat-divider>
            
-            <div class="card-header barra-de-titulo mb-3" 
+            <div class="card-header barra-de-titulo mb-1" 
                 style="background-color: #3f51b5; color: #fff; padding: 15px;">
                 INFORMAÇÕES DE CONSUMO
             </div>
@@ -54,7 +55,7 @@
                             <input matInput>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Valor do investimento</mat-label>
                             <input matInput>
                         </mat-form-field>
@@ -62,15 +63,15 @@
                 </div>
             </div>
         
-            <div class="card mt-3 mb-5">
+            <div class="card mt-1 mb-3">
                 <div class="card-body">
                     <div class="row">
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Variação de injeção</mat-label>
                             <input matInput>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Tipo de Fornecimento</mat-label>
                             <!-- <input matInput> -->
                             <mat-label>Cars</mat-label>
@@ -81,16 +82,16 @@
                             </select>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Classificação de Consumo</mat-label>
-                            <select matNativeControl required>
-                                <option value="1">B1</option>
-                                <option value="2">B2</option>
-                                <option value="3">B3</option>                
+                            <select matNativeControl [(ngModel)] = "valClassificacaoConsumo" required>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B3">B3</option>                
                             </select>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Considerar TUSD G</mat-label>
                             <select matNativeControl required>
                                 <option value="SIM">SIM</option>
@@ -98,17 +99,17 @@
                             </select>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Potência da Geração</mat-label>
                             <input matInput>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Potência da Consumo</mat-label>
                             <input matInput>
                         </mat-form-field>
                 
-                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                        <mat-form-field class="col-lg-3 col-sm-12 col-12">
                             <mat-label>Houve obra no Transformador</mat-label>
                             <select matNativeControl required>
                                 <option value="SIM">SIM</option>
@@ -126,21 +127,32 @@
             </div>
 
             <div class="row">
-                <div class="col-el-4 col-lg-6 col-sm-12 col-12 mt-3 mb-3">
+                <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-1 mb-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">        
                                 <mat-form-field class="col-lg-6 col-sm-12 col-12">
                                     <mat-label>Estado</mat-label>
-                                    <select matNativeControl required>
-                                        <option value="SIM">CEARÁ</option>            
+                                    <select matNativeControl 
+                                        [(ngModel)]="estadosSelecionado" 
+                                        name="estado"
+                                        (change)="buscarConcessionaria()"
+                                        required>
+                                        <ng-container *ngFor="let estado of estadosList;">
+                                            <option [value]="estado.UF">{{estado.nome}}</option>                                            
+                                        </ng-container>
                                     </select>
                                 </mat-form-field>
                             
                                 <mat-form-field class="col-lg-6 col-sm-12 col-12">
                                     <mat-label>Concessionária</mat-label>
-                                    <select matNativeControl required>
-                                        <option value="SIM">ENEL - CE</option>            
+                                    <select matNativeControl 
+                                        [(ngModel)]="concessionariaSelecionada" 
+                                        (change)="getValTusdSemImposto()" required>
+                                        <option label="-- SELECIONE --"></option>
+                                        <ng-container *ngFor="let con of concessionariaList;">                                            
+                                            <option [value]="con.nome">{{con.nome}}</option>                                            
+                                        </ng-container>
                                     </select>
                                 </mat-form-field>
                             </div>
@@ -150,91 +162,93 @@
             </div>
            
         
-            <div class="card-header mt-4 barra-de-titulo" 
+            <div class="card-header barra-de-titulo" 
                 style="background-color: #3f51b5; color: #fff; padding: 15px;">
                 PERFIL DE CONSUMO
             </div>
         
             <div class="row">
-                <div class="col-el-4 col-lg-6 col-sm-12 col-12 mt-3 mb-3">
+                <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-1 mb-1">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">  
-                                <mat-form-field class="col-lg-6 col-sm-12 col-12">
+                                <mat-form-field class="col-lg-6 col-sm-12 col-12" >
                                     <mat-label>Perfil de Consumo</mat-label>
-                                    <select matNativeControl [(ngModel)]="perfilConsumoSelecionado" (change)="preencherInformacoesDeGeracaoEconsumo()" required>
+                                    <select matNativeControl 
+                                        [(ngModel)]="perfilConsumoSelecionado" 
+                                        (change)="preencherInformacoesDeGeracaoEconsumo()"
+                                        required [disabled] = "valConsumoMedioMensal === 0 || geracaoMediaPreviaMensal === 0">
                                         <option value="residencial_1">Residencial 1</option>
-                                        <option value="SIM">Residencial 2</option>
-                                        <option value="SIM">Consumo Remoto</option>
-                                        <option value="SIM">Noturno</option>
-                                        <option value="SIM">Comercial</option>
-                                        <option value="SIM">Padarias / Mercados</option>
-                                        <option value="SIM">24H</option>
-                                        <option value="SIM">Personalizado</option>
+                                        <option value="residencial_2">Residencial 2</option>
+                                        <option value="consumoRemoto">Consumo Remoto</option>
+                                        <option value="consumoNoturno">Noturno</option>
+                                        <option value="comercial_1">Comercial</option>
+                                        <option value="padarias_mercados">Padarias / Mercados</option>
+                                        <option value="vinteEQuatroHoras">24H</option>
+                                        <option value="personalizado">Personalizado</option>
                                     </select>
                                 </mat-form-field>
                                 <mat-form-field class="col-lg-6 col-sm-12 col-12">
                                     <mat-label>Simultaneidade</mat-label>
-                                    <input matInput readonly [ngModel]="valSimultaneidade">
+                                    <input matInput readonly [ngModel]="valSimultaneidade + '%'">
                                 </mat-form-field>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>        
-        
-            <div class="col-lg-6 col-sm-12 col-12 mt-3" >
-                <div style="padding: 5px; background-color: #ccc;">
-                    <span>Informações de Geração e Consumo</span>
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                      <tr>                
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Diário</th>
-                        <th scope="col">Mensal</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Geração</td>
-                        <td>{{valGeracaoDiaria}}</td>
-                        <td>{{geracaoMensal}}</td>
-                      </tr>
-                      <tr>
-                        <td>Energia Injetada</td>
-                        <td>{{energiaInjetadaDiaria}}</td>
-                        <td>{{energiaInjetadaMensal}}</td>
-                      </tr>
-                      <tr>
-                        <td>Consumo Instantâneo</td>
-                        <td>{{consumoInstataneoDiario | number}}</td>
-                        <td>{{consumoInstataneoMenasal}}</td>
-                      </tr>
-                      <tr>
-                        <td>Consumo Retornado</td>
-                        <td>29,97</td>
-                        <td>899,00</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Consumo Total</strong></td>
-                        <td><strong>33,33</strong></td>
-                        <td><strong>1.000,00</strong></td>
-                      </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <button class="btn btn-primary" >teste</button>
-
             <div class="row">
-                <div class="col-lg-6 col-sm-12 col-12 mt-3 mb-3">
+                <div class="col-lg-6 col-sm-12 col-12 mt-1" >
+                    <div style="padding: 5px; background-color: #ccc;">
+                        <span>Informações de Geração e Consumo</span>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>                
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Diário</th>
+                            <th scope="col">Mensal</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Geração</td>
+                            <td>{{valGeracaoDiaria | number}}</td>
+                            <td>{{geracaoMensal | number}}</td>
+                        </tr>
+                        <tr>
+                            <td>Energia Injetada</td>
+                            <td>{{energiaInjetadaDiaria | number}}</td>
+                            <td>{{energiaInjetadaMensal | number}}</td>
+                        </tr>
+                        <tr>
+                            <td>Consumo Instantâneo</td>
+                            <td>{{consumoInstataneoDiario | number}}</td>
+                            <td>{{consumoInstataneoMenasal | number}}</td>
+                        </tr>
+                        <tr>
+                            <td>Consumo Retornado</td>
+                            <td>{{consumoRetornado | number}}</td>
+                            <td>{{consumoRetornadoMensal | number}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Consumo Total</strong></td>
+                            <td><strong>{{consumoTotalDiario | number}}</strong></td>
+                            <td><strong>{{consumoTotalMensal | number}}</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            
+                <div class="col-lg-6 col-sm-12 col-12 mt-1" >
                     <div class="card">
                         <div class="card-header ">
                             PERFIL DE CONSUMO
                         </div>
                         <div class="card-body">
-                            <p-chart type="line" [data]="data2" [options]="options2" style="max-width: 800px !important; max-height: 600px !important;"></p-chart>                            
+                            <!-- <p-chart type="line" [data]="data2" [options]="options2" ></p-chart> -->
+                            <canvas [id]="canvasName" style="height: 180px; max-height: 180px;">{{grafico}}</canvas>
                         </div>
                     </div>
                 </div>
@@ -245,71 +259,53 @@
                     PERFIL DE CONSUMO PERSONALIZADO 
                 </div>
                 <div class="card-body">
-                    <div style="padding: 5px; background-color: #ccc;">
+                    <div *ngIf="consumoMedioMensal.length > 0" style="padding: 5px; background-color: #ccc;">
                         <span>Consumo em kWh</span>
                     </div>
-                    <table class="table table-bordered">
+                    <table *ngIf="consumoMedioMensal.length > 0" class="table table-bordered">
                         <tr>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
-                            <td>1,67</td>
+                            <td *ngFor="let valor of consumoMedioMensal" style="width:4.16%; border:1px solid #ccc;">
+                                {{valor}}
+                            </td>                            
                         </tr>
                     </table>
         
                     <div class="row">
-                        <div class="col-lg-3 col-sm-12 col-12 mt-3">
+                        <div class="col-lg-3 col-sm-12 col-12 mt-1">
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
                                         <td>Consumo Diário(solar)</td>
-                                        <td class="coluna-verde">33,33</td>
+                                        <td >
+                                            {{consumoTotalDiario | number}}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Consumo Mensal(solar)</td>
-                                        <td class="coluna-verde" style="width: 30%;">1.000,00</td>
+                                        <td style="width: 30%;">{{consumoTotalMensal | number}}
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-lg-3 col-sm-12 col-12 mt-3">
+                        <div class="col-lg-3 col-sm-12 col-12 mt-1">
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
                                         <td>Geração Diária</td>
-                                        <td class="coluna-verde">33,33</td>
+                                        <td >{{valGeracaoDiaria | number}}</td>
                                     </tr>
                                     <tr>
                                         <td>Geração Mensal</td>
-                                        <td class="coluna-verde" style="width: 30%;">1.000,00</td>
+                                        <td style="width: 30%;">{{geracaoMensal | number}}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-        
-                    <div class="col-lg-2 col-sm-12 col-12 mt-3 consumo-producao">
-                        CONSUMO IGUAL A PRODUÇÃO
+
+                        <div class="col-lg-2 col-sm-12 col-12 mt-1 consumo-producao" style="height: 74px">
+                            CONSUMO IGUAL A PRODUÇÃO
+                        </div>
                     </div>
                 </div>
             </div>
@@ -319,86 +315,86 @@
                    CONSUMO REMOTO
                 </div>
                 <div class="card-body">
-                    <div class="col-lg-5 col-sm-12 col-12 mt-3">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 80%;">Quantidade de imóveis que vão receber energia MONOFÁSICO</td>
-                                    <td  class="coluna-verde" style="width: 20%;">0</td>
-                                </tr>
-                                <tr>
-                                    <td>Quantidade de imóveis que vão receber energia BIFÁSICO</td>
-                                    <td class="coluna-verde">0</td>
-                                </tr>
-                                <tr>
-                                    <td>Quantidade de imóveis que vão receber energia TRIFÁSICO</td>
-                                    <td class="coluna-verde">0</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="row mt-1">
+                        <p>Quantidade de imóveis que vão receber energia</p>
+                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                            <mat-label>Monofásico</mat-label>
+                            <input matInput [ngModel]="valSimultaneidade" placeholder="Monofásico">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-lg-2 col-sm-12 col-12">
+                            <mat-label>Bifásico</mat-label>
+                            <input matInput [ngModel]="valSimultaneidade" placeholder="Bifásico">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">
+                            <mat-label>Trifásico</mat-label>
+                            <input matInput [ngModel]="valSimultaneidade" placeholder="Trifásico">
+                        </mat-form-field>                  
+                        
                     </div>            
                 </div>
             </div>
         
-            <div class="card-header mt-4 barra-de-titulo" 
+            <div class="card-header mt-3 barra-de-titulo" 
                 style="background-color: #3f51b5; color: #fff; padding: 15px;">
                 IMPOSTOS
             </div>
 
             <div class="row">
-                <div class="col-lg-10 col-sm-12 col-12 mt-3 mb-3">
+                <div class="col-lg-12 col-sm-12 col-12 mt-1">
                     <div class="card">
-                        <div class="card-body">        
+                        <div class="card-body">
+
                             <div class="row">
-                                <div class="col-lg-4 col-sm-12 col-12 mt-3">
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <td>ICMS</td>
-                                                <td class="coluna-verde">20,00%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>PIS</td>
-                                                <td class="coluna-verde">0,710%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>COFINS</td>
-                                                <td class="coluna-verde">2,280%</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3">
+                                    <mat-label>ICMS</mat-label>
+                                    <input matInput [(ngModel)] = "valConsumoMedioMensal">
+                                </mat-form-field>
+
+                                <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3 ms-1">    
+                                    <mat-label>PIS</mat-label>
+                                    <input matInput [(ngModel)] = "valConsumoMedioMensal">
+                                </mat-form-field>
+
+                                <mat-form-field class="col-lg-2 col-sm-12 col-12 mb-3 ms-1">
+                                    <mat-label>COFINS</mat-label>
+                                    <input matInput [(ngModel)] = "valConsumoMedioMensal">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="row">
                         
-                                <div class="col-lg-7 col-sm-12 col-12 mt-3">
+                                <div class="col-lg-7 col-sm-12 col-12 mt-1">
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
                                                 <td>ICMS na TUSD da Taxa de disponibilidade</td>
-                                                <td class="coluna-verde" style="width: 40%;">
+                                                <td style="width: 40%;">
                                                     <mat-checkbox class="example-margin">Sim</mat-checkbox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>ICMS na TE da Taxa de disponibilidade</td>
-                                                <td class="coluna-verde">
+                                                <td>
                                                     <mat-checkbox class="example-margin">Sim</mat-checkbox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>ICMS na TUSD da Energia Injetada/Retornada</td>
-                                                <td class="coluna-verde">
+                                                <td>
                                                     <mat-checkbox class="example-margin">Sim</mat-checkbox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>ICMS no Fio B</td>
-                                                <td class="coluna-verde">
+                                                <td>
                                                     <mat-checkbox class="example-margin">Sim</mat-checkbox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>ICMS na TUSD G</td>
-                                                <td class="coluna-verde">
+                                                <td>
                                                     <mat-checkbox class="example-margin">Sim</mat-checkbox>
                                                 </td>
                                             </tr>
@@ -411,13 +407,13 @@
                 </div>        
             </div>        
         
-            <div class="card-header mt-4 barra-de-titulo" 
+            <div class="card-header mt-3 barra-de-titulo" 
                 style="background-color: #3f51b5; color: #fff; padding: 15px;">
                 RESUMO DE TARIFAS
             </div>
 
             <div class="row">
-                <div class="col-lg-10 col-sm-12 col-12 mt-3 mb-3">
+                <div class="col-lg-12 col-sm-12 col-12 mt-1 mb-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -426,15 +422,15 @@
                                         <tbody>
                                             <tr>
                                                 <td>Estado</td>
-                                                <td style="width: 40%;">CEARÁ</td>
+                                                <td style="width: 40%;">{{estadosSelecionado}}</td>
                                             </tr>
                                             <tr>
                                                 <td>Concessionária escolhida</td>
-                                                <td style="width: 40%;">ENEL CE</td>
+                                                <td style="width: 40%;">{{concessionariaSelecionada}}</td>
                                             </tr>
                                             <tr>
                                                 <td>Valor da TUSD (sem imposto)</td>
-                                                <td style="width: 40%;">RS 0,44</td>
+                                                <td style="width: 40%;">{{valTusdSemImposto | currency:'BRL':true}}</td>
                                             </tr>
                                             <tr>
                                                 <td>Valor da TE (sem imposto)</td>
@@ -473,14 +469,44 @@
                     </div>
                 </div>        
             </div>
-        
-            <div style="height: 100px;"></div>
+
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-12 mt-1 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class=" d-flex flex-row-reverse bd-highlight mb-1" st>  
+                                
+                                    <div class="ps-5 bd-highlight">
+                                        <button class="btn btn-primary">
+                                            Gerar Proposta
+                                        </button>
+                                    </div>
+                                    <div class="ps-2 bd-highlight">
+                                        <button class="btn btn-secondary">
+                                            Limpar
+                                        </button>
+                                    </div>
+                                    <div class=" bd-highlight">
+                                        <button class="btn btn-primary">
+                                            Salvar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        
+        
 
     </mat-tab>
     
     <mat-tab label="Comparativo">
-        <div class="container-fluid mb-5">
+        <div class="container">
 
             <div class="p-3 mt-3">
                 <h2>Simulação de Conta de Energia Elétrica com a Lei 13.300</h2>
@@ -693,7 +719,7 @@
                         </div>
                         <div class="card-body">
                             <div class="mt-2 mb-2">
-                                <p-chart type="line" [data]="data1" [options]="options1"></p-chart>
+                                <!-- <p-chart type="line" [data]="data1" [options]="options1"></p-chart> -->
                             </div>            
                         </div>
                     </div>
@@ -706,7 +732,7 @@
                         </div>
                         <div class="card-body">
                             <div class="mt-2 mb-2">
-                                <p-chart type="line" [data]="data2" [options]="options2"></p-chart>
+                                <!-- <p-chart type="line" [data]="data2" [options]="options2"></p-chart> -->
                             </div>
                         </div>
                     </div>
