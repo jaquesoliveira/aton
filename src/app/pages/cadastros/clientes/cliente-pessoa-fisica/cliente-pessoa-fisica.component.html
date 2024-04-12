@@ -7,11 +7,11 @@
         <div style="display: flex; align-items: center;">
             <button mat-mini-fab
                 color="primary"
-                (click)="navegarParaMenuDeProdutos()">
+                (click)="navegarParaMenuDeClientes()">
                 <mat-icon>menu</mat-icon>
             </button>
-            <img class="ms-2" width="30px" src="assets/images/modulo.png" alt="">
-            <span class="ms-1" style="font-size: large;">Módulos Fotovoltaicos</span>
+            <img class="ms-2" width="30px" src="assets/images/pessoa_fisica.png" alt="">
+            <span class="ms-1" style="font-size: large;">Clientes Pessoa Física</span>
         </div>
     </div>
 </div>
@@ -25,34 +25,42 @@
     <div class="card-body"> 
 
         <div class="row mt-3">
-            <div class="mb-3 col-2">
-                <label for="fabricante" class="form-label">Fabricante</label>
+            <div class="mb-3 col-3">
+                <label for="fabricante" class="form-label">Nome</label>
                 <input class="form-control form-control-sm"
-                    [(ngModel)]="filtros.fabricante"
+                    [(ngModel)]="filtros.nome"
                     (keyup.enter)="onEnter()"
                     id="fabricante">
             </div>
 
             <div class="mb-3 col-2">
-                <label for="potencia" class="form-label">Potência</label>
+                <label for="potencia" class="form-label">CPF</label>
                 <input class="form-control form-control-sm" 
-                    [(ngModel)]="filtros.potencia"
+                [(ngModel)]="filtros.cpf"
                     (keyup.enter)="onEnter()"
                     id="potencia">
             </div>
 
             <div class="mb-3 col-2">
-                <label for="garantia" class="form-label">Garantia(Defeitos)</label>
+                <label for="potencia" class="form-label">RG</label>
+                <input class="form-control form-control-sm" 
+                    [(ngModel)]="filtros.rg"
+                    (keyup.enter)="onEnter()"
+                    id="potencia">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="garantia" class="form-label">Telefone</label>
                 <input class="form-control form-control-sm"
-                    [(ngModel)]="filtros.garantiaDefeito"
+                    [(ngModel)]="filtros.telefone"
                     (keyup.enter)="onEnter()"
                     id="garantia">
             </div>
 
-            <div class="mb-3 col-2">
-                <label for="modelo" class="form-label">Garantia(Eficiência)</label>
+            <div class="mb-3 col-3">
+                <label for="modelo" class="form-label">E-mail</label>
                 <input class="form-control form-control-sm"
-                [(ngModel)]="filtros.garantiaEficiencia"
+                    [(ngModel)]="filtros.email"
                     (keyup.enter)="onEnter()"
                     id="modelo">
             </div>
@@ -74,7 +82,7 @@
 
 <div class="card-header barra-de-titulo mb-1 mt-3" 
     style="background-color: #3f51b5; color: #fff; padding: 5px;">
-    <span class="ms-2">Lista de Módulos Fotovoltaicos</span>
+    <span class="ms-2">Lista de Clientes</span>
 </div>
 <div class="card mb-5">
     <div class="card-body"> 
@@ -83,7 +91,7 @@
         style="display: flex; align-items: center;">
         <button mat-raised-button 
             color="primary" 
-            (click)="navegarParaFormularioDeModulo()">
+            (click)="navegarParaFormularioDeCliente()">
             Adicionar
         </button>        
 
@@ -106,40 +114,40 @@
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="fabricante" >
-            <th mat-header-cell *matHeaderCellDef> Fabricante </th>
-            <td mat-cell mat-column-fabricante *matCellDef="let element"
-                style="width: 21%; text-transform: uppercas;"> {{element.fabricante}} </td>
+        <ng-container matColumnDef="nome" >
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell mat-column-nome *matCellDef="let element"
+                style="width: 21%; text-transform: uppercas;"> {{element.nome}} </td>
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="modelo" >
-            <th mat-header-cell *matHeaderCellDef> Modelo </th>
-            <td mat-cell mat-column-modelo *matCellDef="let element"
-                style="width: 15%; text-transform: uppercas;"> {{element.modelo}} </td>
+        <ng-container matColumnDef="cpf" >
+            <th mat-header-cell *matHeaderCellDef> CPF </th>
+            <td mat-cell mat-column-cpf *matCellDef="let element"
+                style="width: 15%; text-transform: uppercas;"> {{element.cpf}} </td>
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="potencia" >
-            <th mat-header-cell *matHeaderCellDef> Petência </th>
-            <td mat-cell mat-column-potencia *matCellDef="let element"
-                style="width: 15%; text-transform: uppercas;"> {{element.potencia }} </td>
+        <ng-container matColumnDef="rg" >
+            <th mat-header-cell *matHeaderCellDef> RG </th>
+            <td mat-cell mat-column-cpf *matCellDef="let element"
+                style="width: 15%; text-transform: uppercas;"> {{element.rg}} </td>
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container mat-column-garantiaDefeito matColumnDef="garantiaDefeito" >
-            <th mat-header-cell *matHeaderCellDef> Garantia Defeito </th>
-            <td mat-cell mat-column-garantiaDefeito *matCellDef="let element"
-                style="width: 15%; text-transform: uppercase;"> {{element.garantiaDefeito}} </td>
+        <ng-container matColumnDef="telefone" >
+            <th mat-header-cell *matHeaderCellDef> Telefone </th>
+            <td mat-cell mat-column-telefone *matCellDef="let element"
+                style="width: 15%; text-transform: uppercas;"> {{element.telefone}} </td>
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="garantiaEficiencia" >
-            <th mat-header-cell *matHeaderCellDef> Garantia Eficiência </th>
-            <td mat-cell mat-column-garantiaEficiencia *matCellDef="let element"
-                style="width: 15%; text-transform: uppercase;"> {{element.garantiaEficiencia}} </td>
-        </ng-container>       
-
+        <ng-container matColumnDef="email" >
+            <th mat-header-cell *matHeaderCellDef> E-mail </th>
+            <td mat-cell mat-column-email *matCellDef="let element"
+                style="width: 15%; text-transform: uppercase;"> {{element.email}} </td>
+        </ng-container>
+      
         <!-- Weight Column -->
         <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef mat-column-acoes > Ações </th>
@@ -148,8 +156,9 @@
             
             <button mat-mini-fab
                 color="primary"
-                (click)="editar(element)"
-                [routerLink]="['/cadastro/produtos/modulo-form']" >
+                [routerLink]="['/cadastro/clientes/pessoa-fisica-form']"
+                (click)="editar(element)"> 
+                
                 <mat-icon>edit</mat-icon>
             </button>
 

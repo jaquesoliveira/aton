@@ -13,6 +13,8 @@ import { ClientesComponent } from './pages/cadastros/clientes/clientes/clientes.
 import { PropostasComponent } from './pages/propostas/propostas/propostas.component';
 import { ModuloFotovoltaicoListComponent } from './pages/cadastros/produtos/modulo-fotovoltaico-list/modulo-fotovoltaico-list.component';
 import { ModuloFotovoltaicoFormComponent } from './pages/cadastros/produtos/modulo-fotovoltaico-form/modulo-fotovoltaico-form.component';
+import { ClientePessoaFisicaComponent } from './pages/cadastros/clientes/cliente-pessoa-fisica/cliente-pessoa-fisica.component';
+import { ClientePessoaFisicaFormComponent } from './pages/cadastros/clientes/cliente-pessoa-fisica-form/cliente-pessoa-fisica-form.component';
 
 const routes: Routes = [
   {
@@ -68,6 +70,16 @@ const routes: Routes = [
   {
     path:'cadastro/clientes',
     component: ClientesComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'cadastro/clientes/pessoa-fisica-list',
+    component: ClientePessoaFisicaComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'cadastro/clientes/pessoa-fisica-form',
+    component: ClientePessoaFisicaFormComponent,
     pathMatch: 'full'
   },
   {

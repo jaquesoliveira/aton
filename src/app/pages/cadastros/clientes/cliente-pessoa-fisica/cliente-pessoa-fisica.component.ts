@@ -1,45 +1,43 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModuloFotovoltaico } from 'src/app/models/modulo-fotovoltaico.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
-import { InversorService } from 'src/app/services/inversor.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/commons/confirm-dialog/confirm-dialog.component';
 import { InfoDialogComponent } from 'src/app/commons/info-dialog/info-dialog.component';
-import { ModuloFotovoltaicoService } from 'src/app/services/modulo-fotovoltaico.service';
+import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model';
+import { ClientePessoaFisicaService } from 'src/app/services/cliente-pessoa-fisica.service';
 
 @Component({
-  selector: 'app-modulo-fotovoltaico-list',
-  templateUrl: './modulo-fotovoltaico-list.component.html',
-  styleUrl: './modulo-fotovoltaico-list.component.css'
+  selector: 'app-cliente-pessoa-fisica',
+  templateUrl: './cliente-pessoa-fisica.component.html',
+  styleUrl: './cliente-pessoa-fisica.component.css'
 })
-export class ModuloFotovoltaicoListComponent {
-
-  inversorList: ModuloFotovoltaico[]  = []
+export class ClientePessoaFisicaComponent {
+  clienteList: ClientePessoaFisica[]  = []
   showSpinner = false;
-  filtros = {} as ModuloFotovoltaico
+  filtros = {} as ClientePessoaFisica
 
   tituloConfirmDialog = ''
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  public dataSource: MatTableDataSource<ModuloFotovoltaico>;
-  public selection = new SelectionModel<ModuloFotovoltaico>;
+  public dataSource: MatTableDataSource<ClientePessoaFisica>;
+  public selection = new SelectionModel<ClientePessoaFisica>;
 
   public pageOptions: number[] = [5, 10, 15];
   public pageSize = 5;
   public totalPages: number;
 
-  displayedColumns: string[] = ['codigo', 'fabricante', 'potencia', 'garantiaDefeito', 'garantiaEficiencia', 'acoes'];
+  displayedColumns: string[] = ['codigo', 'nome', 'cpf', 'rg', 'telefone', 'email', 'acoes'];
 
   constructor(
     private router: Router,
-    private service: ModuloFotovoltaicoService,
+    private service: ClientePessoaFisicaService,
     private dialog: MatDialog,
   ){}
 
@@ -48,25 +46,25 @@ export class ModuloFotovoltaicoListComponent {
     this.listar();
   }
 
-  navegarParaFormularioDeModulo(){
-    this.router.navigate(['/cadastro/produtos/modulo-form'])
+  navegarParaFormularioDeCliente(){
+    this.router.navigate(['/cadastro/clientes/pessoa-fisica-form'])
   }
 
-  navegarParaMenuDeProdutos(){
-    this.router.navigate(['/cadastro/produtos'])
+  navegarParaMenuDeClientes(){
+    this.router.navigate(['/cadastro/clientes'])
   }
 
   listar(){
     this.service.listar().subscribe({
       next: (data) => {
         this.showSpinnerManager(false);
-        this.dataSource = new MatTableDataSource<ModuloFotovoltaico> (data);
+        this.dataSource = new MatTableDataSource<ClientePessoaFisica> (data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
         this.totalPages = data.length;
 
-        this.inversorList = data
+        this.clienteList = data
       },
       error: (erro) => {
         console.log(erro.erro)
@@ -75,8 +73,8 @@ export class ModuloFotovoltaicoListComponent {
     })
   }
 
-  editar(mod: ModuloFotovoltaico){
-    localStorage.setItem('modulo', JSON.stringify(mod));
+  editar(mod: ClientePessoaFisica){
+    localStorage.setItem('pessoaFisica', JSON.stringify(mod));
   }
 
   excluir(id: number){
@@ -106,20 +104,20 @@ export class ModuloFotovoltaicoListComponent {
   }
 
   limpar(){
-    this.filtros = {} as ModuloFotovoltaico
+    this.filtros = {} as ClientePessoaFisica
   }
 
   pesquisar(){
     this.service.pesquisar(this.filtros).subscribe({
       next: (data) => {
         this.showSpinnerManager(false);
-        this.dataSource = new MatTableDataSource<ModuloFotovoltaico> (data);
+        this.dataSource = new MatTableDataSource<ClientePessoaFisica> (data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
         this.totalPages = data.length;
 
-        this.inversorList = data
+        this.clienteList = data
       },
       error: (erro) => {
         console.log(erro.erro)

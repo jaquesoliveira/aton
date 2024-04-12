@@ -17,19 +17,6 @@
             <img class="ms-2" width="30px" src="assets/images/inversor.png" alt="">
             <span class="ms-1" style="font-size: large;">Cadastro de Inversor</span>
         </div>
-
-        <!-- <div class="pc-only">
-            <button mat-mini-fab 
-                color="primary"
-                class="me-1"
-                (click)="navegarParaListaDeInversores()">
-                <mat-icon>reply</mat-icon>
-            </button>
-
-            <button mat-mini-fab color="primary" (click)="salvar()">
-                <mat-icon>save</mat-icon>
-            </button>
-        </div> -->
     </div>
 </div> 
 
@@ -91,11 +78,17 @@
                 (click)="navegarParaListaDeInversores()">
                 Cancelar
             </button>
+
             <button mat-raised-button color="primary" 
-                (click)="limpar()">Limpar</button>
+                (click)="limpar()">
+                Limpar
+            </button>
+            
             <button mat-raised-button color="primary" 
-                (click)="salvar()"                
-                class="ms-1">Salvar</button>
+                (click)="salvar()"
+                class="ms-4">
+                Salvar
+            </button>
         </div>
     </div>
 </div>
