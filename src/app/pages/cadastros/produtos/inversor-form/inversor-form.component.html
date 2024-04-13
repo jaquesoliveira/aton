@@ -16,7 +16,16 @@
                         
                         Cadastrar Inversor
                     </span>
-                </div>               
+                </div>
+
+                
+                <button mat-mini-fab
+                    color="primary"
+                    (click)="navegarParaListaDeInversores()">
+
+                    <mat-icon>close</mat-icon>
+                </button>
+                
             </div>
         </div>
     </div>
@@ -91,29 +100,18 @@
                 <mat-divider></mat-divider>
         
                 <div class="row mt-2">
-                    <div class="col-lg-4 col-sm-4 col-6">
+                    <div class="col-6">
                         <button mat-raised-button 
-                            color="warn" 
+                            color="primary" 
                             (click)="limpar()"
-                            class="mb-1 col-12"
-                            style="background-color: grey; color: white;">
+                            class="mb-1 col-12">
 
                             Limpar
                         </button>                
-                    </div>
+                    </div>                    
                     
-                    <div class="col-lg-4 col-sm-4 col-6">
-                        <button mat-raised-button
-                            color="warn" 
-                            class="mb-1 col-12"
-                            style="background-color: grey; color: white;"
-                            (click)="navegarParaListaDeInversores()">
 
-                            Cancelar
-                        </button>
-                    </div>
-
-                    <div class="col-lg-4 col-sm-4 col-12">
+                    <div class="col-6">
                         <button mat-raised-button 
                             color="primary" 
                             (click)="salvar()"

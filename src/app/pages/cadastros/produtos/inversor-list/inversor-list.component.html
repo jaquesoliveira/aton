@@ -1,11 +1,12 @@
 <div class="full-container" *ngIf="showSpinner">
     <mat-spinner class="load-centered"></mat-spinner>
 </div>
+
 <div class="row mt-1 mb-1">
     <div class="d-flex justify-content-between" 
         style="display: flex; align-items: center; padding-top: 15px; padding-bottom: 15px;">
         <div style="display: flex; align-items: center;">
-            <img width="30px" 
+            <img width="30px"                 
                 src="assets/images/inversor.png" alt="">
             <span class="ms-1 my-title-1" 
                 style="font-size: 25px; font-weight: 500;">
@@ -43,7 +44,7 @@
         </div>        
     </div>
 </div>
-<mat-divider></mat-divider>
+<mat-divider class="pc-only"></mat-divider>
 
 
 <div class="mt-2 mb-5 d-flex justify-content-center">
@@ -62,6 +63,7 @@
 
                             <div style="display: flex; align-items: center;">
                                 <img width="30px" 
+                                    class="me-2"
                                     src="assets/images/inversor-2.png" 
                                     alt="">
                                 <span class="ms-1 my-title-1" 

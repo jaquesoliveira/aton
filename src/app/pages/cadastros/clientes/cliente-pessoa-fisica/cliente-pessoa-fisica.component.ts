@@ -75,6 +75,7 @@ export class ClientePessoaFisicaComponent {
 
   editar(mod: ClientePessoaFisica){
     localStorage.setItem('pessoaFisica', JSON.stringify(mod));
+    this.navegarParaFormularioDeCliente()
   }
 
   excluir(id: number){

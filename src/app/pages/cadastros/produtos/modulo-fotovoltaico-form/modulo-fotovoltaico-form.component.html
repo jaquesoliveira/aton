@@ -1,77 +1,106 @@
 <div class="full-container" *ngIf="showSpinner">
     <mat-spinner class="load-centered"></mat-spinner>
 </div>
-<div class="row mt-1 mb-1">
-    <div class="d-flex justify-content-between" 
-        style="display: flex; align-items: center;">
-        <div style="display: flex; align-items: center;">
-            <button mat-mini-fab
-                color="primary"
-                (click)="navegarParaListaDeModulos()">
-                <mat-icon>reply</mat-icon>
-            </button>
-            <img class="ms-2" width="30px" src="assets/images/modulo.png" alt="">
-            <span class="ms-1" style="font-size: large;">Cadastro de Módulo Fotovoltaico</span>
+<div class="mt-2 d-flex justify-content-center">
+    <div style="width: 600px; max-width: 600px;">
+        <div class="row mt-1 mb-1">
+            <div class="d-flex justify-content-between" 
+                style="display: flex; align-items: center; padding-top: 15px; padding-bottom: 15px;">
+                
+                <div style="display: flex; align-items: center;">
+                    <img width="30px" 
+                        src="assets/images/modulo.png" alt="">
+                    <span class="ms-1 my-title-1" 
+                        style="font-size: 25px; font-weight: 500;">
+                        
+                        Cadastrar Módulo
+                    </span>
+                </div>
+                
+                <button mat-mini-fab
+                    color="primary" 
+                    (click)="navegarParaListaDeModulos()">
+
+                    <mat-icon>close</mat-icon>
+                </button>                
+            </div>
         </div>
     </div>
-</div> 
-
-<div class="card-header barra-de-titulo mb-1" 
-    style="background-color: #3f51b5; color: #fff; padding: 5px;">
-    <span class="ms-2">Formulário</span>
 </div>
 
-<div class="card mb-3">
-    <div class="card-body"> 
+<div class="mt-2 d-flex justify-content-center">
+    <div style="width: 600px; max-width: 600px;">
 
-        <div class="row mt-3">
-            <div class="mb-3 col-2">
-                <label for="fabricante" class="form-label">Fabricante</label>
-                <input class="form-control form-control-sm"
-                    [(ngModel)]="modulo.fabricante"
-                    id="fabricante">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row mt-3">
+                    <div class="mb-3 col-12">
+                        <label for="fabricante" 
+                            class="form-label">
+                            
+                            Fabricante
+                        </label>
+                        <input class="form-control form-control-sm"
+                            [(ngModel)]="modulo.fabricante"
+                            id="fabricante">
+                    </div>
+
+                    <div class="mb-3 col-12">
+                        <label for="potencia" 
+                            class="form-label">
+                            
+                            Potência
+                        </label>
+                        <input class="form-control form-control-sm" 
+                            [(ngModel)]="modulo.potencia"
+                            id="potencia">
+                    </div>
+
+                    <div class="mb-3 col-12">
+                        <label for="garantia" 
+                            class="form-label">
+                            
+                            Garantia(Defeito)
+                        </label>
+                        <input class="form-control form-control-sm"
+                            [(ngModel)]="modulo.garantiaDefeito"
+                            id="garantia">
+                    </div>
+                    <div class="mb-3 col-12">
+                        <label for="garantia" 
+                            class="form-label">
+                            
+                            Garantia(Eficiência)
+                        </label>
+                        <input class="form-control form-control-sm"
+                            [(ngModel)]="modulo.garantiaEficiencia"
+                            id="garantia">
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div class="mt-2 d-flex justify-content-end">
+                    <!-- <button mat-raised-button
+                        color="primary" class="me-1 col-4"
+                        (click)="navegarParaListaDeModulos()">
+                        Cancelar
+                    </button> -->
+
+                    <button mat-raised-button 
+                        color="primary" 
+                        class="col-6 me-1"
+                        (click)="limpar()">
+                        Limpar
+                    </button>
+                    
+                    <button mat-raised-button color="primary" 
+                        (click)="salvar()"                
+                        class="col-6">
+                        Salvar
+                    </button>
+                </div>
             </div>
-
-            <div class="mb-3 col-2">
-                <label for="potencia" class="form-label">Potência</label>
-                <input class="form-control form-control-sm" 
-                    [(ngModel)]="modulo.potencia"
-                    id="potencia">
-            </div>
-
-            <div class="mb-3 col-2">
-                <label for="garantia" class="form-label">Garantia(Defeito)</label>
-                <input class="form-control form-control-sm"
-                    [(ngModel)]="modulo.garantiaDefeito"
-                    id="garantia">
-            </div>
-            <div class="mb-3 col-2">
-                <label for="garantia" class="form-label">Garantia(Eficiência)</label>
-                <input class="form-control form-control-sm"
-                    [(ngModel)]="modulo.garantiaEficiencia"
-                    id="garantia">
-            </div>
-        </div>
-
-        <mat-divider></mat-divider>
-
-        <div class="mt-2 d-flex justify-content-end">
-            <button mat-raised-button
-                color="primary" class="me-1"
-                (click)="navegarParaListaDeModulos()">
-                Cancelar
-            </button>
-
-            <button mat-raised-button color="primary" 
-                (click)="limpar()">
-                Limpar
-            </button>
-            
-            <button mat-raised-button color="primary" 
-                (click)="salvar()"                
-                class="ms-4">
-                Salvar
-            </button>
         </div>
     </div>
 </div>

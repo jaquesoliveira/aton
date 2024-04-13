@@ -77,6 +77,7 @@ export class ModuloFotovoltaicoListComponent {
 
   editar(mod: ModuloFotovoltaico){
     localStorage.setItem('modulo', JSON.stringify(mod));
+    this.navegarParaFormularioDeModulo()
   }
 
   excluir(id: number){
