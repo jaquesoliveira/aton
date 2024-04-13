@@ -1,48 +1,43 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { InversorService } from 'src/app/services/inversor.service';
-import { InversorDto } from 'src/app/models/inversor-dto';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/commons/confirm-dialog/confirm-dialog.component';
 import { InfoDialogComponent } from 'src/app/commons/info-dialog/info-dialog.component';
+import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model';
+import { ClientePessoaFisicaService } from 'src/app/services/cliente-pessoa-fisica.service';
 
 @Component({
-  selector: 'app-inversor-list',
-  templateUrl: './inversor-list.component.html',
-  styleUrl: './inversor-list.component.css'
+  selector: 'app-cliente-pessoa-fisica',
+  templateUrl: './cliente-pessoa-fisica.component.html',
+  styleUrl: './cliente-pessoa-fisica.component.css'
 })
-export class InversorListComponent implements OnInit{
-
-  inversorList: InversorDto[]  = []
+export class ClientePessoaFisicaComponent {
+  clienteList: ClientePessoaFisica[]  = []
   showSpinner = false;
-  filtros = {} as InversorDto
-  monitoramentos = [
-    'WIFI',
-    'BLUETOOTH'
-  ]
+  filtros = {} as ClientePessoaFisica
 
   tituloConfirmDialog = ''
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  public dataSource: MatTableDataSource<InversorDto>;
-  public selection = new SelectionModel<InversorDto>;
+  public dataSource: MatTableDataSource<ClientePessoaFisica>;
+  public selection = new SelectionModel<ClientePessoaFisica>;
 
   public pageOptions: number[] = [5, 10, 15];
   public pageSize = 5;
   public totalPages: number;
 
-  displayedColumns: string[] = ['codigo', 'fabricante', 'potencia', 'garantia', 'monitoramento', 'modelo', 'acoes'];
+  displayedColumns: string[] = ['codigo', 'nome', 'cpf', 'rg', 'telefone', 'email', 'acoes'];
 
   constructor(
     private router: Router,
-    private service: InversorService,
+    private service: ClientePessoaFisicaService,
     private dialog: MatDialog,
   ){}
 
@@ -51,25 +46,25 @@ export class InversorListComponent implements OnInit{
     this.listar();
   }
 
-  navegarParaFormularioDeInversor(){
-    this.router.navigate(['/cadastro/produtos/inversor-form'])
+  navegarParaFormularioDeCliente(){
+    this.router.navigate(['/cadastro/clientes/pessoa-fisica-form'])
   }
 
-  navegarParaMenuDeProdutos(){
-    this.router.navigate(['/cadastro/produtos'])
+  navegarParaMenuDeClientes(){
+    this.router.navigate(['/cadastro/clientes'])
   }
 
   listar(){
     this.service.listar().subscribe({
       next: (data) => {
         this.showSpinnerManager(false);
-        this.dataSource = new MatTableDataSource<InversorDto> (data);
+        this.dataSource = new MatTableDataSource<ClientePessoaFisica> (data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
         this.totalPages = data.length;
 
-        this.inversorList = data
+        this.clienteList = data
       },
       error: (erro) => {
         console.log(erro.erro)
@@ -78,9 +73,9 @@ export class InversorListComponent implements OnInit{
     })
   }
 
-  editar(inv: InversorDto){
-    localStorage.setItem('inversor', JSON.stringify(inv));
-    this.navegarParaFormularioDeInversor()
+  editar(mod: ClientePessoaFisica){
+    localStorage.setItem('pessoaFisica', JSON.stringify(mod));
+    this.navegarParaFormularioDeCliente()
   }
 
   excluir(id: number){
@@ -110,20 +105,20 @@ export class InversorListComponent implements OnInit{
   }
 
   limpar(){
-    this.filtros = {} as InversorDto
+    this.filtros = {} as ClientePessoaFisica
   }
 
   pesquisar(){
     this.service.pesquisar(this.filtros).subscribe({
       next: (data) => {
         this.showSpinnerManager(false);
-        this.dataSource = new MatTableDataSource<InversorDto> (data);
+        this.dataSource = new MatTableDataSource<ClientePessoaFisica> (data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
         this.totalPages = data.length;
 
-        this.inversorList = data
+        this.clienteList = data
       },
       error: (erro) => {
         console.log(erro.erro)
@@ -158,5 +153,4 @@ export class InversorListComponent implements OnInit{
   onEnter(){
     this.pesquisar();
   }
-  
 }

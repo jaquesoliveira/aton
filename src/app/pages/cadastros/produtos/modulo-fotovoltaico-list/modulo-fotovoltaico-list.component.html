@@ -1,1 +1,245 @@
-<p>modulo-fotovoltaico-list works!</p>
+<div class="full-container" *ngIf="showSpinner">
+    <mat-spinner class="load-centered"></mat-spinner>
+</div>
+
+<div class="row mt-1 mb-1">
+    <div class="d-flex justify-content-between" 
+        style="display: flex; align-items: center; padding-top: 15px; padding-bottom: 15px;">
+        <div style="display: flex; align-items: center;">
+            <img width="30px"                 
+                src="assets/images/modulo.png" alt="">
+            <span class="ms-1 my-title-1" 
+                style="font-size: 25px; font-weight: 500;">
+                
+                Módulos
+            </span>
+        </div>
+
+        <div>
+            <button mat-mini-fab
+                color="primary"
+                (click)="navegarParaFormularioDeModulo()"
+                class="pc-only">
+
+                <mat-icon>add</mat-icon>
+            </button>
+
+            <button mat-mini-fab
+                class="ms-1"
+                color="primary"
+                data-bs-toggle="offcanvas" 
+                data-bs-target="#offcanvasFiltrosInversores" 
+                aria-controls="offcanvasFiltrosInversores">
+
+                <mat-icon>filter_alt</mat-icon>
+            </button>
+
+            <button mat-mini-fab
+                color="primary"
+                class="ms-1"
+                (click)="navegarParaMenuDeProdutos()">
+
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>        
+    </div>
+</div>
+<mat-divider  class="pc-only"></mat-divider>
+
+<div class="mt-2 d-flex justify-content-center">
+    <div style="max-width: 900px; width: 900px; margin-bottom: 200px;">
+        <ng-container *ngFor="let inv of inversorList">
+            <mat-expansion-panel 
+                class="mb-1" 
+                hideToggle="false" 
+                expanded="false">
+                
+                <mat-expansion-panel-header 
+                    style="height: 100px;">
+                    
+                    <mat-panel-title class="d-flex justify-content-between">
+                        <div style="width: 90%;">
+
+                            <div style="display: flex; align-items: center;">
+                                <img width="40px" 
+                                    class="me-2"
+                                    src="assets/images/modulo-2.png" 
+                                    alt="">
+                                <span class="ms-1 my-title-1" 
+                                    style="font-size: larger; font-weight: 500;">
+                                    
+                                    {{inv.fabricante}}
+                                    <div>
+                                        <small style="color: #777; font-size: 12px;">{{inv.potencia}}</small>
+                                    </div>
+                                </span>
+                            </div>
+                            
+
+                            <div class="row">
+                                <!-- <div class="col-lg-4 col-sm-3 col-xs-12">
+                                    <small>Monitoramento:</small>{{inv.monitoramento}}
+                                </div>
+                                <div class="col-lg-4 col-sm-3 col-xs-12">
+                                    <small>Modelo: </small>{{inv.modelo}}
+                                </div>
+                                <div class="col-lg-4 col-sm-3 col-xs-12">
+                                    <small>Potência: </small>{{inv.potencia}}
+                                </div> -->
+                            </div>
+                        </div>                    
+                        
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                
+                <mat-divider></mat-divider>
+                <div class="row" style="height: 70px; padding-top: 5px; padding-bottom: 15px;">
+                    <div class="col-lg-4 col-sm-3 col-xs-12">
+                        <small>Monitoramento: </small>{{inv.potencia}}
+                    </div>
+                    <div class="col-lg-4 col-sm-3 col-xs-12">
+                        <small>Modelo: </small>{{inv.garantiaEficiencia}}
+                    </div>
+                    <div class="col-lg-4 col-sm-3 col-xs-12">
+                        <small>Potência: </small>{{inv.potencia}}
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+                <div class="row">
+                    <div class="d-flex justify-content-end "
+                        style="padding-top: 10px;">
+                        <button mat-mini-fab
+                            color="primary"
+                            (click)="editar(inv)">
+            
+                            <mat-icon>edit</mat-icon>
+                        </button>
+            
+                        <button mat-mini-fab
+                            class="ms-1"
+                            color="primary"
+                            (click)="excluir(inv.id)">
+            
+                            <mat-icon>delete</mat-icon>
+                        </button> 
+                    </div>
+                </div>
+                
+            </mat-expansion-panel>
+        </ng-container>
+    </div>
+</div>
+
+
+<!-- FILTROS -->
+<div 
+    class="offcanvas offcanvas-end" 
+    data-bs-scroll="true" 
+    data-bs-backdrop="false" 
+    tabindex="-1" 
+    id="offcanvasFiltrosInversores" 
+    aria-labelledby="offcanvasFiltrosInversoresLabel">
+
+    <div class="offcanvas-header"
+        style="display: flex; align-items: center;">
+        <h2 class="offcanvas-title" 
+            style="color: #3f51b5;"
+            id="offcanvasFiltrosInversoresLabel">
+            
+            Filtros
+        </h2>
+
+        <button mat-mini-fab
+            color="primary"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <div class="offcanvas-body">
+
+        <div class="row">
+
+            <div class="mb-3 col-12">
+                <label for="fabricante" 
+                    class="form-label">
+                    
+                    Fabricante
+                </label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="filtros.fabricante"                    
+                    id="fabricante">
+            </div>
+
+            <div class="mb-3 col-12">
+                <label for="potencia" 
+                    class="form-label">
+
+                    Potência
+                </label>
+                <input class="form-control form-control-sm" 
+                    [(ngModel)]="filtros.potencia"
+                    id="potencia">
+            </div>
+
+            <div class="mb-3 col-12">
+                <label for="garantia" 
+                    class="form-label">
+
+                    Garantia
+                </label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="filtros.garantiaDefeito"                    
+                    id="garantia">
+            </div>
+            <!-- (keyup.enter)="onEnter()" -->
+
+            <div class="mb-3 col-12">
+                <label for="modelo" 
+                    class="form-label">
+                    
+                    Garantia Eficiencia
+                </label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="filtros.garantiaEficiencia"
+                    id="modelo">
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div class="row mt-2">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <button mat-raised-button 
+                    color="primary" 
+                    (click)="limpar()"
+                    class="col-12 mb-1">
+                
+                    Limpar
+                </button>
+            </div>            
+            
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <button mat-raised-button
+                    color="primary"
+                    (click)="pesquisar()"
+                    data-bs-dismiss="offcanvas"
+                    class="col-12 mb-1">
+                    
+                    Pesquisar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-end" 
+    style="position: fixed; bottom: 30px; right: 50px; z-index: 20;">
+    <button mat-fab 
+        color="primary"
+        class="mobile-only"
+        (click)="navegarParaFormularioDeModulo()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>

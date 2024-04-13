@@ -1,49 +1,50 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModuloFotovoltaico } from 'src/app/models/modulo-fotovoltaico.model';
+import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model';
 import { Router } from '@angular/router';
-import { ModuloFotovoltaicoService } from 'src/app/services/modulo-fotovoltaico.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/commons/confirm-dialog/confirm-dialog.component';
 import { InfoDialogComponent } from 'src/app/commons/info-dialog/info-dialog.component';
+import { ClientePessoaFisicaService } from 'src/app/services/cliente-pessoa-fisica.service';
 
 @Component({
-  selector: 'app-modulo-fotovoltaico-form',
-  templateUrl: './modulo-fotovoltaico-form.component.html',
-  styleUrl: './modulo-fotovoltaico-form.component.css'
+  selector: 'app-cliente-pessoa-fisica-form',
+  templateUrl: './cliente-pessoa-fisica-form.component.html',
+  styleUrl: './cliente-pessoa-fisica-form.component.css'
 })
-export class ModuloFotovoltaicoFormComponent {
+export class ClientePessoaFisicaFormComponent {
+  clientePessoaFisica = {} as ClientePessoaFisica
 
-  modulo = {} as ModuloFotovoltaico
   tituloConfirmDialog = ''
   showSpinner = false;
   
   constructor(
     private router: Router,
-    private service: ModuloFotovoltaicoService,
+    private service: ClientePessoaFisicaService,
     private dialog: MatDialog,
   ){}
 
   ngOnInit(): void {
-    const temp = localStorage.getItem('modulo');
+    const temp = localStorage.getItem('pessoaFisica');
 
     if(temp){
-      const mod = JSON.parse(temp);
+      const pf = JSON.parse(temp);
 
-      if(mod.id){
-        this.modulo.id = mod.id
-        this.modulo.fabricante = mod.fabricante
-        this.modulo.potencia = mod.potencia
-        this.modulo.garantiaDefeito = mod.garantiaDefeito
-        this.modulo.garantiaEficiencia = mod.garantiaEficiencia
+      if(pf.id){
+        this.clientePessoaFisica.id = pf.id
+        this.clientePessoaFisica.nome = pf.nome
+        this.clientePessoaFisica.cpf = pf.cpf
+        this.clientePessoaFisica.rg = pf.rg
+        this.clientePessoaFisica.telefone = pf.telefone
+        this.clientePessoaFisica.email = pf.email
 
-        localStorage.removeItem('modulo');
+        localStorage.removeItem('pessoaFisica');
       }
     }
   }
 
-  navegarParaListaDeModulos(){
-    this.router.navigate(['/cadastro/produtos/modulo-list'])
+  navegarParaListaDeClientes(){
+    this.router.navigate(['/cadastro/clientes/pessoa-fisica-list'])
   }
 
   salvar(){
@@ -51,12 +52,12 @@ export class ModuloFotovoltaicoFormComponent {
     dialogRef.afterClosed().subscribe((data) => {
       if(data){
         this.showSpinnerManager(true);
-        this.service.salvar(this.modulo).subscribe({
+        this.service.salvar(this.clientePessoaFisica).subscribe({
           next: () => {
             const ret = this.infoDialog();
             ret.afterClosed().subscribe((data)=>{
               if(data){
-                this.navegarParaListaDeModulos();
+                this.navegarParaListaDeClientes();
               }  
             })                      
           },
@@ -96,6 +97,6 @@ export class ModuloFotovoltaicoFormComponent {
   }
 
   limpar(){
-    this.modulo = {} as ModuloFotovoltaico
+    this.clientePessoaFisica = {} as ClientePessoaFisica
   }
 }

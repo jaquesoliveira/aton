@@ -1,24 +1,23 @@
 <div class="full-container" *ngIf="showSpinner">
     <mat-spinner class="load-centered"></mat-spinner>
 </div>
-
 <div class="row mt-1 mb-1">
     <div class="d-flex justify-content-between" 
         style="display: flex; align-items: center; padding-top: 15px; padding-bottom: 15px;">
         <div style="display: flex; align-items: center;">
-            <img width="30px"                 
+            <img width="30px" 
                 src="assets/images/inversor.png" alt="">
             <span class="ms-1 my-title-1" 
                 style="font-size: 25px; font-weight: 500;">
                 
-                Inversores
+                Clientes
             </span>
         </div>
 
         <div>
             <button mat-mini-fab
                 color="primary"
-                (click)="navegarParaFormularioDeInversor()"
+                (click)="navegarParaFormularioDeCliente()"
                 class="pc-only">
 
                 <mat-icon>add</mat-icon>
@@ -37,7 +36,7 @@
             <button mat-mini-fab
                 color="primary"
                 class="ms-1"
-                (click)="navegarParaMenuDeProdutos()">
+                (click)="navegarParaMenuDeClientes()">
 
                 <mat-icon>close</mat-icon>
             </button>
@@ -47,9 +46,10 @@
 <mat-divider class="pc-only"></mat-divider>
 
 
+
 <div class="mt-2 mb-5 d-flex justify-content-center">
     <div style="max-width: 900px; width: 900px;">    
-        <ng-container *ngFor="let inv of inversorList">
+        <ng-container *ngFor="let inv of clienteList">
             <mat-expansion-panel 
                 class="mb-1" 
                 hideToggle="false" 
@@ -62,16 +62,16 @@
                         <div style="width: 90%;">
 
                             <div style="display: flex; align-items: center;">
-                                <img width="30px" 
+                                <img width="40px" 
                                     class="me-2"
-                                    src="assets/images/inversor-2.png" 
+                                    src="assets/images/cliente-2.png" 
                                     alt="">
                                 <span class="ms-1 my-title-1" 
                                     style="font-size: larger; font-weight: 500;">
                                     
-                                    {{inv.fabricante}}
+                                    {{inv.nome}}
                                     <div>
-                                        <small style="color: #777; font-size: 12px;">{{inv.potencia}}</small>
+                                        <small style="color: #777; font-size: 12px;">{{inv.email}}</small>
                                     </div>
                                 </span>
                             </div>
@@ -96,13 +96,16 @@
                 <mat-divider></mat-divider>
                 <div class="row" style="height: 70px; padding-top: 5px; padding-bottom: 15px;">
                     <div class="col-lg-4 col-sm-3 col-xs-12">
-                        <small>Monitoramento: </small>{{inv.monitoramento}}
+                        <small>Monitoramento: </small>{{inv.cpf}}
                     </div>
                     <div class="col-lg-4 col-sm-3 col-xs-12">
-                        <small>Modelo: </small>{{inv.modelo}}
+                        <small>Modelo: </small>{{inv.rg}}
                     </div>
                     <div class="col-lg-4 col-sm-3 col-xs-12">
-                        <small>Potência: </small>{{inv.potencia}}
+                        <small>Potência: </small>{{inv.telefone}}
+                    </div>
+                    <div class="col-lg-4 col-sm-3 col-xs-12">
+                        <small>Potência: </small>{{inv.email}}
                     </div>
                 </div>
 
@@ -164,21 +167,21 @@
                 <label for="fabricante" 
                     class="form-label">
                     
-                    Fabricante
+                    Nome
                 </label>
                 <input class="form-control form-control-sm"
-                    [(ngModel)]="filtros.fabricante"                    
+                     [(ngModel)]="filtros.nome"
                     id="fabricante">
             </div>
 
             <div class="mb-3 col-12">
                 <label for="potencia" 
                     class="form-label">
-
-                    Potência
+                    
+                    CPF
                 </label>
                 <input class="form-control form-control-sm" 
-                    [(ngModel)]="filtros.potencia"
+                    [(ngModel)]="filtros.cpf"
                     id="potencia">
             </div>
 
@@ -186,10 +189,10 @@
                 <label for="garantia" 
                     class="form-label">
 
-                    Garantia
+                    RG
                 </label>
                 <input class="form-control form-control-sm"
-                    [(ngModel)]="filtros.garantiaDefeito"                    
+                    [(ngModel)]="filtros.rg"              
                     id="garantia">
             </div>
             <!-- (keyup.enter)="onEnter()" -->
@@ -198,26 +201,22 @@
                 <label for="monitoramento" 
                     class="form-label">
                     
-                    Monitoramento
+                    Telefone
                 </label>
-               
-                <select class="form-select form-select-sm" 
-                    aria-label="Default select example"
-                    [(ngModel)]="filtros.monitoramento">                    
-                    <ng-container *ngFor="let monitor of monitoramentos">
-                        <option [value]="monitor">{{monitor}}</option>
-                    </ng-container>
-                </select>    
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="filtros.telefone"
+                    id="modelo">
+                   
             </div>
 
             <div class="mb-3 col-12">
                 <label for="modelo" 
                     class="form-label">
                     
-                    Modelo
+                    E-mail
                 </label>
                 <input class="form-control form-control-sm"
-                    [(ngModel)]="filtros.modelo"
+                    [(ngModel)]="filtros.email"
                     id="modelo">
             </div>
         </div>
@@ -253,7 +252,7 @@
     <button mat-fab 
         color="primary"
         class="mobile-only"
-        (click)="navegarParaFormularioDeInversor()">
+        (click)="navegarParaFormularioDeCliente()">
         <mat-icon>add</mat-icon>
     </button>
 </div>

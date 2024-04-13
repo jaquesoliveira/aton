@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clientes',
@@ -10,4 +11,13 @@ import { CommonModule } from '@angular/common';
 })
 export class ClientesComponent {
 
+  constructor(private router: Router){}
+
+  navegarParaContaClientes(){
+    this.router.navigate(['cadastro/clientes/pessoa-fisica-list'])
+  }
+
+  cadastrarModulo(){
+    this.router.navigate(['cadastro/produtos/modulo-list'])
+  }
 }

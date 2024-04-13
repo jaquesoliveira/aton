@@ -37,6 +37,11 @@ import { InversorListComponent } from './pages/cadastros/produtos/inversor-list/
 import { InversorFormComponent } from './pages/cadastros/produtos/inversor-form/inversor-form.component';
 import { InfoDialogComponent } from './commons/info-dialog/info-dialog.component';
 import { ConfirmDialogComponent } from './commons/confirm-dialog/confirm-dialog.component';
+import { ModuloFotovoltaicoListComponent } from './pages/cadastros/produtos/modulo-fotovoltaico-list/modulo-fotovoltaico-list.component';
+import { ModuloFotovoltaicoFormComponent } from './pages/cadastros/produtos/modulo-fotovoltaico-form/modulo-fotovoltaico-form.component';
+import { ClientePessoaFisicaComponent } from './pages/cadastros/clientes/cliente-pessoa-fisica/cliente-pessoa-fisica.component';
+import { ClientePessoaFisicaFormComponent } from './pages/cadastros/clientes/cliente-pessoa-fisica-form/cliente-pessoa-fisica-form.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 registerLocaleData(ptBr);
 
@@ -55,7 +60,11 @@ registerLocaleData(ptBr);
     InversorListComponent,
     InversorFormComponent,
     InfoDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ModuloFotovoltaicoListComponent,
+    ModuloFotovoltaicoFormComponent,
+    ClientePessoaFisicaComponent,
+    ClientePessoaFisicaFormComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +85,8 @@ registerLocaleData(ptBr);
     MatProgressSpinnerModule,
     HttpClientModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatExpansionModule,
   ],
   providers: [
     {
