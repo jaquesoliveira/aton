@@ -43,9 +43,17 @@ body {
     color: #3f51b5;
 }
 
+.my-side-menu-title-1{
+    color: #3f51b5;
+    min-height: 48px;
+    margin-left: 20px !important;
+    font-size: 20px;
+    font-weight: 500;
+}
+
 input{
     height: 40px;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     color: #777 !important;
     font-size: 16px;
 }
@@ -59,4 +67,8 @@ select{
 
 textarea{    
     color: #555 !important;
+}
+
+li {
+    list-style-type: none;
 }

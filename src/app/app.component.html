@@ -1,7 +1,7 @@
 <mat-drawer-container class="example-container" >
     <mat-drawer #drawer class="example-sidenav teste-scroll" mode="side">
         <div class="row mb-3">
-            <span class="side-menu-title ms-4 mt-3 mb-2">Menu</span>
+            <span class="side-menu-title ms-4 mt-3 mb-2 my-title-1">Menu</span>
         </div>        
         
         
@@ -33,11 +33,15 @@
                 <span class="example-spacer"></span>
                 <!-- <div class="user-name">Jaques Oliveira</div> -->
                 
-                <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                <button mat-icon-button 
+                    class="example-icon favorite-icon" 
+                    aria-label="Example icon-button with heart icon">
                     <mat-icon>person</mat-icon>
                 </button>
                 
-                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                <button mat-icon-button 
+                    class="example-icon" 
+                    aria-label="Example icon-button with share icon">
                     <mat-icon>settings</mat-icon>
                 </button>
         
@@ -62,24 +66,39 @@
     data-bs-backdrop="false"
     aria-labelledby="offcanvasExampleLabel">
     
-    <div class="offcanvas-header">
-      <h2 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h2>
-      <button type="button" 
-        class="btn-close" 
-        data-bs-dismiss="offcanvas" 
-        aria-label="Close"></button>
+    <div>
+        <div class="d-flex justify-content-between ps-3 pt-3 pe-3" 
+            style="display: flex; align-items: center;">
+            <div>
+                <span class="my-title-1 my-side-menu-title-1">
+                    
+                    Menu
+                </span>
+            </div>
+            
+            <div>
+                <button mat-mini-fab
+                    color="primary"        
+                    data-bs-dismiss="offcanvas" 
+                    aria-label="Close">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>            
+        </div>        
     </div>
     
-    <div class="offcanvas-body">
+    <div class="offcanvas-body" style="top: -20px;">
         <div class="row">
             <ul>
                 <mat-divider></mat-divider> 
                 <li style="margin-top: 10px; margin-bottom: 10px;">
                     <a routerLink="/home" 
-                        class="btn ms-2 mt-2 mb-3"
+                        class="btn ms-2 mt-2 my-title-1"
+                        style="display: flex; align-items: center;"
                         data-bs-dismiss="offcanvas">
 
-                        Dashboard
+                        <mat-icon>dashboard</mat-icon>
+                        <span class="ms-2">Dashboard</span> 
                     </a>
                 </li>
                 <mat-divider></mat-divider>
@@ -88,15 +107,19 @@
                     <div class="accordion accordion-flush" 
                         id="accordionFlushExample">
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
+                            <h2 class="accordion-header" id="flush-headingOne" 
+                                style="padding-bottom: 0px !important;" >
                                 <button 
-                                    class="accordion-button collapsed" 
+                                    class="accordion-button collapsed  my-title-1" 
                                     type="button" 
                                     data-bs-toggle="collapse" 
                                     data-bs-target="#flush-collapseOne" 
                                     aria-expanded="false" 
-                                    aria-controls="flush-collapseOne">
-                                Cadastros
+                                    aria-controls="flush-collapseOne"
+                                    style="padding-bottom: 0px !important;">
+
+                                    <mat-icon>description</mat-icon>                                    
+                                    <span class="ms-2">Cadastros</span>
                                 </button>
                             </h2>
                             <div id="flush-collapseOne" 
@@ -106,20 +129,25 @@
 
                                 <li style="margin-top: 10px; margin-bottom: 10px;">
                                     <a routerLink="/cadastro/clientes" 
-                                        class="btn ms-4 mt-2 mb-3"
+                                        class="btn ms-4 mt-2 my-title-1"
+                                        style="display: flex; align-items: center;"
                                         data-bs-dismiss="offcanvas">
                 
-                                        Clientes
+                                        <mat-icon>group</mat-icon>                                    
+                                        <span class="ms-2">Clientes</span>
+                                        
                                     </a>
                                 </li>
                                 <mat-divider></mat-divider>
                 
                                 <li style="margin-top: 10px; margin-bottom: 10px;">
                                     <a routerLink="/cadastro/produtos" 
-                                        class="btn ms-4 mt-2 mb-3"
+                                        class="btn ms-4 mt-2 my-title-1"
+                                        style="display: flex; align-items: center;"
                                         data-bs-dismiss="offcanvas">
-                
-                                        Produtos
+
+                                        <mat-icon>inventory_2</mat-icon>                                    
+                                        <span class="ms-2">Produtos</span>
                                     </a>
                                 </li>
                                 <mat-divider></mat-divider>
@@ -135,13 +163,16 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingTwo">
                                 <button 
-                                    class="accordion-button collapsed" 
+                                    class="accordion-button collapsed my-title-1"
+                                    style="padding-bottom: 0px !important;" 
                                     type="button" 
                                     data-bs-toggle="collapse" 
                                     data-bs-target="#flush-collapseTwo" 
                                     aria-expanded="false" 
                                     aria-controls="flush-collapseTwo">
-                                    Simulações
+
+                                    <mat-icon>signpost</mat-icon>                                    
+                                    <span class="ms-2">Simulações</span>
                                 </button>
                             </h2>
                             <div id="flush-collapseTwo" 
@@ -151,7 +182,7 @@
                                 
                                 <li style="margin-top: 10px; margin-bottom: 10px;">
                                     <a routerLink="/simulacao-a" 
-                                        class="btn ms-4 mt-2 mb-3"
+                                        class="btn ms-4 mt-2 my-title-1"
                                         data-bs-dismiss="offcanvas">
                                         Simulação Grupo A
                                     </a> 
@@ -160,7 +191,7 @@
                 
                                 <li style="margin-top: 10px; margin-bottom: 10px;">
                                     <a routerLink="/simulacao-b" 
-                                        class="btn ms-4 mt-2 mb-3"
+                                        class="btn ms-4 mt-2 my-title-1"
                                         data-bs-dismiss="offcanvas">
                 
                                         Simulação Grupo B
@@ -170,7 +201,7 @@
                 
                                 <li style="margin-top: 10px; margin-bottom: 10px;">
                                     <a routerLink="/dimensionamento-bateria" 
-                                        class="btn ms-4 mt-2 mb-3"
+                                        class="btn ms-4 mt-2 my-title-1"
                                         data-bs-dismiss="offcanvas">
                 
                                         Dimensionamento Bateria
@@ -185,10 +216,13 @@
 
                 <li style="margin-top: 10px; margin-bottom: 10px;">
                     <a routerLink="/propostas" 
-                        class="btn ms-2 mt-2 mb-3" 
+                        class="btn ms-2 mt-2 my-title-1" 
+                        style="display: flex; align-items: center;"
                         data-bs-dismiss="offcanvas">
 
-                        Propostas
+                        <mat-icon>shopping_bag</mat-icon>                                    
+                        <span class="ms-2">Propostas</span>
+                        
                     </a>
                 </li>
                 <mat-divider></mat-divider>
