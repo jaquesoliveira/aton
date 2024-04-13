@@ -22,6 +22,42 @@
     <span class="ms-2">Formulário</span>
 </div>
 
+<mat-expansion-panel expanded="true">
+    <!-- <mat-expansion-panel-header>
+      <mat-panel-title>
+        This is the expansion title
+      </mat-panel-title>      
+    </mat-expansion-panel-header> -->
+
+    <div class="row mt-3">
+        <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="clientePessoaFisica.nome">
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+            <mat-label>RG</mat-label>
+            <input matInput [(ngModel)]="clientePessoaFisica.nome">
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+            <mat-label>CPF</mat-label>
+            <input matInput [(ngModel)]="clientePessoaFisica.nome">
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+            <mat-label>Telefon</mat-label>
+            <input matInput [(ngModel)]="clientePessoaFisica.nome">
+        </mat-form-field>
+        
+        <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+            <mat-label>E-mail</mat-label>
+            <input matInput [(ngModel)]="clientePessoaFisica.nome">
+        </mat-form-field>
+    </div>
+    
+</mat-expansion-panel>
+
 <div class="card mb-1">
     <div class="card-header">
         Dados pessoais
@@ -64,6 +100,87 @@
                     id="modelo">
             </div>
         </div>
+
+        <p class="mt-4">Contatos</p>
+        <mat-divider></mat-divider>
+
+        <div class="row mt-3">
+            <div class="mb-3 col-3">
+                <label for="fabricante" class="form-label">Nome</label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="clientePessoaFisica.nome"
+                    id="fabricante">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="potencia" class="form-label">CPF</label>
+                <input class="form-control form-control-sm" 
+                [(ngModel)]="clientePessoaFisica.cpf"
+                    id="potencia">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="potencia" class="form-label">RG</label>
+                <input class="form-control form-control-sm" 
+                    [(ngModel)]="clientePessoaFisica.rg"
+                    id="potencia">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="garantia" class="form-label">Telefone</label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="clientePessoaFisica.telefone"
+                    id="garantia">
+            </div>
+
+            <div class="mb-3 col-3">
+                <label for="modelo" class="form-label">E-mail</label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="clientePessoaFisica.email"
+                    id="modelo">
+            </div>
+        </div>
+
+        <p class="mt-4">Endereço</p>
+        <mat-divider></mat-divider>
+
+        <div class="row mt-3">
+            <div class="mb-3 col-3">
+                <label for="fabricante" class="form-label">Nome</label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="clientePessoaFisica.nome"
+                    id="fabricante">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="potencia" class="form-label">CPF</label>
+                <input class="form-control form-control-sm" 
+                [(ngModel)]="clientePessoaFisica.cpf"
+                    id="potencia">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="potencia" class="form-label">RG</label>
+                <input class="form-control form-control-sm" 
+                    [(ngModel)]="clientePessoaFisica.rg"
+                    id="potencia">
+            </div>
+
+            <div class="mb-3 col-2">
+                <label for="garantia" class="form-label">Telefone</label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="clientePessoaFisica.telefone"
+                    id="garantia">
+            </div>
+
+            <div class="mb-3 col-3">
+                <label for="modelo" class="form-label">E-mail</label>
+                <input class="form-control form-control-sm"
+                    [(ngModel)]="clientePessoaFisica.email"
+                    id="modelo">
+            </div>
+        </div>
+        
         
         <mat-divider></mat-divider>
         <div class="mt-2 d-flex justify-content-end">
@@ -83,96 +200,6 @@
                 class="ms-4">
                 Salvar
             </button>
-        </div>
-    </div>
-</div>
-
-<div class="card mb-1">
-    <div class="card-header">
-        Contato
-    </div>
-    <div class="card-body"> 
-
-        <div class="row mt-3">
-            <div class="mb-3 col-3">
-                <label for="fabricante" class="form-label">Nome</label>
-                <input class="form-control form-control-sm"
-                    [(ngModel)]="clientePessoaFisica.nome"
-                    id="fabricante">
-            </div>
-
-            <div class="mb-3 col-2">
-                <label for="potencia" class="form-label">CPF</label>
-                <input class="form-control form-control-sm" 
-                [(ngModel)]="clientePessoaFisica.cpf"
-                    id="potencia">
-            </div>
-
-            <div class="mb-3 col-2">
-                <label for="potencia" class="form-label">RG</label>
-                <input class="form-control form-control-sm" 
-                    [(ngModel)]="clientePessoaFisica.rg"
-                    id="potencia">
-            </div>
-
-            <div class="mb-3 col-2">
-                <label for="garantia" class="form-label">Telefone</label>
-                <input class="form-control form-control-sm"
-                    [(ngModel)]="clientePessoaFisica.telefone"
-                    id="garantia">
-            </div>
-
-            <div class="mb-3 col-3">
-                <label for="modelo" class="form-label">E-mail</label>
-                <input class="form-control form-control-sm"
-                    [(ngModel)]="clientePessoaFisica.email"
-                    id="modelo">
-            </div>
-        </div>        
-    </div>
-</div>
-
-<div class="card mb-1">
-    <div class="card-header">
-        Endereço
-    </div>
-    <div class="card-body"> 
-
-        <div class="row mt-3">
-            <div class="mb-3 col-3">
-                <label for="fabricante" class="form-label">Nome</label>
-                <input class="form-control form-control-sm"
-                    [(ngModel)]="clientePessoaFisica.nome"
-                    id="fabricante">
-            </div>
-
-            <div class="mb-3 col-2">
-                <label for="potencia" class="form-label">CPF</label>
-                <input class="form-control form-control-sm" 
-                [(ngModel)]="clientePessoaFisica.cpf"
-                    id="potencia">
-            </div>
-
-            <div class="mb-3 col-2">
-                <label for="potencia" class="form-label">RG</label>
-                <input class="form-control form-control-sm" 
-                    [(ngModel)]="clientePessoaFisica.rg"
-                    id="potencia">
-            </div>
-
-            <div class="mb-3 col-2">
-                <label for="garantia" class="form-label">Telefone</label>
-                <input class="form-control form-control-sm"
-                    [(ngModel)]="clientePessoaFisica.telefone"
-                    id="garantia">
-            </div>
-
-            <div class="mb-3 col-3">
-                <label for="modelo" class="form-label">E-mail</label>
-                <input class="form-control form-control-sm"
-                    [(ngModel)]="clientePessoaFisica.email"
-                    id="modelo">
-            </div>
         </div>
     </div>
 </div>

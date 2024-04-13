@@ -4,13 +4,80 @@
             <span class="side-menu-title ms-4 mt-3 mb-2">Menu</span>
         </div>        
         
-        <div class="row teste-scroll" >
-            <ul>  
+        
+    </mat-drawer>
+  
+        <mat-toolbar color="primary">
+            <mat-toolbar-row style="padding-left: 0px;">
+                <!-- <button 
+                    mat-icon-button 
+                    class="example-icon" 
+                    aria-label="Example icon-button with menu icon"
+                    (click)="drawer.toggle()">
+
+                    <mat-icon>menu</mat-icon>
+                </button> -->
+
+                <button 
+                    mat-icon-button
+                    class="example-icon"
+                    data-bs-toggle="offcanvas" 
+                    data-bs-target="#offcanvasExample">
+
+                    <mat-icon>menu</mat-icon>
+                </button>                
+        
+                <img src="assets/images/logo.png" style="width: 50px;" alt="">
+                <span class="ms-2">Energy System</span>
+        
+                <span class="example-spacer"></span>
+                <!-- <div class="user-name">Jaques Oliveira</div> -->
+                
+                <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                    <mat-icon>person</mat-icon>
+                </button>
+                
+                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                    <mat-icon>settings</mat-icon>
+                </button>
+        
+                <button mat-icon-button 
+                    class="example-icon" 
+                    aria-label="Example icon-button with share icon"
+                    (click)="sair()">
+                    <mat-icon>logout</mat-icon>
+                </button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <div class="container" >
+            <router-outlet></router-outlet>            
+        </div>
+  
+</mat-drawer-container>
+
+<div class="offcanvas offcanvas-start" 
+    tabindex="1" 
+    id="offcanvasExample"
+    data-bs-backdrop="false"
+    aria-labelledby="offcanvasExampleLabel">
+    
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h2>
+      <button type="button" 
+        class="btn-close" 
+        data-bs-dismiss="offcanvas" 
+        aria-label="Close"></button>
+    </div>
+    
+    <div class="offcanvas-body">
+        <div class="row">
+            <ul>
                 <mat-divider></mat-divider> 
                 <li style="margin-top: 10px; margin-bottom: 10px;">
                     <a routerLink="/home" 
-                        class="btn ms-2 mt-2 mb-3" 
-                        (click)="drawer.toggle()">
+                        class="btn ms-2 mt-2 mb-3"
+                        data-bs-dismiss="offcanvas">
 
                         Dashboard
                     </a>
@@ -40,7 +107,7 @@
                                 <li style="margin-top: 10px; margin-bottom: 10px;">
                                     <a routerLink="/cadastro/clientes" 
                                         class="btn ms-4 mt-2 mb-3"
-                                        (click)="drawer.toggle()">
+                                        data-bs-dismiss="offcanvas">
                 
                                         Clientes
                                     </a>
@@ -50,7 +117,7 @@
                                 <li style="margin-top: 10px; margin-bottom: 10px;">
                                     <a routerLink="/cadastro/produtos" 
                                         class="btn ms-4 mt-2 mb-3"
-                                        (click)="drawer.toggle()">
+                                        data-bs-dismiss="offcanvas">
                 
                                         Produtos
                                     </a>
@@ -84,8 +151,8 @@
                                 
                                 <li style="margin-top: 10px; margin-bottom: 10px;">
                                     <a routerLink="/simulacao-a" 
-                                        class="btn ms-4 mt-2 mb-3" 
-                                        (click)="drawer.toggle()">
+                                        class="btn ms-4 mt-2 mb-3"
+                                        data-bs-dismiss="offcanvas">
                                         Simulação Grupo A
                                     </a> 
                                 </li>
@@ -93,8 +160,8 @@
                 
                                 <li style="margin-top: 10px; margin-bottom: 10px;">
                                     <a routerLink="/simulacao-b" 
-                                        class="btn ms-4 mt-2 mb-3" 
-                                        (click)="drawer.toggle()">
+                                        class="btn ms-4 mt-2 mb-3"
+                                        data-bs-dismiss="offcanvas">
                 
                                         Simulação Grupo B
                                     </a>                     
@@ -104,7 +171,7 @@
                                 <li style="margin-top: 10px; margin-bottom: 10px;">
                                     <a routerLink="/dimensionamento-bateria" 
                                         class="btn ms-4 mt-2 mb-3"
-                                        (click)="drawer.toggle()">
+                                        data-bs-dismiss="offcanvas">
                 
                                         Dimensionamento Bateria
                                     </a>
@@ -119,7 +186,7 @@
                 <li style="margin-top: 10px; margin-bottom: 10px;">
                     <a routerLink="/propostas" 
                         class="btn ms-2 mt-2 mb-3" 
-                        (click)="drawer.toggle()">
+                        data-bs-dismiss="offcanvas">
 
                         Propostas
                     </a>
@@ -127,48 +194,5 @@
                 <mat-divider></mat-divider>
             </ul>
         </div>
-    </mat-drawer>
-  
-    <div>
-        <mat-toolbar color="primary" style="min-width: 1200px; overflow-y: hidden !important; overflow-x: hidden;">
-            <mat-toolbar-row >
-                <button 
-                    mat-icon-button 
-                    class="example-icon" 
-                    aria-label="Example icon-button with menu icon"
-                    (click)="drawer.toggle()">
-
-                    <mat-icon>menu</mat-icon>
-                </button>
-        
-                <img src="assets/images/logo.png" style="width: 50px;" alt="">
-                <span class="ms-2">Energy System</span>
-        
-                <span class="example-spacer"></span>
-                <!-- <div class="user-name">Jaques Oliveira</div> -->
-                
-                <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-                    <mat-icon>person</mat-icon>
-                </button>
-                
-                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-                    <mat-icon>settings</mat-icon>
-                </button>
-        
-                <button mat-icon-button 
-                    class="example-icon" 
-                    aria-label="Example icon-button with share icon"
-                    (click)="sair()">
-                    <mat-icon>logout</mat-icon>
-                </button>
-            </mat-toolbar-row>
-        </mat-toolbar>
-
-        <div class="container" style="min-width: 1200px; overflow-y: hidden !important; overflow-x: hidden;">            
-            <router-outlet></router-outlet>            
-        </div>
     </div>
-  
-</mat-drawer-container>
-
-
+</div>

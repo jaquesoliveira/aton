@@ -16,6 +16,13 @@
     color: #777;
 }
 
+.spinner{
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    margin: 50%;
+}
+
 @media only screen and (max-width: 800px) {    
     .pc-only{
         display: none;
@@ -26,13 +33,6 @@
     .mobile-only{
         display: none;
     }
-}
-
-.spinner{
-    position: absolute;
-    z-index: 10;
-    display: flex;
-    margin: 50%;
 }
 
 

@@ -80,6 +80,7 @@ export class InversorListComponent implements OnInit{
 
   editar(inv: InversorDto){
     localStorage.setItem('inversor', JSON.stringify(inv));
+    this.navegarParaFormularioDeInversor()
   }
 
   excluir(id: number){
