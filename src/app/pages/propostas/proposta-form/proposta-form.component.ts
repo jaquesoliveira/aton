@@ -26,6 +26,7 @@ export class PropostaFormComponent implements OnInit{
   concessionariaList: Estado[] = []
   //estadosSelecionado = {} as Estado;
   estadosSelecionado = '';
+  municipioSelecionado = ''
   concessionariaSelecionada = ''
 
   constructor(public service: GurpoBServiceService){
