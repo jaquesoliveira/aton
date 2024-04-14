@@ -1,0 +1,72 @@
+<mat-expansion-panel
+    class="mb-1" 
+    hideToggle="false" 
+    expanded="true">
+
+    <mat-expansion-panel-header 
+        style="height: 100px;">
+        
+        <mat-panel-title 
+            class="d-flex justify-content-between">
+            <div style="width: 90%;">
+
+                <div style="display: flex; align-items: center;">
+                    <img width="40px" 
+                        class="me-2"
+                        [src]="tipoPessoa === 'fisica'? 'assets/images/pessoa_fisica.png': 'assets/images/pessoa_juridica.png' " 
+                        alt="">
+                    <span class="ms-1 my-title-1" 
+                        style="font-size: larger; font-weight: 500;">
+                                                            
+                        <div>                            
+                            {{titulo}}
+                        </div>
+                    </span>
+                </div>                            
+
+                <div class="row">                                
+                </div>
+            </div>                    
+            
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-divider></mat-divider>
+    <div class="row" 
+        style="height: 70px; padding-top: 5px; padding-bottom: 15px;">
+        <div class="col-lg-4 col-sm-3 col-xs-12">
+            <small>
+                Cadastros: 
+                
+                <span style="font-weight:500;">
+                    {{cadastros}}
+                </span>
+            </small>
+        </div>
+        <div class="col-lg-6 col-sm-3 col-xs-12">
+            <small>
+                Propostas Aprovadas: 
+                
+                <span style="font-weight:500;">
+                    {{propostas_aprovadas}}
+                </span>
+            </small>
+        </div>
+        <div class="col-lg-4 col-sm-3 col-xs-12">
+            <small>
+                Vendas:
+                <span style="font-weight:500;">
+                    {{vendas}}
+                </span>
+            </small>
+        </div>
+        <div class="col-lg-6 col-sm-3 col-xs-12">
+            <small>
+                Valor:
+                <span style="font-weight:500;">
+                    R${{valorVendas}}
+                </span>
+            </small>
+        </div>
+    </div>          
+</mat-expansion-panel>

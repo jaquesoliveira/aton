@@ -1,1 +1,386 @@
-<p>proposta-form works!</p>
+<!-- <div class="mt-3">
+    <h2 class="my-title-1">Proposta</h2>
+</div> -->
+
+<div class="row mt-1 mb-1">
+    <div class="d-flex justify-content-between" 
+        style="display: flex; align-items: center; padding-top: 15px; padding-bottom: 15px;">
+        <div style="display: flex; align-items: center;">
+            <img width="30px" 
+                src="assets/images/proposta.png" alt="">
+            <span class="ms-2 my-title-1" 
+                style="font-size: 25px; font-weight: 500;">
+                
+                PROPOSTA
+            </span>
+        </div>
+
+        <div>
+            <button mat-mini-fab
+                color="primary"
+                class="ms-1"
+                >
+
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>        
+    </div>
+</div>
+<mat-divider class="pc-only"></mat-divider>
+    
+<mat-divider></mat-divider>
+
+
+<div class="mt-4">
+    <app-barra-de-titulo 
+        titulo="INFORMAÇÕES DO CLIENTE">
+    </app-barra-de-titulo>
+</div>
+
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row">
+            <div>
+                <button mat-raised-button color="primary">Selecionar Cliente</button>
+            </div>
+
+            <div class="mt-2">
+                <app-cliente-info-expansion-panel [cliente]="cliente">
+                    
+                </app-cliente-info-expansion-panel>                
+            </div>
+        </div>    
+<!-- 
+        <div class="row">
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Taxa Iluminação Pública sem solar</mat-label>
+                <input matInput>
+                <mat-hint>(CIP)</mat-hint>
+            </mat-form-field>
+    
+            <mat-form-field  class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Taxa Iluminação Pública com solar</mat-label>
+                <input matInput>
+                <mat-hint>(CIP)</mat-hint>
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Aumento anual da conta de energia</mat-label>
+                <input matInput>
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Valor do investimento</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div> -->
+    </div>
+</div>
+
+<!-- <div class="card-header barra-de-titulo mb-1 mt-3" 
+    style="background-color: #3f51b5; color: #fff; padding: 15px;">
+    
+</div> -->
+
+<div class="mt-5">
+    <app-barra-de-titulo         
+        titulo="REGIÃO">
+    </app-barra-de-titulo>
+</div>
+
+<div class="row">
+    <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-1 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">        
+                    <mat-form-field class="col-lg-6 col-sm-12 col-12">
+                        <mat-label>Estado</mat-label>
+                        <select matNativeControl 
+                            
+                            name="estado"
+                            
+                            required>
+                            
+                        </select>
+                    </mat-form-field>
+                
+                    <mat-form-field class="col-lg-6 col-sm-12 col-12">
+                        <mat-label>Concessionária</mat-label>
+                        <select matNativeControl 
+                            required>
+                            <option label="-- SELECIONE --"></option>
+                            
+                        </select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="mt-5">
+    <app-barra-de-titulo         
+        titulo="INFORMAÇÕES DE CONSUMO">
+    </app-barra-de-titulo>
+</div>
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+                <mat-label>Consumo Médio Mensal</mat-label>
+                <input matInput [(ngModel)]="consumoMedioMensal">
+                <mat-hint>(KWh/mês)</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+                <mat-label>Potência do Módulo</mat-label>
+                <input matInput [(ngModel)]="potenciaModulo">
+            </mat-form-field>
+
+            <div class="col-lg-3 col-sm-12 col-12 mb-3">    
+                <button mat-raised-button 
+                    color="primary"
+                    (click)="calcular()">
+                    Calcular
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Kwh Dia</mat-label>
+                <input matInput
+                    [(ngModel)]="kwhDia">
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Kwp Nominal</mat-label>
+                <input matInput [(ngModel)]="kwpNominal">
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Kwp Real</mat-label>
+                <input matInput [(ngModel)]="kwpReal">
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Número de Módulos</mat-label>
+                <input matInput [(ngModel)]="numModulos">
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="card mt-1 mb-3">
+    <div class="card-body">
+        <div class="row">
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Variação de injeção</mat-label>
+                <input matInput>
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Tipo de Fornecimento</mat-label>
+                <mat-label>Cars</mat-label>
+                <select matNativeControl required>
+                    <option value="1">Monofásico</option>
+                    <option value="2">Bifásico</option>
+                    <option value="3">Trifásico</option>                
+                </select>
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Classificação de Consumo</mat-label>
+                <select matNativeControl required>
+                    <option value="B1">B1</option>
+                    <option value="B2">B2</option>
+                    <option value="B3">B3</option>                
+                </select>
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Considerar TUSD G</mat-label>
+                <select matNativeControl required>
+                    <option value="SIM">SIM</option>
+                    <option value="NAO">NÃO</option>             
+                </select>
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Potência da Geração</mat-label>
+                <input matInput>
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Potência da Consumo</mat-label>
+                <input matInput>
+            </mat-form-field>
+    
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Houve obra no Transformador</mat-label>
+                <select matNativeControl required>
+                    <option value="SIM">SIM</option>
+                    <option value="NAO">NÃO</option>             
+                </select>
+            </mat-form-field>
+        </div>
+    </div>    
+</div> -->
+
+
+<!-- <div class="card-header barra-de-titulo" 
+    style="background-color: #3f51b5; color: #fff; padding: 15px;">
+    REGIÃO
+</div> -->
+
+
+<!-- <div class="card-header barra-de-titulo" 
+    style="background-color: #3f51b5; color: #fff; padding: 15px;">
+    PERFIL DE CONSUMO
+</div> -->
+
+<div class="mt-5">
+    <app-barra-de-titulo         
+        titulo="INFORMAÇÕES DA USINA">
+    </app-barra-de-titulo>
+</div>
+
+<div class="row">
+    <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-1 mb-1">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">  
+                    <mat-form-field class="col-lg-6 col-sm-12 col-12" >
+                        <mat-label>Perfil de Consumo</mat-label>
+                        <select matNativeControl 
+                            
+                            >
+                            <option value="residencial_1">Residencial 1</option>
+                            <option value="residencial_2">Residencial 2</option>
+                            <option value="consumoRemoto">Consumo Remoto</option>
+                            <option value="consumoNoturno">Noturno</option>
+                            <option value="comercial_1">Comercial</option>
+                            <option value="padarias_mercados">Padarias / Mercados</option>
+                            <option value="vinteEQuatroHoras">24H</option>
+                            <option value="personalizado">Personalizado</option>
+                        </select>
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-6 col-sm-12 col-12">
+                        <mat-label>Simultaneidade</mat-label>
+                        <input matInput readonly >
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
+    
+ 
+
+<!-- <div class="card-header mt-3 barra-de-titulo" 
+    style="background-color: #3f51b5; color: #fff; padding: 15px;">
+    IMPOSTOS
+</div> -->
+    
+
+<!-- <div class="card-header mt-3 barra-de-titulo" 
+    style="background-color: #3f51b5; color: #fff; padding: 15px;">
+    RESUMO DE TARIFAS
+</div> -->
+
+<div class="mt-5">
+    <app-barra-de-titulo         
+        titulo="RESUMO DE TARIFAS">
+    </app-barra-de-titulo>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-12 mt-1 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12 col-12 mt-3">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Estado</td>
+                                    <td style="width: 40%;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Concessionária escolhida</td>
+                                    <td style="width: 40%;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Valor da TUSD (sem imposto)</td>
+                                    <td style="width: 40%;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Valor da TE (sem imposto)</td>
+                                    <td style="width: 40%;">R$ 0,30</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+                    <div class="col-lg-6 col-sm-12 col-12 mt-3">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Valor do Fio B (sem imposto)</td>
+                                    <td style="width: 40%;">
+                                        RS 0,29
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Valor da TUSD Geração TIPO 1  (sem imposto)</td>
+                                    <td style="width: 40%;">
+                                        RS 11,67
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Valor da TUSD Geração TIPO 2  (sem imposto)</td>
+                                    <td style="width: 40%;">
+                                        RS 27,97
+                                    </td>
+                                </tr>                    
+                            </tbody>
+                        </table>
+                    </div>        
+                </div>
+            </div>        
+        </div>
+    </div>        
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-12 mt-1 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class=" d-flex flex-row-reverse bd-highlight mb-1" st>  
+                    
+                        <div class="ps-5 bd-highlight">
+                            <button class="btn btn-primary">
+                                Salvar Proposta
+                            </button>
+                        </div>
+                        <div class="ps-2 bd-highlight">
+                            <button class="btn btn-secondary">
+                                Limpar
+                            </button>
+                        </div>
+                        <div class=" bd-highlight">
+                            <button class="btn btn-primary">
+                                Imprimir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

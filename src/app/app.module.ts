@@ -43,6 +43,11 @@ import { ClientePessoaFisicaComponent } from './pages/cadastros/clientes/cliente
 import { ClientePessoaFisicaFormComponent } from './pages/cadastros/clientes/cliente-pessoa-fisica-form/cliente-pessoa-fisica-form.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { PropostasComponent } from './pages/propostas/propostas/propostas.component';
+import { SimulacoesComponent } from './pages/simulacoes/simulacoes.component';
+import { ClienteExpansionPanelComponent } from './commons/cliente-expansion-panel/cliente-expansion-panel.component';
+import { PropostaFormComponent } from './pages/propostas/proposta-form/proposta-form.component';
+import { BarraDeTituloComponent } from './commons/barra-de-titulo/barra-de-titulo.component';
+import { ClienteInfoExpansionPanelComponent } from './commons/cliente-info-expansion-panel/cliente-info-expansion-panel.component';
 
 registerLocaleData(ptBr);
 
@@ -66,7 +71,12 @@ registerLocaleData(ptBr);
     ModuloFotovoltaicoFormComponent,
     ClientePessoaFisicaComponent,
     ClientePessoaFisicaFormComponent,
-    PropostasComponent
+    PropostasComponent,
+    SimulacoesComponent,
+    ClienteExpansionPanelComponent,
+    PropostaFormComponent,
+    BarraDeTituloComponent,
+    ClienteInfoExpansionPanelComponent
   ],
   imports: [
     BrowserModule,
