@@ -50,31 +50,7 @@
                     
                 </app-cliente-info-expansion-panel>                
             </div>
-        </div>    
-<!-- 
-        <div class="row">
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Taxa Iluminação Pública sem solar</mat-label>
-                <input matInput>
-                <mat-hint>(CIP)</mat-hint>
-            </mat-form-field>
-    
-            <mat-form-field  class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Taxa Iluminação Pública com solar</mat-label>
-                <input matInput>
-                <mat-hint>(CIP)</mat-hint>
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Aumento anual da conta de energia</mat-label>
-                <input matInput>
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Valor do investimento</mat-label>
-                <input matInput>
-            </mat-form-field>
-        </div> -->
+        </div>
     </div>
 </div>
 
@@ -94,24 +70,31 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">        
+                    <!-- <mat-form-field class="col-lg-6 col-sm-12 col-12">
+                        <mat-label>Estado</mat-label>
+                        <select matNativeControl 
+                            [(ngModel)]="estadosSelecionado" 
+                            name="estado" required>
+                            <ng-container *ngFor="let estado of estadosList;">
+                                <option [value]="estado.UF">{{estado.nome}}</option>                                            
+                            </ng-container>
+                        </select>
+                    </mat-form-field> -->
                     <mat-form-field class="col-lg-6 col-sm-12 col-12">
                         <mat-label>Estado</mat-label>
                         <select matNativeControl 
-                            
-                            name="estado"
-                            
-                            required>
-                            
+                            [(ngModel)]="estadosSelecionado" 
+                            name="estado"required>
+                            <ng-container *ngFor="let estado of estadosList;">
+                                <option [value]="estado.UF">{{estado.nome}}</option>                                            
+                            </ng-container>
                         </select>
                     </mat-form-field>
                 
-                    <mat-form-field class="col-lg-6 col-sm-12 col-12">
-                        <mat-label>Concessionária</mat-label>
-                        <select matNativeControl 
-                            required>
-                            <option label="-- SELECIONE --"></option>
-                            
-                        </select>
+                    <mat-form-field class="col-lg-6 col-sm-12 col-12 mb-3">    
+                        <mat-label>Município</mat-label>
+                        <input matInput 
+                            [(ngModel)]="consumoMedioMensal">
                     </mat-form-field>
                 </div>
             </div>
@@ -135,114 +118,15 @@
                 <input matInput [(ngModel)]="consumoMedioMensal">
                 <mat-hint>(KWh/mês)</mat-hint>
             </mat-form-field>
-
-            <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
-                <mat-label>Potência do Módulo</mat-label>
-                <input matInput [(ngModel)]="potenciaModulo">
-            </mat-form-field>
-
-            <div class="col-lg-3 col-sm-12 col-12 mb-3">    
-                <button mat-raised-button 
-                    color="primary"
-                    (click)="calcular()">
-                    Calcular
-                </button>
-            </div>
         </div>
 
         <div class="row">
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Kwh Dia</mat-label>
-                <input matInput
-                    [(ngModel)]="kwhDia">
-            </mat-form-field>
-
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Kwp Nominal</mat-label>
-                <input matInput [(ngModel)]="kwpNominal">
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Kwp Real</mat-label>
-                <input matInput [(ngModel)]="kwpReal">
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Número de Módulos</mat-label>
-                <input matInput [(ngModel)]="numModulos">
-            </mat-form-field>
+            
         </div>
     </div>
 </div>
 
-<!-- <div class="card mt-1 mb-3">
-    <div class="card-body">
-        <div class="row">
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Variação de injeção</mat-label>
-                <input matInput>
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Tipo de Fornecimento</mat-label>
-                <mat-label>Cars</mat-label>
-                <select matNativeControl required>
-                    <option value="1">Monofásico</option>
-                    <option value="2">Bifásico</option>
-                    <option value="3">Trifásico</option>                
-                </select>
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Classificação de Consumo</mat-label>
-                <select matNativeControl required>
-                    <option value="B1">B1</option>
-                    <option value="B2">B2</option>
-                    <option value="B3">B3</option>                
-                </select>
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Considerar TUSD G</mat-label>
-                <select matNativeControl required>
-                    <option value="SIM">SIM</option>
-                    <option value="NAO">NÃO</option>             
-                </select>
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Potência da Geração</mat-label>
-                <input matInput>
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Potência da Consumo</mat-label>
-                <input matInput>
-            </mat-form-field>
-    
-            <mat-form-field class="col-lg-3 col-sm-12 col-12">
-                <mat-label>Houve obra no Transformador</mat-label>
-                <select matNativeControl required>
-                    <option value="SIM">SIM</option>
-                    <option value="NAO">NÃO</option>             
-                </select>
-            </mat-form-field>
-        </div>
-    </div>    
-</div> -->
-
-
-<!-- <div class="card-header barra-de-titulo" 
-    style="background-color: #3f51b5; color: #fff; padding: 15px;">
-    REGIÃO
-</div> -->
-
-
-<!-- <div class="card-header barra-de-titulo" 
-    style="background-color: #3f51b5; color: #fff; padding: 15px;">
-    PERFIL DE CONSUMO
-</div> -->
-
+<!-- INFORMAÇÕES DA USINA -->
 <div class="mt-5">
     <app-barra-de-titulo         
         titulo="INFORMAÇÕES DA USINA">
@@ -253,25 +137,47 @@
     <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-1 mb-1">
         <div class="card">
             <div class="card-body">
-                <div class="row">  
-                    <mat-form-field class="col-lg-6 col-sm-12 col-12" >
-                        <mat-label>Perfil de Consumo</mat-label>
-                        <select matNativeControl 
-                            
-                            >
-                            <option value="residencial_1">Residencial 1</option>
-                            <option value="residencial_2">Residencial 2</option>
-                            <option value="consumoRemoto">Consumo Remoto</option>
-                            <option value="consumoNoturno">Noturno</option>
-                            <option value="comercial_1">Comercial</option>
-                            <option value="padarias_mercados">Padarias / Mercados</option>
-                            <option value="vinteEQuatroHoras">24H</option>
-                            <option value="personalizado">Personalizado</option>
-                        </select>
+                <div class="row">        
+                    <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+                        <mat-label>Potência do Módulo</mat-label>
+                        <input matInput [(ngModel)]="potenciaModulo">
                     </mat-form-field>
-                    <mat-form-field class="col-lg-6 col-sm-12 col-12">
-                        <mat-label>Simultaneidade</mat-label>
-                        <input matInput readonly >
+        
+                    <div class="col-lg-3 col-sm-12 col-12 mb-3">    
+                        <button mat-raised-button 
+                            color="primary"
+                            (click)="calcular()">
+                            Calcular
+                        </button>
+                    </div>
+                </div>
+                <div class="row">  
+                    <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                        <mat-label>Kwh Dia</mat-label>
+                        <input matInput
+                            [(ngModel)]="kwhDia"
+                            readonly>
+                    </mat-form-field>
+        
+                    <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                        <mat-label>Kwp Nominal</mat-label>
+                        <input matInput 
+                            [(ngModel)]="kwpNominal"
+                            readonly>
+                    </mat-form-field>
+            
+                    <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                        <mat-label>Kwp Real</mat-label>
+                        <input matInput 
+                            [(ngModel)]="kwpReal"
+                            readonly>
+                    </mat-form-field>
+            
+                    <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                        <mat-label>Número de Módulos</mat-label>
+                        <input matInput 
+                            [(ngModel)]="numModulos"
+                            readonly>
                     </mat-form-field>
                 </div>
             </div>
