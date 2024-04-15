@@ -1,0 +1,93 @@
+<mat-expansion-panel 
+    class="mb-1" 
+    hideToggle="false" 
+    expanded="false">
+    
+    <mat-expansion-panel-header 
+        style="height: 100px;">
+        
+        <mat-panel-title class="d-flex justify-content-between">
+            <div style="width: 90%;">
+
+                <div style="display: flex; align-items: center;">
+                    <img width="40px" 
+                        class="me-2"
+                        [src]="tipoPessoa === 'juridica'? 'assets/images/pessoa_juridica.png' : 'assets/images/pessoa_fisica.png'" 
+                        alt="">
+                    <span class="ms-1 my-title-1" 
+                        style="font-size: larger; font-weight: 500;">
+                        
+                        {{cliente.nome}}
+                        <div>
+                            <small style="color: #777; font-size: 12px;">{{cliente.email}}</small>
+                        </div>
+                    </span>
+                </div>
+
+                <div class="row">
+                </div>
+            </div>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    <mat-divider></mat-divider>
+    <div class="row" 
+        style="height: 70px; padding-top: 10px; padding-bottom: 5px; color: #666;">
+        
+        <div class="col-lg-4 col-sm-3 col-xs-12 d-flex justify-content-start"
+            style="align-items: center;">
+            <small>
+                CPF: 
+            </small>
+            
+            <!-- {{cliente.telefone}} -->
+            <span class="d-flex justify-content-start" 
+                style="font-weight: bold; align-items: center;">
+                882.441.303-00
+            </span>
+            
+        </div>
+       
+        <div class="col-lg-4 col-sm-3 col-xs-12 d-flex justify-content-start"
+            style="align-items: center;">
+            <small>
+                Fone 1: 
+            </small>
+            
+            <!-- {{cliente.telefone}} -->
+            <span class="d-flex justify-content-start" 
+                style="font-weight: bold; align-items: center;">
+                (85) 98701-7085
+                <img src="assets/images/zap.png" width="28px" alt="">
+            </span>            
+        </div>
+        
+        <div class="col-lg-4 col-sm-3 col-xs-12 d-flex justify-content-start"
+            style="align-items: center;">
+            <small>
+                E-mail:  
+            </small>
+            
+            <!-- {{cliente.telefone}} -->
+            <span class="d-flex justify-content-start" 
+                style="font-weight: bold; align-items: center;">
+                {{email}}
+                <!-- <img src="assets/images/zap.png" width="28px" alt=""> -->
+            </span>            
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="d-flex justify-content-end "
+            style="padding-top: 10px;">
+            <!-- <button mat-mini-fab
+                color="primary"
+                (click)="editar(inv)">
+
+                <mat-icon>edit</mat-icon>
+            </button> -->
+        </div>
+    </div>
+    
+</mat-expansion-panel>

@@ -1,1 +1,265 @@
-<p>proposta-form works!</p>
+<div class="row mt-1 mb-1">
+    <div class="d-flex justify-content-between" 
+        style="display: flex; align-items: center; padding-top: 15px; padding-bottom: 15px;">
+        <div style="display: flex; align-items: center;">
+            <img width="30px" 
+                src="assets/images/proposta.png" alt="">
+            <span class="ms-2 my-title-1" 
+                style="font-size: 25px; font-weight: 500;">
+                
+                PROPOSTA
+            </span>
+        </div>
+
+        <div>
+            <button mat-mini-fab
+                color="primary"
+                class="ms-1"
+                >
+
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>        
+    </div>
+</div>
+<mat-divider class="pc-only"></mat-divider>
+    
+<mat-divider></mat-divider>
+
+<div class="mt-4">
+    <app-barra-de-titulo 
+        titulo="INFORMAÇÕES DO CLIENTE">
+    </app-barra-de-titulo>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row">
+            <div>
+                <button mat-raised-button 
+                    color="primary">Selecionar Cliente
+                </button>
+            </div>
+
+            <div class="mt-2">
+                <app-cliente-info-expansion-panel [cliente]="cliente">                    
+                </app-cliente-info-expansion-panel>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5">
+    <app-barra-de-titulo         
+        titulo="REGIÃO">
+    </app-barra-de-titulo>
+</div>
+
+<div class="row">
+    <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-1 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <mat-form-field class="col-lg-6 col-sm-12 col-12">
+                        <mat-label>Estado</mat-label>
+                        <select matNativeControl 
+                            [(ngModel)]="estadosSelecionado" 
+                            name="estado" required>
+                            <ng-container *ngFor="let estado of estadosList;">
+                                <option [value]="estado.UF">{{estado.nome}}</option>                                            
+                            </ng-container>
+                        </select>
+                    </mat-form-field>
+                
+                    <mat-form-field class="col-lg-6 col-sm-12 col-12">    
+                        <mat-label>Município</mat-label>
+                        <input matInput 
+                            [(ngModel)]="municipioSelecionado">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5">
+    <app-barra-de-titulo         
+        titulo="INFORMAÇÕES DE CONSUMO">
+    </app-barra-de-titulo>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+                <mat-label>Consumo Médio Mensal</mat-label>
+                <input matInput [(ngModel)]="consumoMedioMensal">
+                <mat-hint>(KWh/mês)</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+                <mat-label>Custo Mensal</mat-label>
+                <input matInput >
+                <mat-hint>(R$)</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            
+        </div>
+    </div>
+</div>
+
+<!-- INFORMAÇÕES DA USINA -->
+<div class="mt-5">
+    <app-barra-de-titulo         
+        titulo="INFORMAÇÕES DA USINA">
+    </app-barra-de-titulo>
+</div>
+
+<div class="row">
+    <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-1 mb-1">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">        
+                    <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
+                        <mat-label>Potência do Módulo</mat-label>
+                        <input matInput [(ngModel)]="potenciaModulo">
+                    </mat-form-field>
+        
+                    <div class="col-lg-3 col-sm-12 col-12 mb-3">    
+                        <button mat-raised-button 
+                            color="primary"
+                            (click)="calcular()"
+                            [disabled]="consumoMedioMensal && potenciaModulo ? false : true">
+                            Calcular
+                        </button>
+                    </div>
+                </div>
+                <div class="row">  
+                    <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                        <mat-label>Kwh Dia</mat-label>
+                        <input matInput
+                            [(ngModel)]="kwhDia"
+                            readonly>
+                    </mat-form-field>
+        
+                    <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                        <mat-label>Kwp Nominal</mat-label>
+                        <input matInput 
+                            [(ngModel)]="kwpNominal"
+                            readonly>
+                    </mat-form-field>
+            
+                    <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                        <mat-label>Kwp Real</mat-label>
+                        <input matInput 
+                            [(ngModel)]="kwpReal"
+                            readonly>
+                    </mat-form-field>
+            
+                    <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                        <mat-label>Número de Módulos</mat-label>
+                        <input matInput 
+                            [(ngModel)]="numModulos"
+                            readonly>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5">
+    <app-barra-de-titulo         
+        titulo="RESUMO DE TARIFAS">
+    </app-barra-de-titulo>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-12 mt-1 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+
+                    <!-- <div class="col-lg-6 col-sm-12 col-12 mt-3">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Estado</td>
+                                    <td style="width: 40%;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Concessionária escolhida</td>
+                                    <td style="width: 40%;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Valor da TUSD (sem imposto)</td>
+                                    <td style="width: 40%;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Valor da TE (sem imposto)</td>
+                                    <td style="width: 40%;">R$ 0,30</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+                    <div class="col-lg-6 col-sm-12 col-12 mt-3">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Valor do Fio B (sem imposto)</td>
+                                    <td style="width: 40%;">
+                                        RS 0,29
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Valor da TUSD Geração TIPO 1  (sem imposto)</td>
+                                    <td style="width: 40%;">
+                                        RS 11,67
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Valor da TUSD Geração TIPO 2  (sem imposto)</td>
+                                    <td style="width: 40%;">
+                                        RS 27,97
+                                    </td>
+                                </tr>                    
+                            </tbody>
+                        </table>
+                    </div> -->        
+                </div>
+            </div>        
+        </div>
+    </div>        
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-12 mt-1 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class=" d-flex flex-row-reverse bd-highlight mb-1" st>  
+                    
+                        <div class="ps-5 bd-highlight">
+                            <button class="btn btn-primary">
+                                Salvar Proposta
+                            </button>
+                        </div>
+                        <div class="ps-2 bd-highlight">
+                            <button class="btn btn-secondary">
+                                Limpar
+                            </button>
+                        </div>
+                        <div class=" bd-highlight">
+                            <button class="btn btn-primary">
+                                Imprimir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

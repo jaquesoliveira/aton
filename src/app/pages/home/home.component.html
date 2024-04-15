@@ -1,11 +1,40 @@
 <div class="container-fluid">
-    <div class="mt-4">
+    <div class="mt-4 d-flex justify-content-center">
         <h1 class="my-title-1">Dashboard</h1>
-    </div>            
-
-    <div class="row p-2">
-      <canvas [id]="canvasName" style="height: 180px; max-height: 180px;">{{grafico}}</canvas>
     </div>
+    <mat-divider 
+        style="background-color: #3f51b5;">
+    </mat-divider>
+    
+    <mat-tab-group 
+        mat-stretch-tabs="false"
+        class="mb-2 mt-4">
+        <mat-tab label="Clientes" >
+        </mat-tab>
+    </mat-tab-group>
 
+    <div class="row">
+        <div class="col-lg-6 col-12">
+            <app-cliente-expansion-panel
+                imagem="assets/images/pessoa_juridica.png"
+                titulo="Pessoa Juridica"
+                cadastros="500"
+                propostas_aprovadas="500"
+                vendas="280"
+                valorVendas="120.000,00">
+            </app-cliente-expansion-panel>            
+        </div>
+
+        <div class="col-lg-6 col-12">
+            <app-cliente-expansion-panel
+                imagem="assets/images/pessoa_fisica.png"
+                titulo="Pessoa Física"
+                cadastros="500"
+                propostas_aprovadas="500"
+                vendas="280"
+                valorVendas="120.000,00">
+            </app-cliente-expansion-panel>            
+        </div>
+    </div>
 </div>
 

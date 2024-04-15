@@ -38,7 +38,7 @@
             <div class="card-body"> 
 
                 <div class="row mt-1">
-                    <div class="mb-3 col-12">
+                    <!-- <div class="mb-3 col-12">
                         <label for="fabricante" 
                             class="form-label">
                             
@@ -47,9 +47,15 @@
                         <input class="form-control form-control-sm"
                             [(ngModel)]="clientePessoaFisica.nome"
                             id="fabricante">
-                    </div>
+                    </div> -->
 
-                    <div class="mb-3 col-lg-4 col-12">
+                    <mat-form-field class="mb-3 col-12">    
+                        <mat-label>Nome</mat-label>
+                        <input matInput 
+                            [(ngModel)]="clientePessoaFisica.nome">
+                    </mat-form-field>
+
+                    <!-- <div class="mb-3 col-lg-4 col-12">
                         <label for="potencia" 
                             class="form-label">
                             
@@ -58,20 +64,21 @@
                         <input class="form-control form-control-sm" 
                         [(ngModel)]="clientePessoaFisica.cpf"
                             id="potencia">
-                    </div>
+                    </div> -->
 
-                    <div class="mb-3 col-lg-4 col-12">
-                        <label for="potencia" 
-                            class="form-label">
-                            
-                            RG
-                        </label>
-                        <input class="form-control form-control-sm" 
-                            [(ngModel)]="clientePessoaFisica.rg"
-                            id="potencia">
-                    </div>
+                    <mat-form-field class="mb-3 col-lg-4 col-12">    
+                        <mat-label>CPF</mat-label>
+                        <input matInput 
+                            [(ngModel)]="clientePessoaFisica.cpf">
+                    </mat-form-field>                    
 
-                    <div class="mb-3 col-lg-4 col-12">
+                    <mat-form-field class="mb-3 col-lg-4 col-12">    
+                        <mat-label>RG</mat-label>
+                        <input matInput 
+                            [(ngModel)]="clientePessoaFisica.rg">
+                    </mat-form-field>
+
+                    <!-- <div class="mb-3 col-lg-4 col-12">
                         <label for="garantia" 
                             class="form-label">
                             
@@ -80,18 +87,19 @@
                         <input class="form-control form-control-sm"
                             [(ngModel)]="clientePessoaFisica.telefone"
                             id="garantia">
-                    </div>
+                    </div> -->
 
-                    <div class="mb-3 col-12">
-                        <label for="modelo" c
-                            lass="form-label">
-                            
-                            E-mail
-                        </label>
-                        <input class="form-control form-control-sm"
-                            [(ngModel)]="clientePessoaFisica.email"
-                            id="modelo">
-                    </div>
+                    <mat-form-field class="mb-3 col-lg-4 col-12">    
+                        <mat-label>Telefone</mat-label>
+                        <input matInput 
+                            [(ngModel)]="clientePessoaFisica.telefone">
+                    </mat-form-field>                   
+
+                    <mat-form-field class="mb-3 col-12">    
+                        <mat-label>E-mail</mat-label>
+                        <input matInput 
+                            [(ngModel)]="clientePessoaFisica.email">
+                    </mat-form-field>
                 </div>        
                 
                 <mat-divider></mat-divider>

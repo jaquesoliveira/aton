@@ -34,48 +34,30 @@
         <div class="card mb-3">
             <div class="card-body">
                 <div class="row mt-3">
-                    <div class="mb-3 col-12">
-                        <label for="fabricante" 
-                            class="form-label">
-                            
-                            Fabricante
-                        </label>
-                        <input class="form-control form-control-sm"
-                            [(ngModel)]="modulo.fabricante"
-                            id="fabricante">
-                    </div>
 
-                    <div class="mb-3 col-12">
-                        <label for="potencia" 
-                            class="form-label">
-                            
-                            Potência
-                        </label>
-                        <input class="form-control form-control-sm" 
-                            [(ngModel)]="modulo.potencia"
-                            id="potencia">
-                    </div>
+                    <mat-form-field class="mb-3 col-12">    
+                        <mat-label>Fabricante</mat-label>
+                        <input matInput 
+                            [(ngModel)]="modulo.fabricante">
+                    </mat-form-field>
 
-                    <div class="mb-3 col-12">
-                        <label for="garantia" 
-                            class="form-label">
-                            
-                            Garantia(Defeito)
-                        </label>
-                        <input class="form-control form-control-sm"
-                            [(ngModel)]="modulo.garantiaDefeito"
-                            id="garantia">
-                    </div>
-                    <div class="mb-3 col-12">
-                        <label for="garantia" 
-                            class="form-label">
-                            
-                            Garantia(Eficiência)
-                        </label>
-                        <input class="form-control form-control-sm"
-                            [(ngModel)]="modulo.garantiaEficiencia"
-                            id="garantia">
-                    </div>
+                    <mat-form-field class="mb-3 col-12">    
+                        <mat-label>Potência</mat-label>
+                        <input matInput 
+                            [(ngModel)]="modulo.potencia">
+                    </mat-form-field>
+
+                    <mat-form-field class="mb-3 col-12">    
+                        <mat-label>Garantia(Defeito)</mat-label>
+                        <input matInput 
+                            [(ngModel)]="modulo.garantiaDefeito">
+                    </mat-form-field>
+
+                    <mat-form-field class="mb-3 col-12">    
+                        <mat-label>Garantia(Eficiência)</mat-label>
+                        <input matInput 
+                            [(ngModel)]="modulo.garantiaEficiencia">
+                    </mat-form-field>
                 </div>
 
                 <mat-divider></mat-divider>

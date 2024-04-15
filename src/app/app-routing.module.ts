@@ -15,6 +15,9 @@ import { ModuloFotovoltaicoListComponent } from './pages/cadastros/produtos/modu
 import { ModuloFotovoltaicoFormComponent } from './pages/cadastros/produtos/modulo-fotovoltaico-form/modulo-fotovoltaico-form.component';
 import { ClientePessoaFisicaComponent } from './pages/cadastros/clientes/cliente-pessoa-fisica/cliente-pessoa-fisica.component';
 import { ClientePessoaFisicaFormComponent } from './pages/cadastros/clientes/cliente-pessoa-fisica-form/cliente-pessoa-fisica-form.component';
+import { SimulacoesComponent } from './pages/simulacoes/simulacoes.component';
+import { PropostaFormComponent } from './pages/propostas/proposta-form/proposta-form.component';
+import { PropostaListComponent } from './pages/propostas/proposta-list/proposta-list.component';
 
 const routes: Routes = [
   {
@@ -85,6 +88,21 @@ const routes: Routes = [
   {
     path:'propostas',
     component: PropostasComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'propostas/proposta-form',
+    component: PropostaFormComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'propostas/proposta-list',
+    component: PropostaListComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'simulacoes',
+    component: SimulacoesComponent,
     pathMatch: 'full'
   },
   {

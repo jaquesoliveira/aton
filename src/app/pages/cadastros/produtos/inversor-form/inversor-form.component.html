@@ -37,65 +37,38 @@
         <div class="card mb-3">        
             <div class="card-body">
                 <div class="row mt-3">
-                    <div class="mb-3 col-sm-12 col-lg-12">
-                        <label for="fabricante" 
-                            class="form-label">
-                            
-                            Fabricante
-                        </label>
-                        <input class="form-control form-control-sm"
-                            [(ngModel)]="inversor.fabricante"
-                            id="fabricante">
-                    </div>
+
+                    <mat-form-field class="mb-3 col-sm-12 col-lg-12">    
+                        <mat-label>Fabricante</mat-label>
+                        <input matInput 
+                            [(ngModel)]="inversor.fabricante">
+                    </mat-form-field>
+
+                    <mat-form-field class="mb-3 col-sm-12 col-lg-6">
+                        <mat-label>Potência</mat-label>
+                        <input matInput 
+                            [(ngModel)]="inversor.potencia">
+                    </mat-form-field>
+
+                    <mat-form-field class="mb-3 col-sm-12 col-lg-6">
+                        <mat-label>Garantia</mat-label>
+                        <input matInput [(ngModel)]="inversor.garantiaDefeito">
+                    </mat-form-field>
         
-                    <div class="mb-3 col-sm-12 col-lg-6">
-                        <label for="potencia" 
-                            class="form-label">
-                            
-                            Potência
-                        </label>
-                        <input class="form-control form-control-sm" 
-                            [(ngModel)]="inversor.potencia"
-                            id="potencia">
-                    </div>
-        
-                    <div class="mb-3 col-sm-12 col-lg-6">
-                        <label for="garantia" 
-                            class="form-label">
-                            
-                            Garantia
-                        </label>
-                        <input class="form-control form-control-sm"
-                            [(ngModel)]="inversor.garantiaDefeito"
-                            id="garantia">
-                    </div>
-        
-                    <div class="mb-3 col-sm-12 col-lg-6">
-                        <label for="monitoramento" 
-                            class="form-label">
-                            
-                            Monitoramento
-                        </label>
-                    
-                        <select class="form-select form-select-sm" 
-                            aria-label="Default select example"
-                            [(ngModel)]="inversor.monitoramento">                    
+                    <mat-form-field class="mb-3 col-sm-12 col-lg-6">
+                        <mat-label>Monitoramento</mat-label>
+                        <select matNativeControl 
+                            [(ngModel)] = "inversor.monitoramento">
                             <ng-container *ngFor="let monitor of monitoramentos">
                                 <option [value]="monitor">{{monitor}}</option>
-                            </ng-container>
-                        </select>    
-                    </div>
+                            </ng-container>              
+                        </select>
+                    </mat-form-field>
         
-                    <div class="mb-3 col-sm-12 col-lg-6">
-                        <label for="modelo" 
-                            class="form-label">
-                            
-                            Modelo
-                        </label>
-                        <input class="form-control form-control-sm"
-                            [(ngModel)]="inversor.modelo"
-                            id="modelo">
-                    </div>
+                    <mat-form-field class="mb-3 col-sm-12 col-lg-6">
+                        <mat-label>Modelo</mat-label>
+                        <input matInput [(ngModel)]="inversor.modelo">
+                    </mat-form-field>
                 </div>        
                 <mat-divider></mat-divider>
         
@@ -108,8 +81,7 @@
 
                             Limpar
                         </button>                
-                    </div>                    
-                    
+                    </div>
 
                     <div class="col-6">
                         <button mat-raised-button 
