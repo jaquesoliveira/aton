@@ -4,6 +4,8 @@ import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model'
 import { Estados } from 'src/app/libs/estados';
 import { Estado } from 'src/app/libs/estado';
 import { GurpoBServiceService } from 'src/app/services/gurpo-b-service.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SelecionarClienteComponent } from './selecionar-cliente/selecionar-cliente.component';
 
 @Component({
   selector: 'app-proposta-form',
@@ -29,6 +31,10 @@ export class PropostaFormComponent implements OnInit{
   municipioSelecionado = ''
   concessionariaSelecionada = ''
 
+  
+  tituloConfirmDialog = '';
+  private dialog: MatDialog;
+
   constructor(public service: GurpoBServiceService){
 
   }
@@ -48,6 +54,21 @@ export class PropostaFormComponent implements OnInit{
   getEstados(){
     let est = new Estados();
     this.estadosList = est.getEstados();
+  }
+  
+  teste(){
+    const dialogRef = this.selecionarClienteDialog("Deseja continuar?")
+  }
+
+  selecionarClienteDialog(msg: string){
+    this.tituloConfirmDialog = msg;
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {tituloDialog: this.tituloConfirmDialog};
+
+    return this.dialog.open(SelecionarClienteComponent, dialogConfig);
   }
 
 }
