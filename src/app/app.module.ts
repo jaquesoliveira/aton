@@ -49,6 +49,7 @@ import { PropostaFormComponent } from './pages/propostas/proposta-form/proposta-
 import { BarraDeTituloComponent } from './commons/barra-de-titulo/barra-de-titulo.component';
 import { ClienteInfoExpansionPanelComponent } from './commons/cliente-info-expansion-panel/cliente-info-expansion-panel.component';
 import { SelecionarClienteComponent } from './pages/propostas/proposta-form/selecionar-cliente/selecionar-cliente.component';
+import { PropostaViewComponent } from './pages/propostas/proposta-view/proposta-view.component';
 
 registerLocaleData(ptBr);
 
@@ -78,7 +79,8 @@ registerLocaleData(ptBr);
     PropostaFormComponent,
     BarraDeTituloComponent,
     ClienteInfoExpansionPanelComponent,
-    SelecionarClienteComponent
+    SelecionarClienteComponent,
+    PropostaViewComponent
   ],
   imports: [
     BrowserModule,

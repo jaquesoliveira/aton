@@ -1,19 +1,68 @@
-<div class="d-flex justify-content-start" 
-    style="display: flex; align-items: center;">
-    <img class="ms-2" 
-        style="width: 50px; height: 50px;" 
-        src="assets/images/confirm.png" alt="">
-    <h1 mat-dialog-title>Selecionar Cliente</h1>
-</div>
-<mat-divider></mat-divider>
+<div style="min-height: 650px;">
+    <div class="d-flex justify-content-start" 
+        style="display: flex; align-items: center;">
+        <img class="ms-2" 
+            style="width: 50px; height: 50px;" 
+            src="assets/images/confirm.png" alt="">
+        <h1 mat-dialog-title>Selecionar Cliente</h1>
+    </div>
+    <mat-divider></mat-divider>
 
-<div mat-dialog-actions
-    class="d-flex justify-content-end">
-    <button mat-raised-button  
-        color="primary"       
-        (click)="onConfirm()" 
-        cdkFocusInitial>
+    <div class="d-flex justify-content-center">
+        <div style="width: 900px; max-width: 900px;">
+            <div class="card mb-1">
 
-        OK
-    </button>
+                <div class="card-body"> 
+
+                    <div class="row mt-1">
+                        <mat-form-field class="mb-3 col-12">    
+                            <mat-label>Nome</mat-label>
+                            <input matInput 
+                                (keyup)="applyFilter($event)" 
+                                [value]="filtro"
+                                >
+                        </mat-form-field>
+                    </div>
+
+
+                    <div style="min-height: 350px;">
+                        <mat-table [dataSource]="dataSource" 
+                            class="table table-striped">
+                        
+                            <ng-container matColumnDef="cliente">
+                                <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
+                                <mat-cell *matCellDef="let element"
+                                    (click)="onRowClicked(element)"> 
+                                    {{element.nome}} 
+                                </mat-cell>
+                            </ng-container>
+                        
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                    </div>
+                    
+                    
+                    <mat-divider></mat-divider>
+                    <mat-paginator class="mt-3" showFirstLastButtons
+                        [pageSize]="pageSize"
+                        [length]="totalPagina"
+                        [pageSizeOptions]="pageOptions">
+                    </mat-paginator>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div mat-dialog-actions
+        class="d-flex justify-content-end">
+        <button mat-raised-button  
+            color="primary"       
+            (click)="onConfirm()" 
+            cdkFocusInitial>
+
+            Cancelar
+        </button>
+    </div>
 </div>

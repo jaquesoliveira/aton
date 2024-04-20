@@ -1,7 +1,7 @@
 export interface ClientePessoaFisica{
     id: number;
     nome: string;
-    cpf: number;
+    cpfCnpj: number;
     rg: number;
     telefone: number;
     email: string;

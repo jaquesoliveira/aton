@@ -18,6 +18,7 @@ import { ClientePessoaFisicaFormComponent } from './pages/cadastros/clientes/cli
 import { SimulacoesComponent } from './pages/simulacoes/simulacoes.component';
 import { PropostaFormComponent } from './pages/propostas/proposta-form/proposta-form.component';
 import { PropostaListComponent } from './pages/propostas/proposta-list/proposta-list.component';
+import { PropostaViewComponent } from './pages/propostas/proposta-view/proposta-view.component';
 
 const routes: Routes = [
   {
@@ -98,6 +99,11 @@ const routes: Routes = [
   {
     path:'propostas/proposta-list',
     component: PropostaListComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'propostas/proposta-view',
+    component: PropostaViewComponent,
     pathMatch: 'full'
   },
   {

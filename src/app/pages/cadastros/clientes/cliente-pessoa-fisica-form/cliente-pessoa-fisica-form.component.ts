@@ -33,7 +33,7 @@ export class ClientePessoaFisicaFormComponent {
       if(pf.id){
         this.clientePessoaFisica.id = pf.id
         this.clientePessoaFisica.nome = pf.nome
-        this.clientePessoaFisica.cpf = pf.cpf
+        this.clientePessoaFisica.cpfCnpj = pf.cpf
         this.clientePessoaFisica.rg = pf.rg
         this.clientePessoaFisica.telefone = pf.telefone
         this.clientePessoaFisica.email = pf.email

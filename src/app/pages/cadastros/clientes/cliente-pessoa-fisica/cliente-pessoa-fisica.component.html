@@ -96,7 +96,7 @@
                 <mat-divider></mat-divider>
                 <div class="row" style="height: 70px; padding-top: 5px; padding-bottom: 15px;">
                     <div class="col-lg-4 col-sm-3 col-xs-12">
-                        <small>Monitoramento: </small>{{inv.cpf}}
+                        <small>Monitoramento: </small>{{inv.cpfCnpj}}
                     </div>
                     <div class="col-lg-4 col-sm-3 col-xs-12">
                         <small>Modelo: </small>{{inv.rg}}
@@ -181,7 +181,7 @@
                     CPF
                 </label>
                 <input class="form-control form-control-sm" 
-                    [(ngModel)]="filtros.cpf"
+                    [(ngModel)]="filtros.cpfCnpj"
                     id="potencia">
             </div>
 

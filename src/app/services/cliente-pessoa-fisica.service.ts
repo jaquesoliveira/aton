@@ -17,23 +17,23 @@ export class ClientePessoaFisicaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  listar(){    
-    return this.httpClient.get<ClientePessoaFisica[]>(this.url.concat(`/cliente-pessoa-fisica`))
+  listar(){
+    return this.httpClient.get<ClientePessoaFisica[]>(this.url.concat(`/cliente`))
     .pipe(catchError(this.handlerError))
   }
 
   pesquisar(parametros: ClientePessoaFisica){
-    return this.httpClient.post<ClientePessoaFisica[]>(this.url.concat(`/cliente-pessoa-fisica/consultar`), JSON.stringify(parametros), this.httpOptions)
+    return this.httpClient.post<ClientePessoaFisica[]>(this.url.concat(`/cliente/consultar`), JSON.stringify(parametros), this.httpOptions)
     .pipe(catchError(this.handlerError))
   }
 
   salvar(clientePessoaFisica: ClientePessoaFisica){
-    return this.httpClient.post<any>(this.url.concat(`/cliente-pessoa-fisica/salvar`), JSON.stringify(clientePessoaFisica), this.httpOptions)
+    return this.httpClient.post<any>(this.url.concat(`/cliente/salvar`), JSON.stringify(clientePessoaFisica), this.httpOptions)
     .pipe(catchError(this.handlerError))
   }
 
   excluir(id: number){
-    return this.httpClient.delete<any>(this.url.concat(`/cliente-pessoa-fisica/${id}`))
+    return this.httpClient.delete<any>(this.url.concat(`/cliente/${id}`))
     .pipe(catchError(this.handlerError))
   }
 

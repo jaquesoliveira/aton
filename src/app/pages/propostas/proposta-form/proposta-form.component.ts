@@ -33,9 +33,12 @@ export class PropostaFormComponent implements OnInit{
 
   
   tituloConfirmDialog = '';
-  private dialog: MatDialog;
+  
 
-  constructor(public service: GurpoBServiceService){
+  constructor(
+    public service: GurpoBServiceService,
+    private dialog: MatDialog
+  ){
 
   }
 
@@ -57,18 +60,24 @@ export class PropostaFormComponent implements OnInit{
   }
   
   teste(){
-    const dialogRef = this.selecionarClienteDialog("Deseja continuar?")
+    
   }
 
-  selecionarClienteDialog(msg: string){
-    this.tituloConfirmDialog = msg;
+  selecionarClienteDialog(){
+    //this.tituloConfirmDialog = msg;
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {tituloDialog: this.tituloConfirmDialog};
 
-    return this.dialog.open(SelecionarClienteComponent, dialogConfig);
+    //dialogConfig.data = {tituloDialog: this.tituloConfirmDialog};
+
+    const dialogRef = this.dialog.open(SelecionarClienteComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(data => {
+      console.log(data)
+      this.cliente = data
+    })    
   }
-
 }
