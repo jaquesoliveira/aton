@@ -16,7 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTableModule} from '@angular/material/table';
 import { DimensionamentoBateriaComponent } from './pages/dimensionamento-bateria/dimensionamento-bateria.component';
@@ -50,6 +50,11 @@ import { BarraDeTituloComponent } from './commons/barra-de-titulo/barra-de-titul
 import { ClienteInfoExpansionPanelComponent } from './commons/cliente-info-expansion-panel/cliente-info-expansion-panel.component';
 import { SelecionarClienteComponent } from './pages/propostas/proposta-form/selecionar-cliente/selecionar-cliente.component';
 import { PropostaViewComponent } from './pages/propostas/proposta-view/proposta-view.component';
+import { EnquadramentoTarifarioComponent } from './pages/simulacoes/enquadramento-tarifario/enquadramento-tarifario.component';
+import { DetalhesMesComponent } from './pages/simulacoes/components/detalhes-mes/detalhes-mes.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatCardModule} from '@angular/material/card';
 
 registerLocaleData(ptBr);
 
@@ -80,7 +85,9 @@ registerLocaleData(ptBr);
     BarraDeTituloComponent,
     ClienteInfoExpansionPanelComponent,
     SelecionarClienteComponent,
-    PropostaViewComponent
+    PropostaViewComponent,
+    EnquadramentoTarifarioComponent,
+    DetalhesMesComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +110,10 @@ registerLocaleData(ptBr);
     MatDialogModule,
     MatPaginatorModule,
     MatExpansionModule,
+    MatSlideToggleModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    MatCardModule
   ],
   providers: [
     {

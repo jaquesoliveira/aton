@@ -19,6 +19,7 @@ import { SimulacoesComponent } from './pages/simulacoes/simulacoes.component';
 import { PropostaFormComponent } from './pages/propostas/proposta-form/proposta-form.component';
 import { PropostaListComponent } from './pages/propostas/proposta-list/proposta-list.component';
 import { PropostaViewComponent } from './pages/propostas/proposta-view/proposta-view.component';
+import { EnquadramentoTarifarioComponent } from './pages/simulacoes/enquadramento-tarifario/enquadramento-tarifario.component';
 
 const routes: Routes = [
   {
@@ -109,6 +110,11 @@ const routes: Routes = [
   {
     path:'simulacoes',
     component: SimulacoesComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'simulacoes/enquadramento-tarifario',
+    component: EnquadramentoTarifarioComponent,
     pathMatch: 'full'
   },
   {

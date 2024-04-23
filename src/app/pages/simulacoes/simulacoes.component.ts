@@ -7,5 +7,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './simulacoes.component.css'
 })
 export class SimulacoesComponent {
-
+  showSpinner = false;
 }

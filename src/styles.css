@@ -72,3 +72,17 @@ textarea{
 li {
     list-style-type: none;
 }
+
+
+.mat-toolbar.mat-primary{
+    /* --mat-toolbar-container-background-color:#006400; */
+}
+
+.mat-primary {
+    /* background-color:#ccc; */
+}
+
+.my-link{
+    text-decoration: none;
+    color: #000;
+}
