@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { GurpoBServiceService } from 'src/app/services/gurpo-b-service.service';
+import { Estado } from 'src/app/libs/estado';
+import { Estados } from 'src/app/libs/estados';
+import { TarifasGrupoAService } from 'src/app/services/tarifas-grupo-a.service';
+import { Concessionaria } from 'src/app/libs/concessionaria';
+import { TarifaGrupoAModel } from 'src/app/models/tarifa-grupo-a.model';
 
 @Component({
   selector: 'app-enquadramento-tarifario',
@@ -31,32 +37,32 @@ export class EnquadramentoTarifarioComponent implements OnInit{
   descricaoSelecionada ='';
   descricaoList = [];
 
-  // demandaSelecionada ='';
-  // demandaList = [];
-
-  // consumoSelecionado =''
-  // consumoList = [];
-
   tipo = ''
 
-  janeiro = 0
-  fevereiro = 0
-  marco = 0
-  abril = 0
-  maio = 0
-  junho = 0
-  julho = 0
-  agosto = 0
-  setembro = 0
-  outubro = 0
-  novembro = 0
-  dezembro = 0
+  consumoMedioMensalChecked = false;
+  estadosSelecionado = '';
+  concessionariaSelecionada: number
+  concessionariaList: Concessionaria[] = []
+  estadosList: Estado[] = []
+  dasabilitarConcecionnaria = true;
 
-  consumoMedioMensalChecked = false
+  tarifaGrupoAModelList: TarifaGrupoAModel[] = []
+  subgrupoSelecionado = '';
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private _formBuilder: FormBuilder,
+    private serviceConcessionaria: GurpoBServiceService,
+    private tarifasGrupoAService: TarifasGrupoAService
+  ) {}
 
-  ngOnInit(){ }
+  ngOnInit(){ 
+    this.getEstados();
+  }
+
+  getEstados(){
+    let est = new Estados();
+    this.estadosList = est.getEstados();
+  }
+
 
   preencherDescricao(){
     if(this.tipo === 'demanda'){
@@ -114,70 +120,27 @@ export class EnquadramentoTarifarioComponent implements OnInit{
 
   calcular() {
 
-    let total = 0;
-
-    for(let mes=0; mes<12; mes++) {
-      this.consumoMensal[mes] = this.tarifa * this.getValorMes(mes);
-      total += this.consumoMensal[mes];
-    }
-
-    this.total = total
-    console.log(total);
-    console.log(this.consumoMensal);
   }
 
-  private getValorMes(mes): number {
-    if(mes === 0 ){
-      this.mes = 'Janeiro'
-      return this.janeiro
-    }
+  buscarConcessionaria(){
+    this.dasabilitarConcecionnaria = false;
+    this.serviceConcessionaria.consultar(this.estadosSelecionado).subscribe({
+        next: (data) => {
+            this.concessionariaList = data
+        }
+    })
+  }
 
-    if(mes === 1 ){
-      this.mes = 'Fevereiro'
-      return this.fevereiro
-    }
-
-    if(mes === 2 ){
-      this.mes = 'Março'
-      return this.marco
-    }
-
-    if(mes === 3 ){
-      return this.abril
-    }
-
-    if(mes === 4 ){
-      return this.maio
-    }
-
-    if(mes === 5 ){
-      return this.junho
-    }
-
-    if(mes === 6 ){
-      return this.julho
-    }
-
-    if(mes === 7 ){
-      return this.agosto
-    }
-
-    if(mes === 8 ){
-      return this.setembro
-    }
-
-    if(mes === 9 ){
-      return this.outubro
-    }
-
-    if(mes === 10 ){
-      return this.novembro
-    }
-
-    if(mes === 11 ){
-      return this.dezembro
-    }
-
-    return null
+  carregarTarifas(){
+    
+    this.tarifasGrupoAService.consultarTarifasGrupoA(this.concessionariaSelecionada).subscribe({
+      next: (data) => {
+          console.log(data)
+          //this.tarifaGrupoAModelList = JSON.stringify(data);
+      }, 
+      error: (erro) => {
+        console.log(erro)
+      }
+    })
   }
 }

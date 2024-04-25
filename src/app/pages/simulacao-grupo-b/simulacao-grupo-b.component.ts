@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import Chart from 'chart.js/auto';
 import { ParametrosAneelResumidaDto } from 'src/app/dto/parametrosAneelResumidaDto';
+import { Concessionaria } from 'src/app/libs/concessionaria';
 import { Estado } from 'src/app/libs/estado';
 import { Estados } from 'src/app/libs/estados';
 import { GrupoB } from 'src/app/libs/grupo-b';
@@ -90,7 +91,7 @@ export class SimulacaoGrupoBComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   estadosList: Estado[] = []
 
-  concessionariaList: Estado[] = []
+  concessionariaList: Concessionaria[] = []
   //estadosSelecionado = {} as Estado;
   estadosSelecionado = '';
   concessionariaSelecionada = ''

@@ -4,6 +4,7 @@ import { enviroment } from '../enviroment/enviroment';
 import { catchError, throwError } from 'rxjs';
 import { Estado } from '../libs/estado';
 import { ParametrosAneelResumidaDto } from '../dto/parametrosAneelResumidaDto';
+import { Concessionaria } from '../libs/concessionaria';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class GurpoBServiceService {
 
   consultar(nomeEstado: string){
     console.log(nomeEstado)
-    return this.httpClient.get<Estado[]>(this.url.concat(`/concessionaria/${nomeEstado}`))
+    return this.httpClient.get<Concessionaria[]>(this.url.concat(`/concessionaria/${nomeEstado}`))
     .pipe(catchError(this.handlerError))
   }
 
