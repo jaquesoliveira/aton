@@ -56,6 +56,9 @@ export class EnquadramentoTarifarioComponent implements OnInit{
   filtros = {} as TaAplicacaoFiltrosDTO
   response = {} as TaAplicacaoResponseDto
 
+  qtdConsumidaPonta = 0
+  qtdConsumidaForaPonta = 0
+
   constructor(private _formBuilder: FormBuilder,
     private serviceConcessionaria: GurpoBServiceService,
     private tarifasGrupoAService: TarifasGrupoAService,
@@ -77,6 +80,8 @@ export class EnquadramentoTarifarioComponent implements OnInit{
     this.response.foraPontaVerdeTarifa = {} as TaAplicacaoDto
     this.response.pontaVerdeTarifa = {} as TaAplicacaoDto
     
+
+
     this.response.foraPontaAzulDemanda.valorTarifa = 0
     this.response.foraPontaAzulDemanda.totalTe = 0
     this.response.foraPontaAzulDemanda.totalTusd = 0
@@ -94,6 +99,7 @@ export class EnquadramentoTarifarioComponent implements OnInit{
     this.response.pontaAzulTarifa.valorTarifa = 0
     this.response.pontaAzulTarifa.totalTe = 0
     this.response.pontaAzulTarifa.totalTusd = 0
+
 
     this.response.pontaVerdeDemanda.valorTarifa = 0
     this.response.pontaVerdeDemanda.totalTe = 0

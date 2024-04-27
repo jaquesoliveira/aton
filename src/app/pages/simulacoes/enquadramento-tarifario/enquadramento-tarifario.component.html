@@ -113,14 +113,14 @@
                             <mat-form-field class="col-lg-4 col-sm-12 col-12">
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="1.520,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field class="col-lg-4 col-sm-12 col-12 ms-2">
                                 <mat-label>Ultrapassagem</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
                         </mat-card-content>
@@ -139,7 +139,7 @@
                             <mat-form-field class="col-lg-12 col-sm-12 col-12">    
                                 <mat-label>Único</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
                         </mat-card-content>
@@ -220,28 +220,28 @@
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12">    
                                 <mat-label>Ponta</mat-label>
                                 <input matInput 
-                                [value]="response.pontaAzulTarifa.valorTarifa"
+                                    [value]="response.pontaAzulTarifa.valorTarifa"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Bandeira Tarifa</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    [value]="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Fora Ponta</mat-label>
                                 <input matInput 
-                                    
+                                    [value]="response.foraPontaAzulTarifa.valorTarifa"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Fora P. Bandeira</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    [value]="0"
                                     readonly>
                             </mat-form-field>
                         </mat-card-content>
@@ -279,14 +279,14 @@
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12">    
                                 <mat-label>Fora Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Ultrap. F. Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
@@ -321,28 +321,28 @@
                             <mat-form-field class="col-lg-2 col-sm-12 col-12">
                                 <mat-label>Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Ponta Bandeira</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">
                                 <mat-label>Fora Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">
                                 <mat-label>F. Ponta Bandeira</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
                         </mat-card-content>
@@ -379,7 +379,7 @@
                             <mat-form-field >    
                                 <mat-label>Único</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
                         </mat-card-content>
@@ -432,14 +432,14 @@
                             <mat-form-field class="col-lg-4 col-sm-12 col-12">
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="1.520,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field class="col-lg-4 col-sm-12 col-12 ms-2">
                                 <mat-label>Ultrapassagem</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
                         </mat-card-content>
@@ -458,7 +458,7 @@
                             <mat-form-field class="col-lg-12 col-sm-12 col-12">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="15,20">
+                                    value="0">
                             </mat-form-field>
                         </mat-card-content>
                     </mat-card>
@@ -518,40 +518,40 @@
                     <mat-card>
                         <mat-card-header class="mb-2">
                             <mat-card-subtitle>
-                                Demanda
+                                Quantidade Consumida(Demanda)
                             </mat-card-subtitle>
                         </mat-card-header>
 
                         <mat-card-content>
                             <mat-form-field class="col-lg-2 col-sm-12 col-12">    
-                                <mat-label>Única</mat-label>
-                                <input matInput 
-                                    value="126.115,20"
-                                    readonly>
-                                <mat-hint>R$</mat-hint>
+                                <mat-label>Ponta</mat-label>
+                                <input matInput
+                                    [(ngModel)]="qtdConsumidaPonta">
+                                <mat-hint>
+                                    {{qtdConsumidaPonta * response.pontaAzulDemanda.valorTarifa | currency}}
+                                </mat-hint>
                             </mat-form-field>
 
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">
-                                <mat-label>Ultrapassagem</mat-label>
+                                <mat-label>Fora Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
-                                    readonly>
+                                [(ngModel)]="qtdConsumidaForaPonta">
+                                <mat-hint style="font-size: 13px !important; ">
+                                    {{qtdConsumidaForaPonta * response.foraPontaAzulDemanda.valorTarifa | currency}}
+                                </mat-hint>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">    
+                                <mat-label>Ultrap. Ponta</mat-label>
+                                <input matInput 
+                                    value="0">
                                 <mat-hint>R$</mat-hint>
                             </mat-form-field>
 
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">    
-                                <mat-label>Única</mat-label>
+                                <mat-label>Ultrap. F. Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
-                                    readonly>
-                                <mat-hint>R$</mat-hint>
-                            </mat-form-field>
-
-                            <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">    
-                                <mat-label>Ultrapassagem</mat-label>
-                                <input matInput 
-                                    value="15,20"
-                                    readonly>
+                                    value="0">
                             </mat-form-field>
                         </mat-card-content>
                     </mat-card>
@@ -571,28 +571,28 @@
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
                         </mat-card-content>
@@ -620,7 +620,7 @@
                                         </div>
                                         
                                         <span class="ms-2" style="color: #777; font-weight: 500;">
-                                            {{total | currency}}
+                                            {{ (qtdConsumidaForaPonta * response.foraPontaAzulDemanda.valorTarifa) + (qtdConsumidaPonta * response.pontaAzulDemanda.valorTarifa) | currency}}
                                         </span>
                                     </div>
                                 </div>
@@ -660,7 +660,7 @@
                             <mat-form-field class="col-lg-2 col-sm-12 col-12">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="126.115,20"
+                                    value="0"
                                     readonly>
                                 <mat-hint>R$</mat-hint>
                             </mat-form-field>
@@ -668,7 +668,7 @@
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">
                                 <mat-label>Ultrapassagem</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                                 <mat-hint>R$</mat-hint>
                             </mat-form-field>
@@ -676,7 +676,7 @@
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                                 <mat-hint>R$</mat-hint>
                             </mat-form-field>
@@ -684,7 +684,7 @@
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Ultrapassagem</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
                         </mat-card-content>
@@ -705,28 +705,28 @@
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
 
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Única</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    value="0"
                                     readonly>
                             </mat-form-field>
                         </mat-card-content>
