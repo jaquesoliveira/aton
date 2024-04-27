@@ -7,6 +7,10 @@ import { Estados } from 'src/app/libs/estados';
 import { TarifasGrupoAService } from 'src/app/services/tarifas-grupo-a.service';
 import { Concessionaria } from 'src/app/libs/concessionaria';
 import { TarifaGrupoAModel } from 'src/app/models/tarifa-grupo-a.model';
+import { TaAplicacaoService } from 'src/app/services/ta-aplicacao.service';
+import { TaAplicacaoFiltrosDTO } from '../../../dto/taAplicacaoFiltrosDto';
+import { TaAplicacaoResponseDto } from 'src/app/dto/taAplicacaoResponseDto';
+import { TaAplicacaoDto } from 'src/app/dto/taAplicacaoDto';
 
 @Component({
   selector: 'app-enquadramento-tarifario',
@@ -48,14 +52,56 @@ export class EnquadramentoTarifarioComponent implements OnInit{
 
   tarifaGrupoAModelList: TarifaGrupoAModel[] = []
   subgrupoSelecionado = '';
+  ano: number
+  filtros = {} as TaAplicacaoFiltrosDTO
+  response = {} as TaAplicacaoResponseDto
 
   constructor(private _formBuilder: FormBuilder,
     private serviceConcessionaria: GurpoBServiceService,
-    private tarifasGrupoAService: TarifasGrupoAService
+    private tarifasGrupoAService: TarifasGrupoAService,
+    private service: TaAplicacaoService
   ) {}
 
   ngOnInit(){ 
     this.getEstados();
+
+    this.response.foraPontaAzulDemanda = {} as TaAplicacaoDto
+    this.response.pontaAzulDemanda = {} as TaAplicacaoDto
+
+    this.response.foraPontaAzulTarifa = {} as TaAplicacaoDto
+    this.response.pontaAzulTarifa = {} as TaAplicacaoDto
+
+    this.response.foraPontaVerdeDemanda = {} as TaAplicacaoDto
+    this.response.pontaVerdeDemanda = {} as TaAplicacaoDto
+
+    this.response.foraPontaVerdeTarifa = {} as TaAplicacaoDto
+    this.response.pontaVerdeTarifa = {} as TaAplicacaoDto
+    
+    this.response.foraPontaAzulDemanda.valorTarifa = 0
+    this.response.foraPontaAzulDemanda.totalTe = 0
+    this.response.foraPontaAzulDemanda.totalTusd = 0
+
+    this.response.pontaAzulDemanda.valorTarifa = 0
+    this.response.pontaAzulDemanda.totalTe = 0
+    this.response.pontaAzulDemanda.totalTusd = 0
+
+
+
+    this.response.foraPontaAzulTarifa.valorTarifa = 0
+    this.response.foraPontaAzulTarifa.totalTe = 0
+    this.response.foraPontaAzulTarifa.totalTusd = 0
+
+    this.response.pontaAzulTarifa.valorTarifa = 0
+    this.response.pontaAzulTarifa.totalTe = 0
+    this.response.pontaAzulTarifa.totalTusd = 0
+
+    this.response.pontaVerdeDemanda.valorTarifa = 0
+    this.response.pontaVerdeDemanda.totalTe = 0
+    this.response.pontaVerdeDemanda.totalTusd = 0
+
+    this.response.foraPontaVerdeDemanda.valorTarifa = 0
+    this.response.foraPontaVerdeDemanda.totalTe = 0
+    this.response.foraPontaVerdeDemanda.totalTusd = 0
   }
 
   getEstados(){
@@ -114,14 +160,6 @@ export class EnquadramentoTarifarioComponent implements OnInit{
     }
   }
 
-  selecionarConcecionaria() {
-
-  }
-
-  calcular() {
-
-  }
-
   buscarConcessionaria(){
     this.dasabilitarConcecionnaria = false;
     this.serviceConcessionaria.consultar(this.estadosSelecionado).subscribe({
@@ -131,12 +169,12 @@ export class EnquadramentoTarifarioComponent implements OnInit{
     })
   }
 
-  carregarTarifas(){
+  consultar(){
     
-    this.tarifasGrupoAService.consultarTarifasGrupoA(this.concessionariaSelecionada).subscribe({
+    this.service.consultar(this.filtros).subscribe({
       next: (data) => {
           console.log(data)
-          //this.tarifaGrupoAModelList = JSON.stringify(data);
+          this.response = data;
       }, 
       error: (erro) => {
         console.log(erro)

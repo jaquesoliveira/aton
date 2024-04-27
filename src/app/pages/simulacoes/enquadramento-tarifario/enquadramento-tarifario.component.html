@@ -10,7 +10,7 @@
             <mat-form-field class="col-lg-3 col-sm-12 col-12">
                 <mat-label>Sub Grupo</mat-label>
                 <select matNativeControl 
-                    [(ngModel)]="subgrupoSelecionado" 
+                    [(ngModel)]="filtros.subgrupo" 
                     name="subgrupo" required>
                     <option label="-- Selecione --"></option>
                     <option value="A3">A3</option>
@@ -36,8 +36,7 @@
             <mat-form-field class="col-lg-3 col-sm-12 col-12">    
                 <mat-label>Concessionária</mat-label>
                 <select matNativeControl
-                    [(ngModel)]="concessionariaSelecionada"
-                    (change)="carregarTarifas()"
+                    [(ngModel)]="filtros.concessionaria"
                     name="modalidadeTarifaria"
                     [disabled]="dasabilitarConcecionnaria"
                     required>
@@ -53,6 +52,7 @@
                 <mat-form-field >    
                     <mat-label>Ano</mat-label>
                     <input matInput 
+                        [(ngModel)]="filtros.ano"
                         maxlength="4" 
                         required="">
                 </mat-form-field>
@@ -69,7 +69,10 @@
                 Limpar
             </button>
 
-            <button mat-raised-button color="primary">
+            <button mat-raised-button 
+                color="primary"
+                (click)="consultar()">
+
                 Consultar
             </button>
         </div>
@@ -172,7 +175,7 @@
                             <mat-form-field class="col-lg-2 col-sm-12 col-12">    
                                 <mat-label>Ponta</mat-label>
                                 <input matInput 
-                                    value="126.115,20"
+                                    [value]="response.pontaAzulDemanda.valorTarifa"
                                     readonly>
                                 <mat-hint>R$</mat-hint>
                             </mat-form-field>
@@ -180,7 +183,7 @@
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">
                                 <mat-label>Fora Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    [value]="response.foraPontaAzulDemanda.valorTarifa"
                                     readonly>
                                 <mat-hint>R$</mat-hint>
                             </mat-form-field>
@@ -188,7 +191,7 @@
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Ultrap. Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    [value]="response.pontaAzulDemanda.valorTarifa * 2"
                                     readonly>
                                 <mat-hint>R$</mat-hint>
                             </mat-form-field>
@@ -196,7 +199,7 @@
                             <mat-form-field class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Ultrap. F. Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    [value]="response.foraPontaAzulDemanda.valorTarifa * 2"
                                     readonly>
                             </mat-form-field>
                         </mat-card-content>
@@ -217,7 +220,7 @@
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12">    
                                 <mat-label>Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                [value]="response.pontaAzulTarifa.valorTarifa"
                                     readonly>
                             </mat-form-field>
 
@@ -231,7 +234,7 @@
                             <mat-form-field  class="col-lg-2 col-sm-12 col-12 ms-1">    
                                 <mat-label>Fora Ponta</mat-label>
                                 <input matInput 
-                                    value="15,20"
+                                    
                                     readonly>
                             </mat-form-field>
 
