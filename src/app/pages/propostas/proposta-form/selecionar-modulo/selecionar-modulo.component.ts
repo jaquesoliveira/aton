@@ -1,24 +1,25 @@
-import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ClientePessoaFisicaService } from 'src/app/services/cliente-pessoa-fisica.service';
-import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model';
+import { MatPaginator } from '@angular/material/paginator';
+import { ModuloFotovoltaico } from 'src/app/models/modulo-fotovoltaico.model';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ClientePessoaFisicaService } from 'src/app/services/cliente-pessoa-fisica.service';
+import { ModuloFotovoltaicoService } from 'src/app/services/modulo-fotovoltaico.service';
 
 @Component({
-  selector: 'app-selecionar-cliente',
-  templateUrl: './selecionar-cliente.component.html',
-  styleUrl: './selecionar-cliente.component.css'
+  selector: 'app-selecionar-modulo',
+  templateUrl: './selecionar-modulo.component.html',
+  styleUrl: './selecionar-modulo.component.css'
 })
-export class SelecionarClienteComponent implements OnInit, AfterViewInit{
-    
+export class SelecionarModuloComponent {
+ 
   displayedColumns: string[] = ['cliente'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  public dataSource: MatTableDataSource<ClientePessoaFisica>;
-  public selection = new SelectionModel<ClientePessoaFisica>(true, []);
+  public dataSource: MatTableDataSource<ModuloFotovoltaico>;
+  public selection = new SelectionModel<ModuloFotovoltaico>(true, []);
 
   pageOptions: number[] = [3, 10];
   pageSize: 5;
@@ -27,9 +28,9 @@ export class SelecionarClienteComponent implements OnInit, AfterViewInit{
   filtro = ''
 
   constructor(
-    public dialogRef: MatDialogRef<SelecionarClienteComponent>,    
+    public dialogRef: MatDialogRef<SelecionarModuloComponent>,    
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private service: ClientePessoaFisicaService
+    private service: ModuloFotovoltaicoService
   ){}
 
   ngAfterViewInit() {
@@ -44,7 +45,7 @@ export class SelecionarClienteComponent implements OnInit, AfterViewInit{
   listar(){
     this.service.listar().subscribe({
       next: (data) => {
-        this.dataSource = new MatTableDataSource<ClientePessoaFisica> (data);        
+        this.dataSource = new MatTableDataSource<ModuloFotovoltaico> (data);        
         this.dataSource.paginator = this.paginator;
         this.totalPagina = data.length
       },
@@ -68,7 +69,7 @@ export class SelecionarClienteComponent implements OnInit, AfterViewInit{
     this.filtro = filterValue;
   }
 
-  onRowClicked(row: ClientePessoaFisica){
+  onRowClicked(row: ModuloFotovoltaico){
     this.dialogRef.close(row);
   }
 

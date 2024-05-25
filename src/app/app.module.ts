@@ -55,6 +55,7 @@ import { DetalhesMesComponent } from './pages/simulacoes/components/detalhes-mes
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatCardModule} from '@angular/material/card';
+import { SelecionarModuloComponent } from './pages/propostas/proposta-form/selecionar-modulo/selecionar-modulo.component';
 
 registerLocaleData(ptBr);
 
@@ -87,7 +88,8 @@ registerLocaleData(ptBr);
     SelecionarClienteComponent,
     PropostaViewComponent,
     EnquadramentoTarifarioComponent,
-    DetalhesMesComponent
+    DetalhesMesComponent,
+    SelecionarModuloComponent
   ],
   imports: [
     BrowserModule,

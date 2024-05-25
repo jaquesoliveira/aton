@@ -1,0 +1,9 @@
+.my-table{
+    border: #ccc solid 1px !important;
+}
+
+.mat-column-acoes {
+    width: 32px;
+    text-align: center;
+    font-weight: bold;
+}
