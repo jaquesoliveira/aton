@@ -56,6 +56,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatCardModule} from '@angular/material/card';
 import { SelecionarModuloComponent } from './pages/propostas/proposta-form/selecionar-modulo/selecionar-modulo.component';
+import { SelecionarInversorComponent } from './pages/propostas/proposta-form/selecionar-inversor/selecionar-inversor.component';
 
 registerLocaleData(ptBr);
 
@@ -89,7 +90,8 @@ registerLocaleData(ptBr);
     PropostaViewComponent,
     EnquadramentoTarifarioComponent,
     DetalhesMesComponent,
-    SelecionarModuloComponent
+    SelecionarModuloComponent,
+    SelecionarInversorComponent
   ],
   imports: [
     BrowserModule,

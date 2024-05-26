@@ -91,3 +91,7 @@ li {
     text-decoration: none;
     color: #000;
 }
+
+.my-table{
+    border: #ccc solid 1px !important;
+}

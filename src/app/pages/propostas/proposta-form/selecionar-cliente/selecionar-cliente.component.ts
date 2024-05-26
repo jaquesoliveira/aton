@@ -14,13 +14,13 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class SelecionarClienteComponent implements OnInit, AfterViewInit{
     
-  displayedColumns: string[] = ['cliente'];
+  displayedColumns: string[] = ['cliente', 'cpfCnpj', 'telefone'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource: MatTableDataSource<ClientePessoaFisica>;
   public selection = new SelectionModel<ClientePessoaFisica>(true, []);
 
-  pageOptions: number[] = [3, 10];
+  pageOptions: number[] = [5, 10];
   pageSize: 5;
   pageInit = 0;
   totalPagina: number;

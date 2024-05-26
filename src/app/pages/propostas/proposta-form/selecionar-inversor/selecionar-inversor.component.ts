@@ -1,36 +1,36 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { InversorDto } from 'src/app/models/inversor-dto';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { ModuloFotovoltaico } from 'src/app/models/modulo-fotovoltaico.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ClientePessoaFisicaService } from 'src/app/services/cliente-pessoa-fisica.service';
-import { ModuloFotovoltaicoService } from 'src/app/services/modulo-fotovoltaico.service';
+import { InversorService } from 'src/app/services/inversor.service';
 
 @Component({
-  selector: 'app-selecionar-modulo',
-  templateUrl: './selecionar-modulo.component.html',
-  styleUrl: './selecionar-modulo.component.css'
+  selector: 'app-selecionar-inversor',
+  templateUrl: './selecionar-inversor.component.html',
+  styleUrl: './selecionar-inversor.component.css'
 })
-export class SelecionarModuloComponent {
- 
+export class SelecionarInversorComponent {
+
+
   displayedColumns: string[] = ['codigo', 'fabricante', 'potencia'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  public dataSource: MatTableDataSource<ModuloFotovoltaico>;
-  public selection = new SelectionModel<ModuloFotovoltaico>(true, []);
+  public dataSource: MatTableDataSource<InversorDto>;
+  public selection = new SelectionModel<InversorDto>(true, []);
 
-  pageOptions: number[] = [3, 10];
+  pageOptions: number[] = [5, 10];
   pageSize: 5;
   pageInit = 0;
   totalPagina: number;
   filtro = ''
 
   constructor(
-    public dialogRef: MatDialogRef<SelecionarModuloComponent>,    
+    public dialogRef: MatDialogRef<SelecionarInversorComponent>,    
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private service: ModuloFotovoltaicoService
+    private service: InversorService
   ){}
 
   ngAfterViewInit() {
@@ -45,7 +45,7 @@ export class SelecionarModuloComponent {
   listar(){
     this.service.listar().subscribe({
       next: (data) => {
-        this.dataSource = new MatTableDataSource<ModuloFotovoltaico> (data);        
+        this.dataSource = new MatTableDataSource<InversorDto> (data);        
         this.dataSource.paginator = this.paginator;
         this.totalPagina = data.length
       },
@@ -69,8 +69,7 @@ export class SelecionarModuloComponent {
     this.filtro = filterValue;
   }
 
-  onRowClicked(row: ModuloFotovoltaico){
+  onRowClicked(row: InversorDto){
     this.dialogRef.close(row);
   }
-
 }

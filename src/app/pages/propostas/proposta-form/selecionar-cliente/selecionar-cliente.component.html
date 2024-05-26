@@ -9,14 +9,14 @@
     <mat-divider></mat-divider>
 
     <div class="d-flex justify-content-center">
-        <div style="width: 800px; max-width: 800px;">
+        <div style="width: 700px; max-width: 700px;">
             <div class="card mb-1">
 
                 <div class="card-body"> 
 
                     <div class="row">
-                        <mat-form-field class="mb-1 col-12">    
-                            <mat-label>Nome</mat-label>
+                        <mat-form-field class="col-4">
+                            <mat-label>Filtro</mat-label>
                             <input matInput 
                                 (keyup)="applyFilter($event)" 
                                 [value]="filtro"
@@ -25,15 +25,31 @@
                     </div>
 
 
-                    <div style="min-height: 250px;">
+                    <div class="mb-2" style="min-height: 300px;">
                         <mat-table [dataSource]="dataSource" 
-                            class="table table-striped">
+                            class="my-table">
                         
                             <ng-container matColumnDef="cliente">
                                 <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
                                 <mat-cell *matCellDef="let element"
                                     (click)="onRowClicked(element)"> 
                                     {{element.nome}} 
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="cpfCnpj">
+                                <mat-header-cell *matHeaderCellDef> CPF/CNPJ </mat-header-cell>
+                                <mat-cell *matCellDef="let element"
+                                    (click)="onRowClicked(element)"> 
+                                    {{element.cpfCnpj}} 
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="telefone">
+                                <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
+                                <mat-cell *matCellDef="let element"
+                                    (click)="onRowClicked(element)"> 
+                                    {{element.telefone}} 
                                 </mat-cell>
                             </ng-container>
                         
@@ -43,7 +59,7 @@
                     </div>
                     
                     
-                    <mat-divider></mat-divider>
+                    <!-- <mat-divider></mat-divider> -->
                     <mat-paginator class="mt-3" showFirstLastButtons
                         [pageSize]="pageSize"
                         [length]="totalPagina"
