@@ -172,4 +172,16 @@ export class PropostaFormComponent implements OnInit{
       
     })    
   }
+
+  excluirCliente(){
+    this.dataSourceClientes = null
+  }
+
+  excluirModulo(){
+    this.dataSourceModulo = null
+  }
+
+  excluirInversor(){
+    this.dataSourceInversor = null
+  }
 }

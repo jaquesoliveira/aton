@@ -20,7 +20,7 @@ export class SelecionarClienteComponent implements OnInit, AfterViewInit{
   public dataSource: MatTableDataSource<ClientePessoaFisica>;
   public selection = new SelectionModel<ClientePessoaFisica>(true, []);
 
-  pageOptions: number[] = [5, 10];
+  pageOptions: number[] = [4];
   pageSize: 5;
   pageInit = 0;
   totalPagina: number;
