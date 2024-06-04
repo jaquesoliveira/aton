@@ -176,8 +176,6 @@ export class PropostaFormComponent implements OnInit{
   }
 
   gerarGrafico(){
-
-    console.log(this.municipioSelecionado)
     this.calcularIrradiacaoMediaMensal()
 
     let munic = this.municipioSelecionado
@@ -256,26 +254,7 @@ export class PropostaFormComponent implements OnInit{
   }
 
 
-  calcularIrradiacaoMediaMensal(){
-    // let somaIrradiacao = 0
-    // let irradiacaoMedia = 0
-
-    // somaIrradiacao += this.municipioSelecionado.jan
-    // somaIrradiacao += this.municipioSelecionado.feb
-    // somaIrradiacao += this.municipioSelecionado.mar
-    // somaIrradiacao += this.municipioSelecionado.apr
-    // somaIrradiacao += this.municipioSelecionado.may
-    // somaIrradiacao += this.municipioSelecionado.jun
-    // somaIrradiacao += this.municipioSelecionado.jul
-    // somaIrradiacao += this.municipioSelecionado.aug
-    // somaIrradiacao += this.municipioSelecionado.sep
-    // somaIrradiacao += this.municipioSelecionado.oct
-    // somaIrradiacao += this.municipioSelecionado.nov
-    // somaIrradiacao += this.municipioSelecionado.dec
-
-    // irradiacaoMedia = somaIrradiacao / 12
-
-    // this.irradiacaoMedia = parseFloat( parseFloat(irradiacaoMedia.toLocaleString('pt-BR')).toFixed(2))
+  calcularIrradiacaoMediaMensal(){    
     this.irradiacaoMedia = parseFloat( parseFloat(this.municipioSelecionado.annual.toLocaleString('pt-BR')).toFixed(2))    
   }
 }
