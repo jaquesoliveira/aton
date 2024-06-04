@@ -14,37 +14,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { SelecionarInversorComponent } from './selecionar-inversor/selecionar-inversor.component';
 import { InversorDto } from 'src/app/models/inversor-dto';
+import { PropostaService } from 'src/app/services/proposta.service';
+import { IrradiacaoMunicipio } from 'src/app/dto/IrradiacaoMunicipioDto';
+import Chart from 'chart.js/auto';
 
-export interface Modulo {
-  potencia: string;
-  fabricante: string;  
-}
 
-const ELEMENT_DATA: ModuloFotovoltaico[] = [
-  { 
-    id: 1,
-    fabricante: 'leapton',
-    potencia: '590',
-    garantiaDefeito: '',
-    garantiaEficiencia:''
-  },
-
-  // { 
-  //   id: 2,
-  //   fabricante: 'Tsun',
-  //   potencia: '570',
-  //   garantiaDefeito: '',
-  //   garantiaEficiencia:''
-  // },
-
-  // { 
-  //   id: 3,
-  //   fabricante: 'Astroenergy',
-  //   potencia: '555',
-  //   garantiaDefeito: '',
-  //   garantiaEficiencia:''
-  // },
-];
 
 @Component({
   selector: 'app-proposta-form',
@@ -55,15 +29,6 @@ export class PropostaFormComponent implements OnInit{
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  // public dataSourceClientes: MatTableDataSource<ClientePessoaFisica>;
-  // public selection = new SelectionModel<ClientePessoaFisica>;
-
-  // public pageOptions: number[] = [5, 10, 15];
-  // public pageSize = 5;
-  // public totalPages: number;
-
-
 
   cliente = {} as ClientePessoaFisica
   dataSourceClientes: ClientePessoaFisica[] = []
@@ -87,7 +52,7 @@ export class PropostaFormComponent implements OnInit{
   concessionariaList: Estado[] = []
   //estadosSelecionado = {} as Estado;
   estadosSelecionado = '';
-  municipioSelecionado = ''
+  
   concessionariaSelecionada = ''
   producaoMediaMensal: number
   producaoMediaAnual: number
@@ -96,15 +61,25 @@ export class PropostaFormComponent implements OnInit{
   displayedColumns: string[] = ['codigo', 'fabricante', 'potencia', 'acoes'];
   displayedColumnsClientes: string[] = ['codigo', 'nome', 'cpfCnpj', 'telefone', 'acoes'];
     
-  
+  listaIrradiacaoMunicipios: IrradiacaoMunicipio[] = [];
+  municipioSelecionado: IrradiacaoMunicipio
+
+  canvasName: any
+  grafico: any = []
+  dataGrafico: any;
+  optionsGrafico: any
+
   constructor(
-    public service: GurpoBServiceService,
+    public service: PropostaService,
     private dialog: MatDialog
   ){ }
 
   ngOnInit(): void {
+    this.canvasName = Math.random().toString();
     this.cliente.nome = 'Francisco Jaques Morais de Oliveira'
     this.getEstados();
+    // this.gerarOptions();    
+
   }
   
   calcular(){
@@ -166,10 +141,14 @@ export class PropostaFormComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(data => {
       this.inversor = data
-      let inversores: InversorDto[] = []
-      inversores.push(this.inversor)
-      this.dataSourceInversor = inversores
-      
+
+      if(this.inversor.id){
+        console.log(data)
+
+        let inversores: InversorDto[] = []
+        inversores.push(this.inversor)
+        this.dataSourceInversor = inversores
+      }
     })    
   }
 
@@ -183,5 +162,120 @@ export class PropostaFormComponent implements OnInit{
 
   excluirInversor(){
     this.dataSourceInversor = null
+  }
+
+  listarIrradiacaMunicipios(){
+    this.service.consultar(this.estadosSelecionado).subscribe({
+      next: (data) => {
+        this.listaIrradiacaoMunicipios = data        
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  gerarGrafico(){
+
+    console.log(this.municipioSelecionado)
+    this.calcularIrradiacaoMediaMensal()
+
+    let munic = this.municipioSelecionado
+    this.gerarOptions();
+
+    this.dataGrafico = {
+      labels: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun',
+       'jul', 'ago', 'set', 'out', 'nov', 'dez'
+      ],
+      datasets: [
+        {
+          label: 'Irradiação média mensal',
+          fill: false,
+          yAxisID: 'y',
+          tension: 0.4,
+          data: [munic.jan, munic.feb, munic.mar, munic.apr, munic.may, munic.jun, 
+            munic.jul, munic.aug, munic.sep, munic.oct, munic.nov, munic.dec]
+        }         
+      ]
+  };
+
+    if(this.grafico instanceof Chart){
+        this.grafico.destroy();
+        this.grafico = []
+    }
+
+    this.grafico = new Chart(this.canvasName, {
+        type: 'bar',
+        data: this.dataGrafico,
+        options: this.optionsGrafico
+    })
+  }
+
+
+  public gerarOptions(){
+
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+    this.optionsGrafico = {
+      stacked: false,
+      maintainAspectRatio: false,
+      aspectRatio: 0.6,
+      plugins: {
+          legend: {
+              labels: {
+                  color: textColor
+              }
+          }
+      },
+      scales: {
+          x: {
+              ticks: {
+                  color: textColorSecondary
+              },
+              grid: {
+                  color: surfaceBorder
+              }
+          },
+          y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              ticks: {
+                  color: textColorSecondary
+              },
+              grid: {
+                  color: surfaceBorder
+              }
+          }
+          
+      }
+  };
+  }
+
+
+  calcularIrradiacaoMediaMensal(){
+    // let somaIrradiacao = 0
+    // let irradiacaoMedia = 0
+
+    // somaIrradiacao += this.municipioSelecionado.jan
+    // somaIrradiacao += this.municipioSelecionado.feb
+    // somaIrradiacao += this.municipioSelecionado.mar
+    // somaIrradiacao += this.municipioSelecionado.apr
+    // somaIrradiacao += this.municipioSelecionado.may
+    // somaIrradiacao += this.municipioSelecionado.jun
+    // somaIrradiacao += this.municipioSelecionado.jul
+    // somaIrradiacao += this.municipioSelecionado.aug
+    // somaIrradiacao += this.municipioSelecionado.sep
+    // somaIrradiacao += this.municipioSelecionado.oct
+    // somaIrradiacao += this.municipioSelecionado.nov
+    // somaIrradiacao += this.municipioSelecionado.dec
+
+    // irradiacaoMedia = somaIrradiacao / 12
+
+    // this.irradiacaoMedia = parseFloat( parseFloat(irradiacaoMedia.toLocaleString('pt-BR')).toFixed(2))
+    this.irradiacaoMedia = parseFloat( parseFloat(this.municipioSelecionado.annual.toLocaleString('pt-BR')).toFixed(2))    
   }
 }
