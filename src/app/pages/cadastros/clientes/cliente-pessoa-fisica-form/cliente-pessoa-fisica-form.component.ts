@@ -6,6 +6,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/commons/confirm-dialog/confirm-dialog.component';
 import { InfoDialogComponent } from 'src/app/commons/info-dialog/info-dialog.component';
 import { ClientePessoaFisicaService } from 'src/app/services/cliente-pessoa-fisica.service';
+import { IrradiacaoMunicipio } from 'src/app/dto/IrradiacaoMunicipioDto';
+import { Estado } from 'src/app/libs/estado';
+import { PropostaService } from 'src/app/services/proposta.service';
+import { Estados } from 'src/app/libs/estados';
+import { CepService } from 'src/app/services/cep.service';
 
 @Component({
   selector: 'app-cliente-pessoa-fisica-form',
@@ -17,15 +22,42 @@ export class ClientePessoaFisicaFormComponent {
 
   tituloConfirmDialog = ''
   showSpinner = false;
+
+  estadosSelecionado = ''
+  municipioSelecionado: IrradiacaoMunicipio
+  estadosList: Estado[] = []
+  listaIrradiacaoMunicipios: IrradiacaoMunicipio[] = [];
+  tipoPessoa = 'F'
+  cep = ''
+
+  municipio = ''
+  uf = ''
+  logradouro =''
+  numero=''
+  bairro=''
+
+  fone1:number
+  fone2:number
+  fone1whatsApp: boolean
+  fone1whatsAppTelegram: boolean
+  fone2whatsApp: boolean
+  fone2whatsAppTelegram: boolean
+  tipoTelefone1 = ''
+  tipoTelefone2 = ''
+
+  email=''
   
   constructor(
     private router: Router,
     private service: ClientePessoaFisicaService,
     private dialog: MatDialog,
+    public serviceCidade: PropostaService,
+    private serviceCep: CepService,
   ){}
 
   ngOnInit(): void {
     const temp = localStorage.getItem('pessoaFisica');
+    this.getEstados();
 
     if(temp){
       const pf = JSON.parse(temp);
@@ -41,6 +73,11 @@ export class ClientePessoaFisicaFormComponent {
         localStorage.removeItem('pessoaFisica');
       }
     }
+  }
+
+  getEstados(){
+    let est = new Estados();
+    this.estadosList = est.getEstados();
   }
 
   navegarParaListaDeClientes(){
@@ -98,5 +135,35 @@ export class ClientePessoaFisicaFormComponent {
 
   limpar(){
     this.clientePessoaFisica = {} as ClientePessoaFisica
+  }
+
+  listarIrradiacaMunicipios(){
+    this.serviceCidade.consultar(this.estadosSelecionado).subscribe({
+      next: (data) => {
+        this.listaIrradiacaoMunicipios = data        
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  teste(){
+    console.log(this.tipoPessoa)
+  }
+
+  consultarCep(){
+    this.serviceCep.consultar(this.cep).subscribe({
+      next: (data) => {
+        console.log(data)
+        this.bairro = data.bairro
+        this.logradouro = data.logradouro
+        this.municipio = data.localidade
+        this.uf = data.uf
+      },
+      error: (erro) => {
+        console.log(erro.erro)
+      }
+    })
   }
 }

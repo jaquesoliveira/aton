@@ -57,12 +57,13 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatCardModule} from '@angular/material/card';
 import { SelecionarModuloComponent } from './pages/propostas/proposta-form/selecionar-modulo/selecionar-modulo.component';
 import { SelecionarInversorComponent } from './pages/propostas/proposta-form/selecionar-inversor/selecionar-inversor.component';
-
+import {MatRadioModule} from '@angular/material/radio';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, 
     HomeComponent,
     HelpComponent,
     ConfigsComponent,
@@ -117,9 +118,13 @@ registerLocaleData(ptBr);
     MatSlideToggleModule,
     MatStepperModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   providers: [
+    provideNgxMask(),
     {
       provide: LOCALE_ID,
       useValue: 'pt',
@@ -127,7 +132,7 @@ registerLocaleData(ptBr);
     {
       provide: DEFAULT_CURRENCY_CODE,
       useValue: 'BRL',
-    },
+    },    
   ],
   bootstrap: [AppComponent]
 })

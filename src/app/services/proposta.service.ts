@@ -1,15 +1,13 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { enviroment } from '../enviroment/enviroment';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
-import { Estado } from '../libs/estado';
-import { ParametrosAneelResumidaDto } from '../dto/parametrosAneelResumidaDto';
-import { Concessionaria } from '../libs/concessionaria';
+import { IrradiacaoMunicipio } from '../dto/IrradiacaoMunicipioDto';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GurpoBServiceService {
+export class PropostaService {
 
   private url = enviroment.baseUrl;
 
@@ -19,18 +17,12 @@ export class GurpoBServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
+
   consultar(nomeEstado: string){
     console.log(nomeEstado)
-    return this.httpClient.get<Concessionaria[]>(this.url.concat(`/concessionaria/${nomeEstado}`))
+    return this.httpClient.get<IrradiacaoMunicipio[]>(this.url.concat(`/irradiacao/${nomeEstado}`))
     .pipe(catchError(this.handlerError))
   }
-
-  getValTusdSemImposto(parametros: ParametrosAneelResumidaDto){
-    console.log(parametros)
-    return this.httpClient.post<any>(this.url.concat('/aneel'), JSON.stringify(parametros), this.httpOptions)
-    .pipe(catchError(this.handlerError))
-  }
-  
 
   handlerError(error: HttpErrorResponse){
     let errorMessage = ''
@@ -42,5 +34,4 @@ export class GurpoBServiceService {
     }
     return throwError(errorMessage);
   }
-
 }

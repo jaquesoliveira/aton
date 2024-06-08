@@ -2,124 +2,262 @@
     <mat-spinner class="load-centered"></mat-spinner>
 </div>
 
-<div class="mt-2 d-flex justify-content-center">
-    <div style="width: 900px; max-width: 900px;">
-        <div class="row mt-1 mb-1">
-            <div class="d-flex justify-content-between" 
-                style="display: flex; align-items: center; padding-top: 15px; padding-bottom: 15px;">
+<div class="row mt-1 mb-1">
+    <div class="d-flex justify-content-between" 
+        style="display: flex; align-items: center; padding-top: 15px; padding-bottom: 15px;">
+        <div style="display: flex; align-items: center;">
+            <img width="30px" 
+                src="assets/images/pessoa_fisica.png" alt="">
+            <span class="ms-2 my-title-1" 
+                style="font-size: 25px; font-weight: 500;">
                 
-                <div style="display: flex; align-items: center;">
-                    <img width="30px" 
-                        src="assets/images/inversor.png" alt="">
-                    <span class="ms-1 my-title-1" 
-                        style="font-size: 25px; font-weight: 500;">
-                        
-                        Cadastrar Cliente
-                    </span>
+                Cadastrar Cliente
+            </span>
+        </div>
+
+        <div>
+            <button mat-raised-button
+                color="primary"
+                class="ms-1">
+
+                <!-- <mat-icon>close</mat-icon> -->
+                Fechar
+            </button>
+
+            <!-- <button mat-mini-fab
+                color="primary"
+                class="ms-1">
+
+                <mat-icon>close</mat-icon>
+            </button> -->
+        </div>        
+    </div>
+</div>
+<mat-divider class="pc-only"></mat-divider>
+
+<div class="mt-4">
+    <app-barra-de-titulo 
+        titulo="INFORMAÇÕES DO CLIENTE">
+    </app-barra-de-titulo>
+</div>
+
+<div class="card mb-1">
+
+    <div class="card-body"> 
+
+        <div class="row mt-1">
+
+            <div class="mb-3 col-12">
+                <div class="card mb-1">
+                    <div class="card-body"> 
+                        <mat-radio-group 
+                            aria-label="Select an option"
+                            class="mb-3"
+                            (change)="teste()"
+                            [(ngModel)] = "tipoPessoa">
+                            <mat-radio-button value="F">Física</mat-radio-button>
+                            <mat-radio-button value="J">Jurídica</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
                 </div>
+            </div>                    
 
-                
-                <button mat-mini-fab
-                    color="primary"
-                    (click)="navegarParaListaDeClientes()">
+            <mat-form-field class="mb-3 col-6">    
+                <mat-label>Nome</mat-label>
+                <input matInput 
+                    [(ngModel)]="clientePessoaFisica.nome">
+            </mat-form-field>
 
-                    <mat-icon>close</mat-icon>
-                </button>
-                
-            </div>
+            <mat-form-field
+                *ngIf="tipoPessoa === 'F'"
+                class="mb-3 col-lg-3 col-12">    
+                <mat-label>CPF</mat-label>
+                <input matInput 
+                    mask="000.000.000-00"
+                    [(ngModel)]="clientePessoaFisica.cpfCnpj">
+            </mat-form-field>
+            
+            <mat-form-field
+                *ngIf="tipoPessoa === 'J'" 
+                class="mb-3 col-lg-3 col-12">    
+                <mat-label>CNPJ</mat-label>
+                <input matInput 
+                    [(ngModel)]="clientePessoaFisica.cpfCnpj">
+            </mat-form-field>
+
+            <mat-form-field 
+                *ngIf="tipoPessoa === 'F'"
+                class="mb-3 col-lg-3 col-12">    
+                <mat-label>RG</mat-label>
+                <input matInput 
+                    [(ngModel)]="clientePessoaFisica.rg">
+            </mat-form-field>                    
         </div>
     </div>
 </div>
 
-<div class="d-flex justify-content-center">
-    <div style="width: 900px; max-width: 900px;">
-        <div class="card mb-1">
 
-            <div class="card-body"> 
+<!-- CONTATOS -->
+<div class="mt-5">
+    <app-barra-de-titulo 
+        titulo="CONTATOS">
+    </app-barra-de-titulo>
+</div>
+<div class="card mb-1">
+    <div class="card-body">
+        <div class="row mt-1">
+            <mat-form-field class="col-lg-3">    
+                <mat-label>Fone #1</mat-label>
+                <input matInput type="tel"
+                    mask="(00) 0 0000-0000"
+                    [(ngModel)]="fone1">
+            </mat-form-field>
 
-                <div class="row mt-1">
-                    <!-- <div class="mb-3 col-12">
-                        <label for="fabricante" 
-                            class="form-label">
-                            
-                            Nome
-                        </label>
-                        <input class="form-control form-control-sm"
-                            [(ngModel)]="clientePessoaFisica.nome"
-                            id="fabricante">
-                    </div> -->
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Tipo</mat-label>
+                <select matNativeControl 
+                    [(ngModel)]="tipoTelefone1"
+                    name="tipoFone" required>                    
+                        <option value="RESIDENCIAL">Residencial</option>
+                        <option value="COMERCIAL">Comercial</option>
+                        <option value="CELULAR">Celular</option>                    
+                </select>
+            </mat-form-field>
 
-                    <mat-form-field class="mb-3 col-12">    
-                        <mat-label>Nome</mat-label>
-                        <input matInput 
-                            [(ngModel)]="clientePessoaFisica.nome">
-                    </mat-form-field>
-
-                    <!-- <div class="mb-3 col-lg-4 col-12">
-                        <label for="potencia" 
-                            class="form-label">
-                            
-                            CPF
-                        </label>
-                        <input class="form-control form-control-sm" 
-                        [(ngModel)]="clientePessoaFisica.cpf"
-                            id="potencia">
-                    </div> -->
-
-                    <mat-form-field class="mb-3 col-lg-4 col-12">    
-                        <mat-label>CPF</mat-label>
-                        <input matInput 
-                            [(ngModel)]="clientePessoaFisica.cpfCnpj">
-                    </mat-form-field>                    
-
-                    <mat-form-field class="mb-3 col-lg-4 col-12">    
-                        <mat-label>RG</mat-label>
-                        <input matInput 
-                            [(ngModel)]="clientePessoaFisica.rg">
-                    </mat-form-field>
-
-                    <!-- <div class="mb-3 col-lg-4 col-12">
-                        <label for="garantia" 
-                            class="form-label">
-                            
-                            Telefone
-                        </label>
-                        <input class="form-control form-control-sm"
-                            [(ngModel)]="clientePessoaFisica.telefone"
-                            id="garantia">
-                    </div> -->
-
-                    <mat-form-field class="mb-3 col-lg-4 col-12">    
-                        <mat-label>Telefone</mat-label>
-                        <input matInput 
-                            [(ngModel)]="clientePessoaFisica.telefone">
-                    </mat-form-field>                   
-
-                    <mat-form-field class="mb-3 col-12">    
-                        <mat-label>E-mail</mat-label>
-                        <input matInput 
-                            [(ngModel)]="clientePessoaFisica.email">
-                    </mat-form-field>
-                </div>        
-                
-                <mat-divider></mat-divider>
-                <div class="mt-2 d-flex justify-content-end">          
-
-                    <button mat-raised-button 
-                        color="primary"
-                        class="col-6" 
-                        (click)="limpar()">
-                        Limpar
-                    </button>
-                    
-                    <button mat-raised-button 
-                        color="primary" 
-                        (click)="salvar()"
-                        class="ms-1 col-6">
-                        Salvar
-                    </button>
-                </div>
+            <div *ngIf="tipoTelefone1==='CELULAR'" class="col-lg-3"> 
+                <mat-checkbox class="example-margin" [(ngModel)]="fone1whatsApp">Whatsapp</mat-checkbox>
+                <mat-checkbox class="example-margin" [(ngModel)]="fone1whatsAppTelegram">Telegram</mat-checkbox>
             </div>
         </div>
+
+        <div class="row mt-1">
+            <mat-form-field class="col-lg-3">    
+                <mat-label>Fone #2</mat-label>
+                <input matInput type="tel"
+                    mask="(00) 0 0000-0000"
+                    [(ngModel)]="fone2">
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Tipo</mat-label>
+                <select matNativeControl 
+                    [(ngModel)]="tipoTelefone2"
+                    name="tipoFone" required>                    
+                        <option value="RESIDENCIAL">Residencial</option>
+                        <option value="COMERCIAL">Comercial</option>
+                        <option value="CELULAR">Celular</option>                    
+                </select>
+            </mat-form-field>
+
+            <div *ngIf="tipoTelefone2==='CELULAR'" class="col-lg-3">
+                <mat-checkbox class="example-margin" [(ngModel)]="fone2whatsApp">Whatsapp</mat-checkbox>
+                <mat-checkbox class="example-margin" [(ngModel)]="fone2whatsAppTelegram">Telegram</mat-checkbox>                
+            </div>            
+        </div>
+        <div class="row mt-1">
+            <mat-form-field class="mb-3 col-lg-6">    
+                <mat-label>E-mail</mat-label>
+                <input matInput 
+                    type="email"
+                    maxlength="50"
+                    [(ngModel)]="email">
+            </mat-form-field>
+        </div>
     </div>
+</div>
+
+
+<!-- ENDEREÇO -->
+<div class="mt-5">
+    <app-barra-de-titulo 
+        titulo="ENDEREÇO">
+    </app-barra-de-titulo>
+</div>
+<div class="card mb-1">
+    <div class="card-body">
+        <div class="row">
+            <mat-form-field class="mb-3 col-lg-3">    
+                <mat-label>CEP</mat-label>
+                <input matInput 
+                    [(ngModel)]="cep"
+                    (blur)="consultarCep()">
+            </mat-form-field>
+        </div>
+        <div class="row mt-1">
+            <mat-form-field class="mb-3 col-lg-6">    
+                <mat-label>Logradouro</mat-label>
+                <input matInput 
+                    [(ngModel)]="logradouro">
+            </mat-form-field>
+
+            <mat-form-field class="mb-3 col-lg-3">    
+                <mat-label>Número</mat-label>
+                <input matInput 
+                    [(ngModel)]="numero">
+            </mat-form-field>
+
+            <mat-form-field class="mb-3 col-lg-3">    
+                <mat-label>Bairro</mat-label>
+                <input matInput 
+                    [(ngModel)]="bairro">
+            </mat-form-field>
+        </div>
+
+        <div class="row mt-1">
+            <mat-form-field class="mb-3 col-lg-3">    
+                <mat-label>Cidade</mat-label>
+                <input matInput 
+                    [(ngModel)]="municipio">
+            </mat-form-field>
+
+            <mat-form-field class="mb-3 col-lg-3">    
+                <mat-label>Estado</mat-label>
+                <input matInput 
+                    [(ngModel)]="uf">
+            </mat-form-field>
+
+            <!-- <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Estado</mat-label>
+                <select matNativeControl 
+                    [(ngModel)]="estadosSelecionado" 
+                    (change)="listarIrradiacaMunicipios()"
+                    name="estado" required>
+                    <ng-container *ngFor="let estado of estadosList;">
+                        <option [value]="estado.nome">{{estado.nome}}</option>                                            
+                    </ng-container>
+                </select>
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-3 col-sm-12 col-12">
+                <mat-label>Município</mat-label>
+                <select matNativeControl 
+                    [(ngModel)]="municipioSelecionado"
+                    name="municipio" required>
+                    <ng-container *ngFor="let municipio of listaIrradiacaoMunicipios;">
+                        <option [ngValue]="municipio">{{municipio.name}}</option>                                            
+                    </ng-container>
+                </select>
+            </mat-form-field> -->
+        </div>
+    </div>
+</div>
+
+
+<!-- BOTÕES -->
+
+<mat-divider class="mt-3"></mat-divider>
+<div class="mt-3 d-flex justify-content-end">          
+
+    <button mat-raised-button 
+        color="primary"            
+        (click)="limpar()">
+        Limpar
+    </button>
+    
+    <button mat-raised-button 
+        color="primary" 
+        (click)="salvar()"
+        class="ms-1">
+        Salvar
+    </button>
 </div>

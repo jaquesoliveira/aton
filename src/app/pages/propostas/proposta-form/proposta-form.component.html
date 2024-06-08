@@ -109,6 +109,58 @@
 </div>
 
 
+<div class="mt-5">
+    <app-barra-de-titulo         
+        titulo="REGIÃO">
+    </app-barra-de-titulo>
+</div>
+
+<div class="row">
+    <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-1 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <mat-form-field class="col-lg-4 col-sm-12 col-12">
+                        <mat-label>Estado</mat-label>
+                        <select matNativeControl 
+                            [(ngModel)]="estadosSelecionado" 
+                            (change)="listarIrradiacaMunicipios()"
+                            name="estado" required>
+                            <ng-container *ngFor="let estado of estadosList;">
+                                <option [value]="estado.nome">{{estado.nome}}</option>                                            
+                            </ng-container>
+                        </select>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-lg-4 col-sm-12 col-12">
+                        <mat-label>Município</mat-label>
+                        <select matNativeControl 
+                            [(ngModel)]="municipioSelecionado"
+                            (change)="gerarGrafico()"
+                            name="municipio" required>
+                            <ng-container *ngFor="let municipio of listaIrradiacaoMunicipios;">
+                                <option [ngValue]="municipio">{{municipio.name}}</option>                                            
+                            </ng-container>
+                        </select>
+                    </mat-form-field>
+                </div>
+
+                
+                <!-- <div class="row">
+                    <div>Grafigo de Irradiação</div>
+                </div> -->
+                <mat-divider></mat-divider>
+
+                <div class="row">
+                    <canvas [id]="canvasName" 
+                        style="height: 300px; max-height: 300px;">{{grafico}}</canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div class="mt-5">
     <app-barra-de-titulo         
@@ -339,103 +391,7 @@
 </div>
 
 
-<div class="mt-5">
-    <app-barra-de-titulo         
-        titulo="REGIÃO">
-    </app-barra-de-titulo>
-</div>
 
-<div class="row">
-    <div class="col-el-12 col-lg-12 col-sm-12 col-12 mt-1 mb-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <mat-form-field class="col-lg-4 col-sm-12 col-12">
-                        <mat-label>Estado</mat-label>
-                        <select matNativeControl 
-                            [(ngModel)]="estadosSelecionado" 
-                            name="estado" required>
-                            <ng-container *ngFor="let estado of estadosList;">
-                                <option [value]="estado.UF">{{estado.nome}}</option>                                            
-                            </ng-container>
-                        </select>
-                    </mat-form-field>
-                
-                    <mat-form-field class="col-lg-4 col-sm-12 col-12">    
-                        <mat-label>Município</mat-label>
-                        <input matInput 
-                            [(ngModel)]="municipioSelecionado">
-                    </mat-form-field>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- <div class="mt-5">
-    <app-barra-de-titulo         
-        titulo="RESUMO DE TARIFAS">
-    </app-barra-de-titulo>
-</div>
-
-<div class="row">
-    <div class="col-lg-12 col-sm-12 col-12 mt-1 mb-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-
-                    <div class="col-lg-6 col-sm-12 col-12 mt-3">
-                        <table class="table table-bordered table-striped">
-                            <tbody>
-                                <tr>
-                                    <td>Estado</td>
-                                    <td style="width: 40%;"></td>
-                                </tr>
-                                <tr>
-                                    <td>Concessionária escolhida</td>
-                                    <td style="width: 40%;"></td>
-                                </tr>
-                                <tr>
-                                    <td>Valor da TUSD (sem imposto)</td>
-                                    <td style="width: 40%;"></td>
-                                </tr>
-                                <tr>
-                                    <td>Valor da TE (sem imposto)</td>
-                                    <td style="width: 40%;">R$ 0,30</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-            
-                    <div class="col-lg-6 col-sm-12 col-12 mt-3">
-                        <table class="table table-bordered table-striped">
-                            <tbody>
-                                <tr>
-                                    <td>Valor do Fio B (sem imposto)</td>
-                                    <td style="width: 40%;">
-                                        RS 0,29
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Valor da TUSD Geração TIPO 1  (sem imposto)</td>
-                                    <td style="width: 40%;">
-                                        RS 11,67
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Valor da TUSD Geração TIPO 2  (sem imposto)</td>
-                                    <td style="width: 40%;">
-                                        RS 27,97
-                                    </td>
-                                </tr>                    
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>        
-        </div>
-    </div>        
-</div> -->
 
 <div class="row">
     <div class="col-lg-12 col-sm-12 col-12 mt-1 mb-3">
