@@ -11,6 +11,9 @@ import { Estado } from 'src/app/libs/estado';
 import { PropostaService } from 'src/app/services/proposta.service';
 import { Estados } from 'src/app/libs/estados';
 import { CepService } from 'src/app/services/cep.service';
+import { AdicionarContatoComponent } from '../dialogs/adicionar-contato/adicionar-contato.component';
+import { Contato } from 'src/app/models/contato.model';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-cliente-pessoa-fisica-form',
@@ -19,6 +22,7 @@ import { CepService } from 'src/app/services/cep.service';
 })
 export class ClientePessoaFisicaFormComponent {
   cliente = {} as Cliente
+  contato = {} as Contato
 
   tituloConfirmDialog = ''
   showSpinner = false;
@@ -46,8 +50,13 @@ export class ClientePessoaFisicaFormComponent {
   tipoTelefone2 = ''
 
   email=''
-  displayedColumnsClientes: string[] = ['codigo', 'tipo', 'telefone', 'chat', 'email', 'acoes'];
+  displayedColumnsContatos: string[] = ['tipo', 'telefone', 'chat', 'email', 'acoes'];
   
+  //dataSourceContatos: Contato[] = []
+  public dataSourceContatos: MatTableDataSource<Contato>;
+  contatos: Contato[] = []
+
+
   constructor(
     private router: Router,
     private service: ClientePessoaFisicaService,
@@ -166,5 +175,23 @@ export class ClientePessoaFisicaFormComponent {
         console.log(erro.erro)
       }
     })
+  }
+
+
+  adicionaContatoDialog(){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(AdicionarContatoComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data => {      
+      this.contato = data
+      if(this.contato.descricao){
+        this.contatos.push(this.contato)
+        this.dataSourceContatos = new MatTableDataSource<Contato> (this.contatos); 
+      }
+    })    
   }
 }

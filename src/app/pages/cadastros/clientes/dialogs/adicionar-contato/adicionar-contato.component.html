@@ -1,0 +1,66 @@
+<div style="min-height: 300px; max-height: 300px; width: 800px; max-width: 800px;">
+    <div class="d-flex justify-content-start" 
+        style="display: flex; align-items: center;">
+        <img class="ms-2" 
+            style="width: 35px; height: 35px;" 
+            src="assets/images/contato.png" alt="">
+        <h1 mat-dialog-title>Adicionar Contato</h1>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="mt-2 container-fluid">
+            <div class="row mt-1">
+                <mat-form-field class="col-lg-3">    
+                    <mat-label>Tipo</mat-label>
+                    <input matInput 
+                        [(ngModel)]="contato.tipo">
+                </mat-form-field>
+    
+                <mat-form-field class="col-lg-4">    
+                    <mat-label>Telefone</mat-label>
+                    <input matInput mask="(00) 0 0000-0000"
+                        [(ngModel)]="contato.descricao"
+                        >
+                </mat-form-field>
+    
+                <div class="col-lg-2">
+                    <mat-checkbox 
+                        class="example-margin" 
+                        [(ngModel)]="contato.fonewhatsApp">
+                            WhatsApp
+                    </mat-checkbox>
+                </div>
+                
+                <div class="col-lg-2">  
+                    <mat-checkbox 
+                        class="example-margin" 
+                        [(ngModel)]="contato.foneTelegram">
+                        Telegram
+                    </mat-checkbox>                      
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <mat-form-field class="col-7">    
+                    <mat-label>E-mail</mat-label>
+                    <input matInput 
+                        [(ngModel)]="contato.email">
+                </mat-form-field>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row mt-2">
+                <div class="d-flex justify-content-end">
+                    <button mat-raised-button
+                        class="me-1"
+                        (click)="onConfirm()"
+                        color="primary">Salvar
+                    </button>
+
+                    <button mat-raised-button                        
+                        (click)="onCancel()"
+                        color="primary">Fechar
+                    </button>
+                </div>                
+            </div>
+    </div>
+</div>

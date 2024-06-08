@@ -59,6 +59,7 @@ import { SelecionarModuloComponent } from './pages/propostas/proposta-form/selec
 import { SelecionarInversorComponent } from './pages/propostas/proposta-form/selecionar-inversor/selecionar-inversor.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { AdicionarContatoComponent } from './pages/cadastros/clientes/dialogs/adicionar-contato/adicionar-contato.component';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -92,7 +93,8 @@ registerLocaleData(ptBr);
     EnquadramentoTarifarioComponent,
     DetalhesMesComponent,
     SelecionarModuloComponent,
-    SelecionarInversorComponent
+    SelecionarInversorComponent,
+    AdicionarContatoComponent
   ],
   imports: [
     BrowserModule,
