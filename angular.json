@@ -59,6 +59,18 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "local": {
+              "fileReplacements": [{
+                "replace": "src/app/enviroment/enviroment.ts",
+                "with": "src/app/enviroment/enviroment.local.ts"
+              }]
+            },
+            "energy": {
+              "fileReplacements": [{
+                "replace": "src/app/enviroment/enviroment.ts",
+                "with": "src/app/enviroment/enviroment.energy.ts"
+              }]
             }
           },
           "defaultConfiguration": "production"
@@ -70,8 +82,13 @@
               "buildTarget": "solar-softwares-app:build:production"
             },
             "development": {
-              "buildTarget": "solar-softwares-app:build:development"
-              
+              "buildTarget": "solar-softwares-app:build:development"              
+            },
+            "local": {
+              "buildTarget": "solar-softwares-app:build:local"              
+            },
+            "energy": {
+              "buildTarget": "solar-softwares-app:build:energy"              
             }
           },
           "defaultConfiguration": "development"
