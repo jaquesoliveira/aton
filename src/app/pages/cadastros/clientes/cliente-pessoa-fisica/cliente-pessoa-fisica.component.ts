@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/commons/confirm-dialog/confirm-dialog.component';
 import { InfoDialogComponent } from 'src/app/commons/info-dialog/info-dialog.component';
-import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model';
+import { Cliente } from 'src/app/models/cliente.model';
 import { ClientePessoaFisicaService } from 'src/app/services/cliente-pessoa-fisica.service';
 
 @Component({
@@ -17,17 +17,17 @@ import { ClientePessoaFisicaService } from 'src/app/services/cliente-pessoa-fisi
   styleUrl: './cliente-pessoa-fisica.component.css'
 })
 export class ClientePessoaFisicaComponent {
-  clienteList: ClientePessoaFisica[]  = []
+  clienteList: Cliente[]  = []
   showSpinner = false;
-  filtros = {} as ClientePessoaFisica
+  filtros = {} as Cliente
 
   tituloConfirmDialog = ''
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  public dataSource: MatTableDataSource<ClientePessoaFisica>;
-  public selection = new SelectionModel<ClientePessoaFisica>;
+  public dataSource: MatTableDataSource<Cliente>;
+  public selection = new SelectionModel<Cliente>;
 
   public pageOptions: number[] = [5, 10, 15];
   public pageSize = 5;
@@ -58,7 +58,7 @@ export class ClientePessoaFisicaComponent {
     this.service.listar().subscribe({
       next: (data) => {
         this.showSpinnerManager(false);
-        this.dataSource = new MatTableDataSource<ClientePessoaFisica> (data);
+        this.dataSource = new MatTableDataSource<Cliente> (data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
@@ -73,7 +73,7 @@ export class ClientePessoaFisicaComponent {
     })
   }
 
-  editar(mod: ClientePessoaFisica){
+  editar(mod: Cliente){
     localStorage.setItem('pessoaFisica', JSON.stringify(mod));
     this.navegarParaFormularioDeCliente()
   }
@@ -105,14 +105,14 @@ export class ClientePessoaFisicaComponent {
   }
 
   limpar(){
-    this.filtros = {} as ClientePessoaFisica
+    this.filtros = {} as Cliente
   }
 
   pesquisar(){
     this.service.pesquisar(this.filtros).subscribe({
       next: (data) => {
         this.showSpinnerManager(false);
-        this.dataSource = new MatTableDataSource<ClientePessoaFisica> (data);
+        this.dataSource = new MatTableDataSource<Cliente> (data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model';
+import { Cliente } from 'src/app/models/cliente.model';
 
 @Component({
   selector: 'app-cliente-info-expansion-panel',
@@ -9,7 +9,7 @@ import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model'
 })
 export class ClienteInfoExpansionPanelComponent {
 
-  @Input() cliente: ClientePessoaFisica
+  @Input() cliente: Cliente
   @Input() tipoPessoa: string
   email ='jaques.oliveira@gmail.com'
 }

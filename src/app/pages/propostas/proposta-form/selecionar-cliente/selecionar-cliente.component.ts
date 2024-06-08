@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef } from '@angu
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ClientePessoaFisicaService } from 'src/app/services/cliente-pessoa-fisica.service';
-import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model';
+import { Cliente} from 'src/app/models/cliente.model';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -17,8 +17,8 @@ export class SelecionarClienteComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = ['cliente', 'cpfCnpj', 'telefone'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  public dataSource: MatTableDataSource<ClientePessoaFisica>;
-  public selection = new SelectionModel<ClientePessoaFisica>(true, []);
+  public dataSource: MatTableDataSource<Cliente>;
+  public selection = new SelectionModel<Cliente>(true, []);
 
   pageOptions: number[] = [4];
   pageSize: 5;
@@ -44,7 +44,7 @@ export class SelecionarClienteComponent implements OnInit, AfterViewInit{
   listar(){
     this.service.listar().subscribe({
       next: (data) => {
-        this.dataSource = new MatTableDataSource<ClientePessoaFisica> (data);        
+        this.dataSource = new MatTableDataSource<Cliente> (data);        
         this.dataSource.paginator = this.paginator;
         this.totalPagina = data.length
       },
@@ -68,7 +68,7 @@ export class SelecionarClienteComponent implements OnInit, AfterViewInit{
     this.filtro = filterValue;
   }
 
-  onRowClicked(row: ClientePessoaFisica){
+  onRowClicked(row: Cliente){
     this.dialogRef.close(row);
   }
 

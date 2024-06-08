@@ -70,9 +70,9 @@
                                     style="font-size: larger; font-weight: 500;">
                                     
                                     {{inv.nome}}
-                                    <div>
+                                    <!--<div>
                                         <small style="color: #777; font-size: 12px;">{{inv.email}}</small>
-                                    </div>
+                                    </div>-->
                                 </span>
                             </div>
                             
@@ -102,10 +102,10 @@
                         <small>Modelo: </small>{{inv.rg}}
                     </div>
                     <div class="col-lg-4 col-sm-3 col-xs-12">
-                        <small>Potência: </small>{{inv.telefone}}
+                        
                     </div>
                     <div class="col-lg-4 col-sm-3 col-xs-12">
-                        <small>Potência: </small>{{inv.email}}
+                        
                     </div>
                 </div>
 
@@ -204,7 +204,7 @@
                     Telefone
                 </label>
                 <input class="form-control form-control-sm"
-                    [(ngModel)]="filtros.telefone"
+                    
                     id="modelo">
                    
             </div>
@@ -216,7 +216,7 @@
                     E-mail
                 </label>
                 <input class="form-control form-control-sm"
-                    [(ngModel)]="filtros.email"
+                    
                     id="modelo">
             </div>
         </div>

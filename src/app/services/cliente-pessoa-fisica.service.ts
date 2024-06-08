@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { enviroment } from '../enviroment/enviroment';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
-import { ClientePessoaFisica } from '../models/cliente-pessoa-fisica.model';
+import { Cliente } from '../models/cliente.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +18,16 @@ export class ClientePessoaFisicaService {
   constructor(private httpClient: HttpClient) { }
 
   listar(){
-    return this.httpClient.get<ClientePessoaFisica[]>(this.url.concat(`/cliente`))
+    return this.httpClient.get<Cliente[]>(this.url.concat(`/cliente`))
     .pipe(catchError(this.handlerError))
   }
 
-  pesquisar(parametros: ClientePessoaFisica){
-    return this.httpClient.post<ClientePessoaFisica[]>(this.url.concat(`/cliente/consultar`), JSON.stringify(parametros), this.httpOptions)
+  pesquisar(parametros: Cliente){
+    return this.httpClient.post<Cliente[]>(this.url.concat(`/cliente/consultar`), JSON.stringify(parametros), this.httpOptions)
     .pipe(catchError(this.handlerError))
   }
 
-  salvar(clientePessoaFisica: ClientePessoaFisica){
+  salvar(clientePessoaFisica: Cliente){
     return this.httpClient.post<any>(this.url.concat(`/cliente/salvar`), JSON.stringify(clientePessoaFisica), this.httpOptions)
     .pipe(catchError(this.handlerError))
   }

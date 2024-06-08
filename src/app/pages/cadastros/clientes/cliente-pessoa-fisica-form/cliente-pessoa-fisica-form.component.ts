@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model';
+import { Cliente } from 'src/app/models/cliente.model';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/commons/confirm-dialog/confirm-dialog.component';
@@ -18,7 +18,7 @@ import { CepService } from 'src/app/services/cep.service';
   styleUrl: './cliente-pessoa-fisica-form.component.css'
 })
 export class ClientePessoaFisicaFormComponent {
-  clientePessoaFisica = {} as ClientePessoaFisica
+  cliente = {} as Cliente
 
   tituloConfirmDialog = ''
   showSpinner = false;
@@ -46,6 +46,7 @@ export class ClientePessoaFisicaFormComponent {
   tipoTelefone2 = ''
 
   email=''
+  displayedColumnsClientes: string[] = ['codigo', 'tipo', 'telefone', 'chat', 'email', 'acoes'];
   
   constructor(
     private router: Router,
@@ -60,15 +61,15 @@ export class ClientePessoaFisicaFormComponent {
     this.getEstados();
 
     if(temp){
-      const pf = JSON.parse(temp);
+      const cli: Cliente = JSON.parse(temp);
 
-      if(pf.id){
-        this.clientePessoaFisica.id = pf.id
-        this.clientePessoaFisica.nome = pf.nome
-        this.clientePessoaFisica.cpfCnpj = pf.cpf
-        this.clientePessoaFisica.rg = pf.rg
-        this.clientePessoaFisica.telefone = pf.telefone
-        this.clientePessoaFisica.email = pf.email
+      if(cli.id){
+        this.cliente.id = cli.id
+        this.cliente.nome = cli.nome
+        this.cliente.cpfCnpj = cli.cpfCnpj
+        this.cliente.rg = cli.rg
+        this.cliente.contatos = cli.contatos
+        this.cliente.endereco = cli.endereco
 
         localStorage.removeItem('pessoaFisica');
       }
@@ -89,7 +90,7 @@ export class ClientePessoaFisicaFormComponent {
     dialogRef.afterClosed().subscribe((data) => {
       if(data){
         this.showSpinnerManager(true);
-        this.service.salvar(this.clientePessoaFisica).subscribe({
+        this.service.salvar(this.cliente).subscribe({
           next: () => {
             const ret = this.infoDialog();
             ret.afterClosed().subscribe((data)=>{
@@ -134,7 +135,7 @@ export class ClientePessoaFisicaFormComponent {
   }
 
   limpar(){
-    this.clientePessoaFisica = {} as ClientePessoaFisica
+    this.cliente = {} as Cliente
   }
 
   listarIrradiacaMunicipios(){

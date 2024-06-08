@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClientePessoaFisica } from 'src/app/models/cliente-pessoa-fisica.model';
+import { Cliente } from 'src/app/models/cliente.model';
 import { Estados } from 'src/app/libs/estados';
 import { Estado } from 'src/app/libs/estado';
 import { GurpoBServiceService } from 'src/app/services/gurpo-b-service.service';
@@ -30,8 +30,8 @@ export class PropostaFormComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  cliente = {} as ClientePessoaFisica
-  dataSourceClientes: ClientePessoaFisica[] = []
+  cliente = {} as Cliente
+  dataSourceClientes: Cliente[] = []
   dataSourceModulo:  ModuloFotovoltaico[] = []
   modulo = {} as ModuloFotovoltaico
   dataSourceInversor: InversorDto[] = []
@@ -107,7 +107,7 @@ export class PropostaFormComponent implements OnInit{
     dialogRef.afterClosed().subscribe(data => {
       console.log(data)
       this.cliente = data
-      let clientes: ClientePessoaFisica[] = []
+      let clientes: Cliente[] = []
       clientes.push(this.cliente)
       this.dataSourceClientes = clientes
     })    
