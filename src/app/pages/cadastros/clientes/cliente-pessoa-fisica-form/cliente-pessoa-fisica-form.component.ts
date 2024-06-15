@@ -14,6 +14,7 @@ import { CepService } from 'src/app/services/cep.service';
 import { AdicionarContatoComponent } from '../dialogs/adicionar-contato/adicionar-contato.component';
 import { Contato } from 'src/app/models/contato.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { Endereco } from 'src/app/models/endereco.model';
 
 @Component({
   selector: 'app-cliente-pessoa-fisica-form',
@@ -53,9 +54,9 @@ export class ClientePessoaFisicaFormComponent {
   displayedColumnsContatos: string[] = ['tipo', 'telefone', 'chat', 'email', 'acoes'];
   
   //dataSourceContatos: Contato[] = []
-  public dataSourceContatos: MatTableDataSource<Contato>;
+  //public dataSourceContatos: MatTableDataSource<Contato>;
   contatos: Contato[] = []
-
+  
 
   constructor(
     private router: Router,
@@ -68,6 +69,8 @@ export class ClientePessoaFisicaFormComponent {
   ngOnInit(): void {
     const temp = localStorage.getItem('pessoaFisica');
     this.getEstados();
+    this.cliente.contatos = [] as Contato[];
+    this.cliente.endereco = {} as Endereco;
 
     if(temp){
       const cli: Cliente = JSON.parse(temp);
@@ -105,15 +108,15 @@ export class ClientePessoaFisicaFormComponent {
             ret.afterClosed().subscribe((data)=>{
               if(data){
                 this.navegarParaListaDeClientes();
-              }  
-            })                      
+              }
+            })
           },
           error: (erro) => {
             console.log(erro.erro)
           }
         })
       }
-    })    
+    })
   }
 
   confirmDialog(msg: string){
@@ -158,18 +161,13 @@ export class ClientePessoaFisicaFormComponent {
     })
   }
 
-  teste(){
-    console.log(this.tipoPessoa)
-  }
-
   consultarCep(){
-    this.serviceCep.consultar(this.cep).subscribe({
+    this.serviceCep.consultar(this.cliente.endereco.cep).subscribe({
       next: (data) => {
-        console.log(data)
-        this.bairro = data.bairro
-        this.logradouro = data.logradouro
-        this.municipio = data.localidade
-        this.uf = data.uf
+        this.cliente.endereco.bairro = data.bairro
+        this.cliente.endereco.endereco = data.logradouro
+        this.cliente.endereco.cidade = data.localidade
+        this.cliente.endereco.estado = data.uf
       },
       error: (erro) => {
         console.log(erro.erro)
@@ -189,9 +187,13 @@ export class ClientePessoaFisicaFormComponent {
     dialogRef.afterClosed().subscribe(data => {      
       this.contato = data
       if(this.contato.descricao){
-        this.contatos.push(this.contato)
-        this.dataSourceContatos = new MatTableDataSource<Contato> (this.contatos); 
+        this.cliente.contatos.push(this.contato)
       }
     })    
+  }
+
+  exluirContato(item: Contato){
+    const index = this.cliente.contatos.indexOf(item);
+    this.cliente.contatos.splice(index,1);
   }
 }

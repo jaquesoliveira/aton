@@ -8,4 +8,5 @@ export interface Cliente{
     rg: number;
 	endereco: Endereco;
 	contatos: Contato[];
+    tipo: string;
 }

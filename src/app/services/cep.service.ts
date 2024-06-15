@@ -18,7 +18,7 @@ export class CepService {
 
   constructor(private httpClient: HttpClient) { }
 
-  consultar(cep: string){
+  consultar(cep: number){
     return this.httpClient.get<any>(this.url.concat(`${cep}/json`))
     .pipe(catchError(this.handlerError))
   }
