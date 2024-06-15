@@ -11,14 +11,15 @@
             <span class="ms-2 my-title-1" 
                 style="font-size: 25px; font-weight: 500;">
                 
-                Cadastrar Cliente
+                Cadastro de Cliente
             </span>
         </div>
 
         <div>
             <button mat-raised-button
                 color="primary"
-                class="ms-1">
+                class="ms-1"
+                (click) = "navegarParaListaDeClientes()">
 
                 <!-- <mat-icon>close</mat-icon> -->
                 Fechar
@@ -68,7 +69,7 @@
             </mat-form-field>
 
             <mat-form-field
-                *ngIf="tipoPessoa === 'F'"
+                *ngIf="cliente.tipo === 'F'"
                 class="mb-3 col-lg-3 col-12">    
                 <mat-label>CPF</mat-label>
                 <input matInput 
@@ -77,20 +78,21 @@
             </mat-form-field>
             
             <mat-form-field
-                *ngIf="tipoPessoa === 'J'" 
+                *ngIf="cliente.tipo === 'J'" 
                 class="mb-3 col-lg-3 col-12">    
                 <mat-label>CNPJ</mat-label>
                 <input matInput 
+                    mask="00.000.000/0000-00" 
                     [(ngModel)]="cliente.cpfCnpj">
             </mat-form-field>
 
             <mat-form-field 
-                *ngIf="tipoPessoa === 'F'"
+                *ngIf="cliente.tipo === 'F'"
                 class="mb-3 col-lg-3 col-12">    
                 <mat-label>RG</mat-label>
                 <input matInput 
                     [(ngModel)]="cliente.rg">
-            </mat-form-field>                    
+            </mat-form-field>
         </div>
     </div>
 </div>

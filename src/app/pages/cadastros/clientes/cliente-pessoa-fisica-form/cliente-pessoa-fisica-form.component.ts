@@ -32,25 +32,7 @@ export class ClientePessoaFisicaFormComponent {
   municipioSelecionado: IrradiacaoMunicipio
   estadosList: Estado[] = []
   listaIrradiacaoMunicipios: IrradiacaoMunicipio[] = [];
-  tipoPessoa = 'F'
-  cep = ''
-
-  municipio = ''
-  uf = ''
-  logradouro =''
-  numero=''
-  bairro=''
-
-  fone1:number
-  fone2:number
-  fone1whatsApp: boolean
-  fone1whatsAppTelegram: boolean
-  fone2whatsApp: boolean
-  fone2whatsAppTelegram: boolean
-  tipoTelefone1 = ''
-  tipoTelefone2 = ''
-
-  email=''
+  
   displayedColumnsContatos: string[] = ['tipo', 'telefone', 'chat', 'email', 'acoes'];
   
   //dataSourceContatos: Contato[] = []
@@ -78,6 +60,7 @@ export class ClientePessoaFisicaFormComponent {
       if(cli.id){
         this.cliente.id = cli.id
         this.cliente.nome = cli.nome
+        this.cliente.tipo = cli.tipo
         this.cliente.cpfCnpj = cli.cpfCnpj
         this.cliente.rg = cli.rg
         this.cliente.contatos = cli.contatos

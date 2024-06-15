@@ -17,6 +17,7 @@ import { InversorDto } from 'src/app/models/inversor-dto';
 import { PropostaService } from 'src/app/services/proposta.service';
 import { IrradiacaoMunicipio } from 'src/app/dto/IrradiacaoMunicipioDto';
 import Chart from 'chart.js/auto';
+import { Contato } from 'src/app/models/contato.model';
 
 
 
@@ -32,6 +33,7 @@ export class PropostaFormComponent implements OnInit{
 
   cliente = {} as Cliente
   dataSourceClientes: Cliente[] = []
+  dataSourceContatos: Contato[] = []
   dataSourceModulo:  ModuloFotovoltaico[] = []
   modulo = {} as ModuloFotovoltaico
   dataSourceInversor: InversorDto[] = []
@@ -60,7 +62,8 @@ export class PropostaFormComponent implements OnInit{
   tituloConfirmDialog = '';
   displayedColumns: string[] = ['codigo', 'fabricante', 'potencia', 'acoes'];
   displayedColumnsClientes: string[] = ['codigo', 'nome', 'cpfCnpj', 'telefone', 'acoes'];
-    
+  displayedColumnsContatos: string[] = ['tipo', 'telefone', 'chat', 'email'];
+
   listaIrradiacaoMunicipios: IrradiacaoMunicipio[] = [];
   municipioSelecionado: IrradiacaoMunicipio
 
@@ -76,7 +79,6 @@ export class PropostaFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.canvasName = Math.random().toString();
-    this.cliente.nome = 'Francisco Jaques Morais de Oliveira'
     this.getEstados();
     // this.gerarOptions();    
 
@@ -109,7 +111,8 @@ export class PropostaFormComponent implements OnInit{
       this.cliente = data
       let clientes: Cliente[] = []
       clientes.push(this.cliente)
-      this.dataSourceClientes = clientes
+      //this.dataSourceClientes = clientes
+      this.dataSourceContatos = this.cliente.contatos
     })    
   }
 

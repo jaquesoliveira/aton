@@ -50,60 +50,126 @@
                 </button>
             </div>
 
-            <div class="mt-2">
-                <!-- <app-cliente-info-expansion-panel [cliente]="cliente">  
+            <div class="mt-3">
+                <mat-form-field 
+                    *ngIf="cliente.nome"
+                    class="col-lg-5 col-12">    
+                    <mat-label>Nome</mat-label>
+                    <input matInput readonly
+                        [(ngModel)]="cliente.nome">
+                </mat-form-field>
 
-                </app-cliente-info-expansion-panel>  -->
-                <!-- *ngIf="dataSourceClientes.length > 0" -->
-                <div class="mt-2">
-                    <table mat-table 
-                        [dataSource]="dataSourceClientes" 
-                        class="my-table mt-2 mb-3">
+                <mat-form-field 
+                    *ngIf="cliente.tipo"
+                    class="col-lg-3 col-12 ms-1">    
+                    <mat-label>Tipo</mat-label>
+                    <input matInput readonly
+                        [value]="cliente.tipo === 'F' ? 'FÍSICA': cliente.tipo === 'J' ? 'JURÍDICA':'' ">
+                </mat-form-field>
 
-                        <ng-container matColumnDef="codigo">
-                            <th mat-header-cell *matHeaderCellDef>Código</th>
-                            <td mat-cell *matCellDef="let element"> 
-                                {{element.id}} 
-                            </td>
-                        </ng-container>
+                <mat-form-field 
+                    *ngIf="cliente.tipo==='F'"
+                    class="col-lg-3 col-12 ms-1">    
+                    <mat-label>CPF</mat-label>
+                    <input matInput readonly
+                        mask="000.000.000-00" 
+                        [(ngModel)]="cliente.cpfCnpj">
+                </mat-form-field>
 
-                        <ng-container matColumnDef="nome">
-                            <th mat-header-cell *matHeaderCellDef>Nome</th>
-                            <td mat-cell *matCellDef="let element"> 
-                                {{element.nome}} 
-                            </td>
-                        </ng-container>
+                <mat-form-field 
+                    *ngIf="cliente.tipo==='J'"
+                    class="mb-3 col-lg-3 col-12 ms-1">    
+                    <mat-label>CPF</mat-label>
+                    <input matInput
+                        mask="00.000.000/0000-00" 
+                        [(ngModel)]="cliente.cpfCnpj">
+                </mat-form-field>
+            </div>           
+        </div>
 
-                        <ng-container matColumnDef="cpfCnpj">
-                            <th mat-header-cell *matHeaderCellDef>CPF/CNPJ</th>
-                            <td mat-cell *matCellDef="let element"> 
-                                {{element.cpfCnpj}} 
-                            </td>
-                        </ng-container>
+        <div *ngIf="cliente.contatos" class="row mt-2 mb-2">
+            <div>
+                <span class="mt-5" style="color: #3f51b5; font-weight: 500;">
+                    Contatos
+                </span>
+                
+                <table mat-table 
+                    [dataSource]="dataSourceContatos" 
+                    class="my-table mb-3">
 
-                        <ng-container matColumnDef="telefone">
-                            <th mat-header-cell *matHeaderCellDef>Telefone</th>
-                            <td mat-cell *matCellDef="let element"> 
-                                {{element.telefone}} 
-                            </td>
-                        </ng-container>
+                    <ng-container matColumnDef="tipo">
+                        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+                        <td mat-cell *matCellDef="let element"> 
+                            {{element.tipo}} 
+                        </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="acoes">
-                            <th mat-header-cell *matHeaderCellDef>Ações</th>
-                            <td mat-cell *matCellDef="let element"> 
-                                <button mat-raised-button
-                                    (click)="excluirCliente()"
-                                    color="warn">
-                                    Excluir
-                                </button>
-                            </td>
-                        </ng-container>
-                          
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsClientes"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumnsClientes;"></tr>  
-                    </table>
-                </div>
-            </div>
+                    <ng-container matColumnDef="telefone">
+                        <th mat-header-cell *matHeaderCellDef>Telefone</th>
+                        <td mat-cell *matCellDef="let element"> 
+                            {{element.descricao}} 
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="chat">
+                        <th mat-header-cell *matHeaderCellDef>Chat</th>
+                        <td mat-cell *matCellDef="let element">
+                            <img *ngIf="element.fonewhatsApp" width="30px" src="assets/images/zap.png" alt="">
+                            <img *ngIf="element.foneTelegram" width="20px" src="assets/images/telegram.png" alt=""> 
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef>E-mail</th>
+                        <td mat-cell *matCellDef="let element"> 
+                            {{element.email}} 
+                        </td>
+                    </ng-container>                        
+                    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsContatos"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsContatos;"></tr>  
+                </table>
+            </div>            
+        </div>
+
+
+        <span *ngIf="cliente.endereco" class="mt-5" style="color: #3f51b5; font-weight: 500;">
+            Endereço
+        </span>
+        
+        <mat-divider *ngIf="cliente.endereco"></mat-divider>
+        <div class="row mt-1" *ngIf="cliente.endereco">
+            <mat-form-field class="mb-3 col-lg-6">    
+                <mat-label>Logradouro</mat-label>
+                <input matInput 
+                    [value]="cliente.endereco.endereco">
+            </mat-form-field>
+
+            <mat-form-field class="mb-3 col-lg-3">    
+                <mat-label>Número</mat-label>
+                <input matInput 
+                    [(ngModel)]="cliente.endereco.numero">
+            </mat-form-field>
+
+            <mat-form-field class="mb-3 col-lg-3">    
+                <mat-label>Bairro</mat-label>
+                <input matInput 
+                    [(ngModel)]="cliente.endereco.bairro">
+            </mat-form-field>
+        </div>
+
+        <div class="row mt-1" *ngIf="cliente.endereco">
+            <mat-form-field class="mb-3 col-lg-3">    
+                <mat-label>Cidade</mat-label>
+                <input matInput 
+                    [(ngModel)]="cliente.endereco.cidade">
+            </mat-form-field>
+
+            <mat-form-field class="mb-3 col-lg-3">    
+                <mat-label>Estado</mat-label>
+                <input matInput 
+                    [(ngModel)]="cliente.endereco.estado">
+            </mat-form-field>
         </div>
     </div>
 </div>
@@ -271,10 +337,10 @@
                             <ng-container matColumnDef="acoes">
                                 <th mat-header-cell *matHeaderCellDef>Ações</th>
                                 <td mat-cell *matCellDef="let element"> 
-                                    <button mat-raised-button 
+                                    <button mat-mini-fab 
                                         (click)="excluirModulo()"
-                                        color="warn">
-                                        Excluir
+                                        color="primary">
+                                        <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>
                             </ng-container>
@@ -285,25 +351,7 @@
                     </div>
                 </div>
                 <mat-divider></mat-divider>
-                <!-- <mat-divider class=""></mat-divider> -->
-
-                <!-- <div class="row mt-3">
-                    <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
-                        <mat-label>Potência do Módulo</mat-label>
-                        <input matInput 
-                            [(ngModel)]="potenciaModulo"
-                            [disabled]="consumoMedioMensal ? false : true">
-                    </mat-form-field>
-        
-                    <div class="col-lg-3 col-sm-12 col-12 mb-3">    
-                        <button mat-raised-button 
-                            color="primary"
-                            (click)="calcular()"
-                            [disabled]="consumoMedioMensal && potenciaModulo ? false : true">
-                            Calcular
-                        </button>
-                    </div>
-                </div> -->
+                
                 <div class="row mt-3">  
                     <mat-form-field class="col-lg-3 col-sm-12 col-12">
                         <mat-label>Kwh Dia</mat-label>
@@ -372,10 +420,10 @@
                             <ng-container matColumnDef="acoes">
                                 <th mat-header-cell *matHeaderCellDef>Ações</th>
                                 <td mat-cell *matCellDef="let element"> 
-                                    <button mat-raised-button 
+                                    <button mat-mini-fab 
                                         (click)="excluirInversor()"
-                                        color="warn">
-                                        Excluir
+                                        color="primary">
+                                        <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>
                             </ng-container>
