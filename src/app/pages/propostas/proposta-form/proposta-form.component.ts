@@ -18,6 +18,8 @@ import { PropostaService } from 'src/app/services/proposta.service';
 import { IrradiacaoMunicipio } from 'src/app/dto/IrradiacaoMunicipioDto';
 import Chart from 'chart.js/auto';
 import { Contato } from 'src/app/models/contato.model';
+import { Router } from '@angular/router';
+import { Proposta } from 'src/app/models/Proposta.model';
 
 
 
@@ -31,6 +33,7 @@ export class PropostaFormComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  proposta = {} as Proposta
   cliente = {} as Cliente
   dataSourceClientes: Cliente[] = []
   dataSourceContatos: Contato[] = []
@@ -74,18 +77,16 @@ export class PropostaFormComponent implements OnInit{
 
   constructor(
     public service: PropostaService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router,
   ){ }
 
   ngOnInit(): void {
     this.canvasName = Math.random().toString();
     this.getEstados();
-    // this.gerarOptions();    
-
   }
   
   calcular(){
-    // this.kwhDia = parseFloat((this.consumoMedioMensal / 30).toFixed(2));
     this.kwhDia = parseFloat((this.producaoMediaMensal / 30).toFixed(2));
     this.kwpNominal = parseFloat((this.kwhDia / this.irradiacaoMedia).toFixed(2));
     this.kwpReal = parseFloat((this.kwpNominal / 0.8).toFixed(2));
@@ -259,5 +260,25 @@ export class PropostaFormComponent implements OnInit{
 
   calcularIrradiacaoMediaMensal(){    
     this.irradiacaoMedia = parseFloat( parseFloat(this.municipioSelecionado.annual.toLocaleString('pt-BR')).toFixed(2))    
+  }
+
+
+  visualizarProposta(){
+    this.proposta.cliente = this.cliente
+    this.proposta.inversor = this.inversor
+    this.proposta.moduloFotovoltaico = this.modulo
+    this.proposta.consumoMedioMensal = this.consumoMedioMensal
+    this.proposta.consumoAnual = this.consumoMedioMensal * 12
+    this.proposta.custoMedioMensal = this.custoMedioMensal
+    this.proposta.custoAnual = this.custoMedioMensal * 12
+    this.proposta.producaoMediaMensal = this.producaoMediaMensal
+    this.proposta.producaoAnual = this.producaoMediaMensal * 12
+    this.proposta.kwhDia = this.kwhDia
+    this.proposta.kwpNominal = this.kwpNominal
+    this.proposta.kwpReal = this.kwpReal
+    this.proposta.numModulos = this.numModulos
+
+    localStorage.setItem('proposta', JSON.stringify(this.proposta))
+    this.router.navigate(['/propostas/proposta-view'])
   }
 }

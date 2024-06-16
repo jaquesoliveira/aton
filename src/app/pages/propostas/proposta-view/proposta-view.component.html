@@ -16,7 +16,7 @@
                 <span class="sub-titulo">Proposta Comercial #00001</span>
             </div>
             <div class="texto-capa">
-                <span>Elaborado para: Jaques Oliveira</span>
+                <span>Elaborado para: {{proposta.cliente.nome}}</span>
             </div>
             <div class="texto-capa">
                 <span>Fortaleza - CE</span>
@@ -35,6 +35,108 @@
     <div id="folha-a4" class="folha a4_vertical">
         <div id="conteudo">
             <h1 class="titulo-principal">SOLAR PLUS BRASIL</h1>
+        </div>
+
+        <div>            
+            cliente: {{proposta.cliente.nome}}
+            modulo: {{proposta.moduloFotovoltaico.fabricante}}
+
+            <div class="mt-2">
+                <table class="table my-table mt-2 mb-3">                    
+                    <tbody>
+                        <tr>
+                            <td>Consumo Médio Mensal</td>
+                            <td>{{proposta.consumoMedioMensal}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Consumo Médio Anual</td>
+                            <td>{{proposta.consumoAnual}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Custo Médio Anual</td>
+                            <td>{{proposta.custoMedioMensal}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Custo Anual</td>
+                            <td>{{proposta.custoAnual}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Produção Média Mensal</td>
+                            <td>{{proposta.producaoMediaMensal}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Produção Anual</td>
+                            <td>{{proposta.producaoAnual}}</td>                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div>            
+            modulo: {{proposta.moduloFotovoltaico.fabricante}}
+
+            <div class="mt-2">
+                <table class="table my-table mt-2 mb-3">                    
+                    <tbody>
+                        <tr>
+                            <td>Fabricante</td>
+                            <td>{{proposta.consumoMedioMensal}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Potência</td>
+                            <td>{{proposta.consumoAnual}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Garantia(Defeito)</td>
+                            <td>{{proposta.custoMedioMensal}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Garantia(Eficiência)</td>
+                            <td>{{proposta.custoAnual}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Quantidade</td>
+                            <td>{{proposta.producaoMediaMensal}}</td>                            
+                        </tr>                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div>            
+            Inversor
+
+            <div class="mt-2">
+                <table class="table my-table mt-2 mb-3">                    
+                    <tbody>
+                        <tr>
+                            <td>Modelo</td>
+                            <td>{{proposta.inversor.modelo}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Fabricante</td>
+                            <td>{{proposta.consumoMedioMensal}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Potência</td>
+                            <td>{{proposta.consumoAnual}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Garantia(Defeito)</td>
+                            <td>{{proposta.custoMedioMensal}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Monitoramento</td>
+                            <td>{{proposta.custoAnual}}</td>                            
+                        </tr>
+                        <tr>
+                            <td>Quantidade</td>
+                            <td>{{proposta.producaoMediaMensal}}</td>                            
+                        </tr>                        
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

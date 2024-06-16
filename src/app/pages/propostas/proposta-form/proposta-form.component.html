@@ -244,7 +244,7 @@
             </mat-form-field>
 
             <mat-form-field class="col-lg-3 col-sm-12 col-12 mb-3">    
-                <mat-label>Consumo Médio Anual</mat-label>
+                <mat-label>Consumo Anual</mat-label>
                 <input matInput 
                     [value]="consumoMedioMensal ? consumoMedioMensal * 12 : 0"
                     readonly>
@@ -460,8 +460,9 @@
                         </div>
                         <div class=" bd-highlight">
                             <button 
-                                [routerLink]="['/propostas/proposta-view']"
-                                class="btn btn-primary">
+                                
+                                class="btn btn-primary"
+                                (click)="visualizarProposta()">
                                 Visualizar
                             </button>
                         </div>
