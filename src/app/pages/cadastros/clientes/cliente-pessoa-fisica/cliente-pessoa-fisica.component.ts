@@ -33,7 +33,7 @@ export class ClientePessoaFisicaComponent {
   public pageSize = 5;
   public totalPages: number;
 
-  displayedColumns: string[] = ['codigo', 'nome', 'cpf', 'rg', 'telefone', 'email', 'acoes'];
+  displayedColumns: string[] = ['codigo', 'nome', 'tipo', 'cpfCnpj', 'acoes'];
 
   constructor(
     private router: Router,
