@@ -60,6 +60,11 @@ import { SelecionarInversorComponent } from './pages/propostas/proposta-form/sel
 import {MatRadioModule} from '@angular/material/radio';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AdicionarContatoComponent } from './pages/cadastros/clientes/dialogs/adicionar-contato/adicionar-contato.component';
+import { SelecionarEstadoComponent } from './pages/propostas/proposta-form/selecionar-estado/selecionar-estado.component';
+import { SelecionarMunicipioComponent } from './pages/propostas/proposta-form/selecionar-municipio/selecionar-municipio.component';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
+import { PropostaListComponent } from './pages/propostas/proposta-list/proposta-list.component';
+import { CpfPipe } from './commons/cpf.pipe';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -94,7 +99,11 @@ registerLocaleData(ptBr);
     DetalhesMesComponent,
     SelecionarModuloComponent,
     SelecionarInversorComponent,
-    AdicionarContatoComponent
+    AdicionarContatoComponent,
+    SelecionarEstadoComponent,
+    SelecionarMunicipioComponent,
+    PropostaListComponent,
+    CpfPipe
   ],
   imports: [
     BrowserModule,
@@ -123,7 +132,8 @@ registerLocaleData(ptBr);
     MatCardModule,
     MatRadioModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    MatSnackBarModule
   ],
   providers: [
     provideNgxMask(),
@@ -134,7 +144,8 @@ registerLocaleData(ptBr);
     {
       provide: DEFAULT_CURRENCY_CODE,
       useValue: 'BRL',
-    },    
+    },
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],
   bootstrap: [AppComponent]
 })

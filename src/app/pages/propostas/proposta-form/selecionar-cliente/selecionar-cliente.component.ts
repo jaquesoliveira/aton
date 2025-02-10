@@ -53,10 +53,7 @@ export class SelecionarClienteComponent implements OnInit, AfterViewInit{
       }
     })
   }
-
-  onConfirm(): void {
-    this.dialogRef.close(true)
-  }
+ 
 
   onCancel(): void {
     this.dialogRef.close(false)

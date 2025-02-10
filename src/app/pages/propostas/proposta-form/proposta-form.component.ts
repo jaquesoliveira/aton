@@ -20,6 +20,11 @@ import Chart from 'chart.js/auto';
 import { Contato } from 'src/app/models/contato.model';
 import { Router } from '@angular/router';
 import { Proposta } from 'src/app/models/Proposta.model';
+import { EstadosService } from 'src/app/services/estados.service';
+import { EstadosDto } from 'src/app/models/estados-dto';
+import { SelecionarEstadoComponent } from './selecionar-estado/selecionar-estado.component';
+import { SelecionarMunicipioComponent } from './selecionar-municipio/selecionar-municipio.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -33,6 +38,7 @@ export class PropostaFormComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  idProposta: number
   proposta = {} as Proposta
   cliente = {} as Cliente
   dataSourceClientes: Cliente[] = []
@@ -53,10 +59,11 @@ export class PropostaFormComponent implements OnInit{
   kwpReal: number
   numModulos: number
 
-  estadosList: Estado[] = []
-  concessionariaList: Estado[] = []
-  //estadosSelecionado = {} as Estado;
-  estadosSelecionado = '';
+  //estadosList: Estado[] = []
+  estadosList: EstadosDto[] = []
+  concessionariaList: EstadosDto[] = []
+  estadosSelecionado = {nome:"", uf:""} as EstadosDto;
+  //estadosSelecionado = '';
   
   concessionariaSelecionada = ''
   producaoMediaMensal: number
@@ -68,7 +75,7 @@ export class PropostaFormComponent implements OnInit{
   displayedColumnsContatos: string[] = ['tipo', 'telefone', 'chat', 'email'];
 
   listaIrradiacaoMunicipios: IrradiacaoMunicipio[] = [];
-  municipioSelecionado: IrradiacaoMunicipio
+  municipioSelecionado = {} as IrradiacaoMunicipio
 
   canvasName: any
   grafico: any = []
@@ -79,11 +86,60 @@ export class PropostaFormComponent implements OnInit{
     public service: PropostaService,
     private dialog: MatDialog,
     private router: Router,
+    private serviceEstados: EstadosService,
+    private message: MatSnackBar
   ){ }
 
   ngOnInit(): void {
+    this.idProposta = JSON.parse(localStorage.getItem('idProposta'))
     this.canvasName = Math.random().toString();
     this.getEstados();
+    this.carregarProposta()
+  }
+
+  carregarProposta(){
+    this.service.findById(this.idProposta).subscribe({
+      next:(data) => {
+        let proposta: Proposta = data
+        //this.proposta.cliente = data.cliente
+        //this.estadosList = data
+        this.proposta.id = proposta.id
+        this.cliente = data.cliente
+        let clientes: Cliente[] = []
+        clientes.push(this.cliente)
+        this.dataSourceContatos = this.cliente.contatos
+
+        this.estadosSelecionado.nome = data.uf
+        
+        this.municipioSelecionado = data.municipio
+
+        this.consumoMedioMensal = proposta.consumoMedioMensal
+        this.custoMedioMensal = proposta.custoMedioMensal
+        this.producaoMediaMensal = proposta.producaoMediaMensal
+
+        this.modulo = proposta.modulo
+        let modulos: ModuloFotovoltaico[] = []
+        modulos.push(this.modulo)
+        this.dataSourceModulo = modulos
+
+        this.kwhDia = proposta.kwhDia
+        this.kwpNominal = proposta.kwpNominal
+        this.kwpReal = proposta.kwpReal
+        this.numModulos = proposta.numModulos
+
+
+        this.inversor = proposta.inversor
+        let inversores: InversorDto[] = []
+        inversores.push(this.inversor)
+        this.dataSourceInversor = inversores
+
+        //this.listarIrradiacaMunicipios()
+        this.gerarGrafico();
+      },
+      error:(error)=> {
+        console.log(error.error);
+      }
+    });
   }
   
   calcular(){
@@ -93,9 +149,34 @@ export class PropostaFormComponent implements OnInit{
     this.numModulos = Math.ceil(parseFloat(((this.kwpReal * 1000) / this.potenciaModulo ).toFixed(2)));
   }
 
+
+  salvarProposta(){
+    this.preencherProposta()
+    console.log(this.proposta);
+    
+    this.service.salvar(this.proposta).subscribe({
+      next:(data) => {
+        this.message.open("Salvo com sucesso")
+      },
+      error:(error)=> {        
+        console.log(error.error);
+        this.message.open("Merda no ventilador")
+      }
+    });
+  }
+
   getEstados(){
-    let est = new Estados();
-    this.estadosList = est.getEstados();
+    // let est = new Estados();
+    // this.estadosList = est.getEstados();
+
+    this.serviceEstados.listar().subscribe({
+      next:(data) => {
+        this.estadosList = data
+      },
+      error:(error)=> {
+        console.log(error.error);
+      }
+    });
   }
   
 
@@ -108,12 +189,13 @@ export class PropostaFormComponent implements OnInit{
     const dialogRef = this.dialog.open(SelecionarClienteComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(data => {
-      console.log(data)
-      this.cliente = data
-      let clientes: Cliente[] = []
-      clientes.push(this.cliente)
-      //this.dataSourceClientes = clientes
-      this.dataSourceContatos = this.cliente.contatos
+      if(data){
+        this.cliente = data
+        let clientes: Cliente[] = []
+        clientes.push(this.cliente)
+        //this.dataSourceClientes = clientes
+        this.dataSourceContatos = this.cliente.contatos
+      }
     })    
   }
 
@@ -126,12 +208,14 @@ export class PropostaFormComponent implements OnInit{
     const dialogRef = this.dialog.open(SelecionarModuloComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(data => {
-      this.modulo = data
-      let modulos: ModuloFotovoltaico[] = []
-      modulos.push(this.modulo)
-      this.dataSourceModulo = modulos
-      this.potenciaModulo = this.modulo.potencia
-      this.calcular();
+      if(data){
+        this.modulo = data
+        let modulos: ModuloFotovoltaico[] = []
+        modulos.push(this.modulo)
+        this.dataSourceModulo = modulos
+        this.potenciaModulo = this.modulo.potencia
+        this.calcular();
+      }
     })    
   }
 
@@ -147,11 +231,42 @@ export class PropostaFormComponent implements OnInit{
       this.inversor = data
 
       if(this.inversor.id){
-        console.log(data)
-
         let inversores: InversorDto[] = []
         inversores.push(this.inversor)
         this.dataSourceInversor = inversores
+      }
+    })    
+  }
+
+  selecionarEstadoDialog(){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(SelecionarEstadoComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data => {
+
+      if(data){
+        this.estadosSelecionado = data
+      }
+    })    
+  }
+
+  selecionarMunicipioDialog(){
+    localStorage.setItem('estadoSelecionado', this.estadosSelecionado.nome)
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(SelecionarMunicipioComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data => {
+      if(data){
+        this.municipioSelecionado = data
+        this.gerarGrafico()
       }
     })    
   }
@@ -169,7 +284,7 @@ export class PropostaFormComponent implements OnInit{
   }
 
   listarIrradiacaMunicipios(){
-    this.service.consultar(this.estadosSelecionado).subscribe({
+    this.service.consultar(this.estadosSelecionado.nome).subscribe({
       next: (data) => {
         this.listaIrradiacaoMunicipios = data        
       },
@@ -266,7 +381,7 @@ export class PropostaFormComponent implements OnInit{
   visualizarProposta(){
     this.proposta.cliente = this.cliente
     this.proposta.inversor = this.inversor
-    this.proposta.moduloFotovoltaico = this.modulo
+    this.proposta.modulo = this.modulo
     this.proposta.consumoMedioMensal = this.consumoMedioMensal
     this.proposta.consumoAnual = this.consumoMedioMensal * 12
     this.proposta.custoMedioMensal = this.custoMedioMensal
@@ -277,8 +392,36 @@ export class PropostaFormComponent implements OnInit{
     this.proposta.kwpNominal = this.kwpNominal
     this.proposta.kwpReal = this.kwpReal
     this.proposta.numModulos = this.numModulos
+    this.proposta.municipio = this.municipioSelecionado
+    this.proposta.uf = this.estadosSelecionado.uf
 
-    localStorage.setItem('proposta', JSON.stringify(this.proposta))
-    this.router.navigate(['/propostas/proposta-view'])
+    console.log(this.proposta);
+    
+
+    // localStorage.setItem('proposta', JSON.stringify(this.proposta))
+    // this.router.navigate(['/propostas/proposta-view'])
+  }
+
+  preencherProposta(){
+    this.proposta.cliente = this.cliente
+    this.proposta.inversor = this.inversor
+    this.proposta.modulo = this.modulo
+    this.proposta.consumoMedioMensal = this.consumoMedioMensal
+    this.proposta.consumoAnual = this.consumoMedioMensal * 12
+    this.proposta.custoMedioMensal = this.custoMedioMensal
+    this.proposta.custoAnual = this.custoMedioMensal * 12
+    this.proposta.producaoMediaMensal = this.producaoMediaMensal
+    this.proposta.producaoAnual = this.producaoMediaMensal * 12
+    this.proposta.kwhDia = this.kwhDia
+    this.proposta.kwpNominal = this.kwpNominal
+    this.proposta.kwpReal = this.kwpReal
+    this.proposta.numModulos = this.numModulos
+    this.proposta.municipio = this.municipioSelecionado
+    this.proposta.uf = this.estadosSelecionado.nome
+    this.proposta.id = this.idProposta
+  }
+
+  listaPropostas(){
+    this.router.navigate(['/propostas'])  
   }
 }

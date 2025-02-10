@@ -1,22 +1,22 @@
-<div style="min-height: 550px;">
+<div style="min-height: 550px; max-height: 650px;">
     <div class="d-flex justify-content-start" 
         style="display: flex; align-items: center;">
         <img class="ms-2" 
             style="width: 35px; height: 35px;" 
             src="assets/images/confirm.png" alt="">
-        <h1 mat-dialog-title>Selecionar Módulo Fotovoltaico</h1>
+        <h1 mat-dialog-title>Selecionar Cliente</h1>
     </div>
     <mat-divider></mat-divider>
 
     <div class="d-flex justify-content-center">
-        <div style="width: 800px; max-width: 800px;">
+        <div style="width: 700px; max-width: 700px;">
             <div class="card mb-1">
 
                 <div class="card-body"> 
 
                     <div class="row">
-                        <mat-form-field class="mb-1 col-12">    
-                            <mat-label>Nome</mat-label>
+                        <mat-form-field class="col-4">
+                            <mat-label>Filtro</mat-label>
                             <input matInput 
                                 (keyup)="applyFilter($event)" 
                                 [value]="filtro"
@@ -25,31 +25,23 @@
                     </div>
 
 
-                    <div style="min-height: 250px;">
+                    <div class="mb-2" style="min-height: 300px;">
                         <mat-table [dataSource]="dataSource" 
-                            class="table table-striped">
+                            class="my-table">
                         
-                            <ng-container matColumnDef="codigo">
-                                <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
+                            <ng-container matColumnDef="nome">
+                                <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
                                 <mat-cell *matCellDef="let element"
                                     (click)="onRowClicked(element)"> 
-                                    {{element.id}} 
+                                    {{element.nome}} 
                                 </mat-cell>
                             </ng-container>
 
-                            <ng-container matColumnDef="fabricante">
-                                <mat-header-cell *matHeaderCellDef> Fabricante </mat-header-cell>
+                            <ng-container matColumnDef="uf">
+                                <mat-header-cell *matHeaderCellDef> UF </mat-header-cell>
                                 <mat-cell *matCellDef="let element"
                                     (click)="onRowClicked(element)"> 
-                                    {{element.fabricante}} 
-                                </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="potencia">
-                                <mat-header-cell *matHeaderCellDef> Potência </mat-header-cell>
-                                <mat-cell *matCellDef="let element"
-                                    (click)="onRowClicked(element)"> 
-                                    {{element.potencia}} 
+                                    {{element.uf}} 
                                 </mat-cell>
                             </ng-container>
                         
@@ -59,7 +51,7 @@
                     </div>
                     
                     
-                    <mat-divider></mat-divider>
+                    <!-- <mat-divider></mat-divider> -->
                     <mat-paginator class="mt-3" showFirstLastButtons
                         [pageSize]="pageSize"
                         [length]="totalPagina"

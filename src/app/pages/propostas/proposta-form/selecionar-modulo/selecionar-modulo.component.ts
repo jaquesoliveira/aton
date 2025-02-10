@@ -53,11 +53,7 @@ export class SelecionarModuloComponent {
         console.log(error)
       }
     })
-  }
-
-  onConfirm(): void {
-    this.dialogRef.close(true)
-  }
+  } 
 
   onCancel(): void {
     this.dialogRef.close(false)
