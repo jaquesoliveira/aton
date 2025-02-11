@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Cliente } from 'src/app/models/cliente.model';
 import { Estados } from 'src/app/libs/estados';
@@ -25,6 +25,7 @@ import { EstadosDto } from 'src/app/models/estados-dto';
 import { SelecionarEstadoComponent } from './selecionar-estado/selecionar-estado.component';
 import { SelecionarMunicipioComponent } from './selecionar-municipio/selecionar-municipio.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import jsPDF from 'jspdf';
 
 
 
@@ -37,6 +38,9 @@ export class PropostaFormComponent implements OnInit{
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+
+
 
   idProposta: number
   proposta = {} as Proposta
@@ -394,12 +398,19 @@ export class PropostaFormComponent implements OnInit{
     this.proposta.numModulos = this.numModulos
     this.proposta.municipio = this.municipioSelecionado
     this.proposta.uf = this.estadosSelecionado.uf
-
-    console.log(this.proposta);
     
 
-    // localStorage.setItem('proposta', JSON.stringify(this.proposta))
-    // this.router.navigate(['/propostas/proposta-view'])
+    // console.log(this.proposta);
+
+    // let pdf = new jsPDF('p', 'pt', 'a4');
+    // pdf.html(this.el.nativeElement,{
+    //   callback: (pdf) => {
+    //     pdf.save('proposta.pdf')
+    //   }
+    // })    
+
+    localStorage.setItem('proposta', JSON.stringify(this.proposta))
+    this.router.navigate(['/propostas/proposta-view'])
   }
 
   preencherProposta(){

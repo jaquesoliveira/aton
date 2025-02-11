@@ -3,16 +3,19 @@ html { font-size: 12pt; }
 .folha { 
     background-color: #fff;
     padding-top: 15px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+
+    /* background-color: #ccc; */
 }
-.a4_vertical { width: 793px; height: 1122px; }
+.a4_vertical { width: 595px; height: 840px; }
 .a4_horizontal { width: 1122px; height: 793px; }
 
 
 .titulo-principal{
     color: #3f51b5;
-    font-size: 45px;
+    font-size: 40px;
     font-family: "Oswald", sans-serif !important;
     font-optical-sizing: auto;
     font-weight: 700;
@@ -46,9 +49,30 @@ html { font-size: 12pt; }
 }
 
 .bottom-info{
-    bottom: 0px;
-    top: 12%;
-    margin-bottom: 0px;
+    /* bottom: 0px; */
+    top: 10%;
+    margin-bottom: 15px;
     position: relative;
-
+    margin-left: 15px;
 }
+
+#content{
+    width: 595px;
+    height: 840px;
+    /* background-color: #777; */
+}
+
+.my-background{
+    background-image: url("/assets/images/bg-01.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;    
+}
+
+.descricao-vantagens{
+    font-size: 20px;
+}
+
+.a{
+    list-style-type: square;
+  }
